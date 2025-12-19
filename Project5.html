@@ -234,6 +234,78 @@
             height: 100%;
         }
 
+        /* ------------------- */
+        /* Jump Mechanics – Scan-friendly layout */
+        /* ------------------- */
+        .mech-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px;
+          margin-top: 20px;
+        }
+
+        .mech-item {
+          background: var(--bg-color);
+          border: 1px solid rgba(0, 191, 255, 0.18);
+          border-radius: 12px;
+          padding: 18px 18px 16px;
+          position: relative;
+          box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+          transition: transform var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        /* Accent stripe */
+        .mech-item::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 14px;
+          bottom: 14px;
+          width: 4px;
+          border-radius: 999px;
+          background: var(--accent-color);
+          opacity: 0.9;
+        }
+
+        .mech-item h3 {
+          font-size: 1.15rem;
+          margin-bottom: 10px;
+          padding-left: 10px;
+          color: var(--text-color);
+          font-family: var(--font-heading);
+          line-height: 1.25;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .mech-item h3 i {
+          color: var(--accent-color);
+          font-size: 1.1rem;
+          min-width: 18px;
+        }
+
+        .mech-item p {
+          margin: 0;
+          padding-left: 10px;
+          color: var(--text-muted);
+          font-size: 0.98rem;
+          line-height: 1.65;
+        }
+
+        .mech-item:hover {
+          transform: translateY(-4px);
+          border-color: rgba(0, 191, 255, 0.35);
+          box-shadow: 0 14px 26px rgba(0, 191, 255, 0.08), 0 10px 30px rgba(0,0,0,0.45);
+        }
+
+        @media (max-width: 768px) {
+          .mech-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+
         /* Role & Responsibilities */
         .role-list {
             list-style: none;
@@ -513,16 +585,40 @@
         <section id="jump-mechs" class="scroll-target">
             <h2>Jump mechanics</h2>
             <div class="content-card">
-                <p>The game features the following mechanics as part of the 2D platforming game:</p>
-                <ul class="role-list">
-                    <li>Acceleration curves: Instead of instant max speed, the jumps ramp up velocity over the first few frames, making movement feel more responsive and natural.</li>
-                    <li>Gravity scaling: The game uses different gravity values depending on context—stronger gravity when falling than when rising,
-                        or reduced gravity while holding the jump button (allowing variable jump heights). This gives players more control and makes jumps feel "floatier"/"snappier".</li>
-                    <li>Input buffering: If you press jump slightly before landing, the game "remembers" that input for a few frames and executes the jump as soon as you touch the ground. Without this, jumps feel unresponsive and frustrating.</li>
-                    <li>Coyote Time: You can still jump for a few frames after walking off a ledge, even though you're technically in the air. Without this, players may feel cheated when they press jump "too late" and fall. With it, the game feels much more forgiving and fair.</li>
-                    <li>Jump Buffering: The game remembers your jump input for a brief window. If you press jump slightly before you land, it'll execute the jump the instant you touch the ground. This prevents the frustrating experience of mashing jump and nothing happening because your timing was off by a fraction of a second.</li>
-                    <li>Hit Stop (or "freeze frames"): When you land an attack, the game pauses for a few frames—both your character and the enemy briefly freeze. This adds weight and impact to hits. The tiny pause (exaggerated in this project) makes it feel powerful. Without it, attacks can feel like you're swinging through air even when connecting.</li>
-                </ul>
+                <p>To make movement feel responsive and “fair,” I implemented a set of platformer-friendly jump systems:</p>
+
+                <div class="mech-grid">
+                  <div class="mech-item">
+                    <h3><i class="fa-solid fa-chart-line"></i> Acceleration curves</h3>
+                    <p>Instead of instant max speed, jumps ramp up velocity over the first few frames, making movement feel more responsive and natural.</p>
+                  </div>
+
+                  <div class="mech-item">
+                    <h3><i class="fa-solid fa-down-long"></i> Gravity scaling</h3>
+                    <p>Different gravity values depending on context—stronger gravity when falling than rising, or reduced gravity while holding jump for variable heights.</p>
+                  </div>
+
+                  <div class="mech-item">
+                    <h3><i class="fa-solid fa-hourglass-half"></i> Input buffering</h3>
+                    <p>If you press jump slightly before landing, the game “remembers” it for a few frames and triggers the jump as soon as you touch down.</p>
+                  </div>
+
+                  <div class="mech-item">
+                    <h3><i class="fa-solid fa-person-falling"></i> Coyote time</h3>
+                    <p>You can still jump for a few frames after walking off a ledge, which makes platforming feel more forgiving and fair.</p>
+                  </div>
+
+                  <div class="mech-item">
+                    <h3><i class="fa-solid fa-keyboard"></i> Jump buffering</h3>
+                    <p>The game remembers jump input briefly so a slightly-early press executes instantly on landing (less “I pressed it!” frustration).</p>
+                  </div>
+
+                  <div class="mech-item">
+                    <h3><i class="fa-solid fa-burst"></i> Hit stop</h3>
+                    <p>When an attack lands, the game pauses for a few frames to add weight and impact (exaggerated here for feel).</p>
+                  </div>
+                </div>
+
             </div>
         </section>
 

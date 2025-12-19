@@ -495,8 +495,8 @@
       <section id="role" class="scroll-target">
             <h2>My Role: Solo Developer</h2>
             <div class="content-card">
-                <p>As a solo developer, the project was created as a fun personal project. The project focuses on Sprite characters, Spine2D playable characters, and a believable, interactable environments to enchance the player experience on their adventure.
-                    It expands on the systems in Trash Through The Dimensions, introducing more streamlined interactions, advanced inventory systems, shop systems, and more.</p>
+                <p>As a solo developer, the project was created as a fun personal/portfolio project. The project focuses on implementing and creating gameplay systems for a 2D platforming game using Spine2D playable characters.
+                   It features all of the core features for a complete platforming experience.</p>
                 <ul class="role-list">
                     <li>Gameplay Programming & Systems Design (C#)</li>
                     <li>UI/UX Design & Implementation</li>
@@ -509,6 +509,23 @@
                 </ul>
             </div>
         </section>
+
+        <section id="jump-mechs" class="scroll-target">
+            <h2>Jump mechanics</h2>
+            <div class="content-card">
+                <p>The game features the following mechanics as part of the 2D platforming game:</p>
+                <ul class="role-list">
+                    <li>Acceleration curves: Instead of instant max speed, the jumps ramp up velocity over the first few frames, making movement feel more responsive and natural.</li>
+                    <li>Gravity scaling: The game uses different gravity values depending on context—stronger gravity when falling than when rising,
+                        or reduced gravity while holding the jump button (allowing variable jump heights). This gives players more control and makes jumps feel "floatier"/"snappier".</li>
+                    <li>Input buffering: If you press jump slightly before landing, the game "remembers" that input for a few frames and executes the jump as soon as you touch the ground. Without this, jumps feel unresponsive and frustrating.</li>
+                    <li>Coyote Time: You can still jump for a few frames after walking off a ledge, even though you're technically in the air. Without this, players may feel cheated when they press jump "too late" and fall. With it, the game feels much more forgiving and fair.</li>
+                    <li>Jump Buffering: The game remembers your jump input for a brief window. If you press jump slightly before you land, it'll execute the jump the instant you touch the ground. This prevents the frustrating experience of mashing jump and nothing happening because your timing was off by a fraction of a second.</li>
+                    <li>Hit Stop (or "freeze frames"): When you land an attack, the game pauses for a few frames—both your character and the enemy briefly freeze. This adds weight and impact to hits. The tiny pause (exaggerated in this project) makes it feel powerful. Without it, attacks can feel like you're swinging through air even when connecting.</li>
+                </ul>
+            </div>
+        </section>
+
 
         <section id="tech" class="scroll-target">
             <h2>Tools & Technologies</h2>

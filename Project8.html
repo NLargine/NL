@@ -481,7 +481,7 @@
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Enemy AI &amp; Spawning</h3>
-                        <p>Rather than discrete wave rounds, enemies spawn continuously from drop ships that fly in at the map edges, maintaining constant pressure. Each of the seven enemy types has distinct targeting logic — ground units pathfind to generators, aerial units bypass walls entirely, and siege units prioritise structural damage. Drop ships themselves can be destroyed to temporarily slow the assault.</p>
+                        <p>Rather than discrete wave rounds, enemies spawn continuously from drop ships that fly in at the map edges, maintaining constant pressure. Each of the eight enemy types has distinct targeting logic — ground units pathfind to generators, aerial units bypass walls entirely, and siege units prioritise structural damage.</p>
                     </div>
                     <div class="media-content">
                         <!-- REPLACE: swap 'enemy_screenshot.png' with your actual filename -->
@@ -494,7 +494,7 @@
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Scrap Economy &amp; Shop System</h3>
-                        <p>Enemies drop Scrap on death, collected by proximity. An in-world shop near the generators lets players spend Scrap on turret deployment, wall placement, weapon upgrades, and generator repairs. This creates a meaningful risk-reward loop — pushing forward to farm Scrap versus retreating to spend it defensively.</p>
+                        <p>Enemies drop Scrap on death, collected by proximity. An in-world shop near the generators lets players spend Scrap on turret deployment, ammo, weapon upgrades, healing and more. This creates a meaningful risk-reward loop — pushing forward to farm Scrap versus retreating to spend it defensively.</p>
                     </div>
 
                 </div>
@@ -504,7 +504,7 @@
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Multi-Point Generator Defence</h3>
-                        <p>Four generators simultaneously contribute passive progress to the launch meter. Each can be independently damaged and destroyed — losing all four ends the mission. This multi-objective layout forces the player to constantly reposition and make strategic choices about where to invest their turrets and walls, as no single position can cover all four at once.</p>
+                        <p>Four generators simultaneously contribute passive progress to the launch meter. Each can be independently damaged and destroyed — losing all four ends the mission. This multi-objective layout forces the player to constantly reposition and make strategic choices about where to invest their turrets and walls, as only the wall's choke point can cover all four at once.</p>
                     </div>
                     <div class="media-content">
                         <!-- REPLACE: swap 'generators_screenshot.png' with your actual filename -->
@@ -532,12 +532,12 @@
                         <tr>
                             <td><span class="tag tag-ground">Ground</span></td>
                             <td class="enemy-name-cell">Basic Mechs</td>
-                            <td>Backbone of every assault. Dangerous in numbers, fast to overwhelm unguarded positions.</td>
+                            <td>Backbone of every assault. Slow, bullet hell projectiles.</td>
                         </tr>
                         <tr>
                             <td><span class="tag tag-ground">Ground</span></td>
                             <td class="enemy-name-cell">Laser Mechs</td>
-                            <td>Slower but deadly at range. Sustained laser fire chews through generators — always a priority target.</td>
+                            <td>Harder hitting and high projectile speed. Sustained laser fire chews through generators — always a priority target.</td>
                         </tr>
                         <tr>
                             <td><span class="tag tag-ground">Ground</span></td>
@@ -547,27 +547,27 @@
                         <tr>
                             <td><span class="tag tag-ground">Ground</span></td>
                             <td class="enemy-name-cell">Transport Units</td>
-                            <td>Rush the perimeter and deploy troops on contact. Intercept before they arrive.</td>
+                            <td>Deploy troops to the front line. Intercept before they arrive.</td>
                         </tr>
                         <tr>
                             <td><span class="tag tag-air">Aerial</span></td>
                             <td class="enemy-name-cell">Basic Drones</td>
-                            <td>Fast and fragile. Fly over all ground defences and force constant repositioning.</td>
+                            <td>Fast and fragile. Fly over all ground defences and force constant repositioning. Can follow the player behind the wall.</td>
                         </tr>
                         <tr>
                             <td><span class="tag tag-air">Aerial</span></td>
                             <td class="enemy-name-cell">Heavy Drones</td>
-                            <td>Tougher aerial units that absorb serious punishment before going down.</td>
+                            <td>Tougher aerial units that absorb more punishment before going down.</td>
                         </tr>
                         <tr>
                             <td><span class="tag tag-air">Aerial</span></td>
                             <td class="enemy-name-cell">Gunships</td>
-                            <td>The most dangerous aerial threat. High durability, heavy firepower, targets generators directly.</td>
+                            <td>The most dangerous aerial threat. High durability, heavy firepower, targets generators with longer range and damage.</td>
                         </tr>
                         <tr>
                             <td><span class="tag tag-supp">Support</span></td>
                             <td class="enemy-name-cell">Drop Ships</td>
-                            <td>Fly in at map edges and continuously offload troops. Destroying one buys critical breathing room.</td>
+                            <td>Fly in continuously offload troops.</td>
                         </tr>
                     </tbody>
                 </table>

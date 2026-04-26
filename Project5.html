@@ -10,530 +10,77 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* --- CSS --- */
-
-        /* ------------------- */
-        /* 1. Global Styles & Variables */
-        /* ------------------- */
-        :root {
-            --bg-color: #121212;
-            --panel-color: #1E1E1E;
-            --accent-color: #00BFFF;
-            --text-color: #EAEAEA;
-            --text-muted: #a0a0a0;
-            --font-heading: 'Poppins', sans-serif;
-            --font-body: 'Roboto', sans-serif;
-            --container-width: 1000px;
-            --transition-speed: 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            font-size: 18px;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .main-content {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-        
-        section {
-            padding: 60px 0;
-            opacity: 0; /* Hidden for scroll animation */
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            color: var(--accent-color);
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(0, 191, 255, 0.2);
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-        
-        p {
-            margin-bottom: 20px;
-            color: var(--text-muted);
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        /* ------------------- */
-        /* 2. Hero Section */
-        /* ------------------- */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            padding: 20px;
-        }
-
         .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            /* For a static image background */
-             background: url('Project5G1.png') no-repeat center center/cover;
+            background: url('Project5G1.png') no-repeat center center/cover;
         }
 
-        .hero::after { /* Dark overlay */
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: -1;
-        }
-
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-        }
-
-        .hero h2 {
-            font-size: 1.5rem;
-            font-family: var(--font-body);
-            border: none;
-            margin-bottom: 40px;
-            color: var(--text-color);
-        }
-
-        .hero-button {
-            background-color: var(--accent-color);
-            color: #121212;
-            padding: 15px 35px;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            text-transform: uppercase;
-        }
-
-        .hero-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
-            color: #121212;
-        }
-
-        .back-link {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            color: var(--text-muted);
-            font-family: var(--font-body);
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            z-index: 10;
-        }
-
-        .back-link:hover {
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        .back-link i {
-            margin-right: 8px;
-        }
-
-        /* Make it responsive for mobile */
-        @media (max-width: 768px) {
-            .back-link {
-                top: 20px;
-                left: 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* ------------------- */
-        /* 3. Content Sections */
-        /* ------------------- */
-        .content-card {
-            background-color: var(--panel-color);
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Video Embed */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* ------------------- */
-        /* Jump Mechanics – Scan-friendly layout */
-        /* ------------------- */
         .mech-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 18px;
-          margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 20px;
         }
 
         .mech-item {
-          background: var(--bg-color);
-          border: 1px solid rgba(0, 191, 255, 0.18);
-          border-radius: 12px;
-          padding: 18px 18px 16px;
-          position: relative;
-          box-shadow: 0 8px 18px rgba(0,0,0,0.35);
-          transition: transform var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+            background: var(--bg-color);
+            border: 1px solid rgba(0, 191, 255, 0.18);
+            border-radius: 12px;
+            padding: 18px 18px 16px;
+            position: relative;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
         }
 
-        /* Accent stripe */
         .mech-item::before {
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 14px;
-          bottom: 14px;
-          width: 4px;
-          border-radius: 999px;
-          background: var(--accent-color);
-          opacity: 0.9;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 14px;
+            bottom: 14px;
+            width: 4px;
+            border-radius: 999px;
+            background: var(--accent-color);
+            opacity: 0.9;
         }
 
         .mech-item h3 {
-          font-size: 1.15rem;
-          margin-bottom: 10px;
-          padding-left: 10px;
-          color: var(--text-color);
-          font-family: var(--font-heading);
-          line-height: 1.25;
-          display: flex;
-          align-items: center;
-          gap: 10px;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            color: var(--text-color);
+            line-height: 1.25;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .mech-item h3 i {
-          color: var(--accent-color);
-          font-size: 1.1rem;
-          min-width: 18px;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            min-width: 18px;
         }
 
         .mech-item p {
-          margin: 0;
-          padding-left: 10px;
-          color: var(--text-muted);
-          font-size: 0.98rem;
-          line-height: 1.65;
+            margin: 0;
+            padding-left: 10px;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.65;
         }
 
         .mech-item:hover {
-          transform: translateY(-4px);
-          border-color: rgba(0, 191, 255, 0.35);
-          box-shadow: 0 14px 26px rgba(0, 191, 255, 0.08), 0 10px 30px rgba(0,0,0,0.45);
+            transform: translateY(-4px);
+            border-color: rgba(0, 191, 255, 0.35);
+            box-shadow: 0 14px 26px rgba(0, 191, 255, 0.08), 0 10px 30px rgba(0, 0, 0, 0.45);
         }
 
         @media (max-width: 768px) {
-          .mech-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-
-
-        /* Role & Responsibilities */
-        .role-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .role-list li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 10px;
-        }
-        .role-list li::before {
-            content: '\f00c'; /* Font Awesome check mark */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 4px;
-            color: var(--accent-color);
-        }
-
-        /* Project Page External Links Button */
-        .project-links {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .project-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background-color: transparent;
-            color: var(--accent-color);
-            padding: 12px 25px;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            border: 2px solid var(--accent-color);
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .project-button:hover {
-            background-color: var(--accent-color);
-            color: #121212; /* Dark background color for text */
-            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .project-button i {
-            font-size: 1.2rem;
-        }
-
-        /* Tools & Technologies */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
-            text-align: center;
-        }
-        .tech-item {
-            background-color: var(--bg-color);
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-        .tech-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 191, 255, 0.15);
-        }
-        .tech-item i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-        .tech-item span {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        /* Style for feature list in deep dive */
-        .feature-list {
-            list-style: none; /* Removes default black dot */
-            padding-left: 0;
-            margin-top: 15px;
-        }
-
-        .feature-list li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-        }
-
-        .feature-list li::before {
-            content: '\f105'; /* Font Awesome angle-right icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 4px;
-            color: var(--accent-color);
-        }
-
-        /* Technical Deep Dive */
-        .deep-dive {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            margin-top: 40px;
-        }
-        .deep-dive .text-content, .deep-dive .media-content {
-            flex: 1;
-            min-width: 300px;
-        }
-        .deep-dive .media-content img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-        }
-        /* Alternating layout */
-        .deep-dive:nth-child(even) {
-             flex-direction: row-reverse;
-        }
-
-        /* Screenshot Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .gallery-grid img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-        .gallery-grid img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.2);
-        }
-
-        /* Contact */
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .contact-links a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            border: 2px solid transparent;
-            border-radius: 50px;
-            transition: all var(--transition-speed);
-        }
-        .contact-links a:hover {
-            color: white;
-            border-color: var(--accent-color);
-            background-color: rgba(0, 191, 255, 0.1);
-        }
-        .contact-links i {
-            font-size: 1.5rem;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #2a2a2a;
-        }
-
-        /* ------------------- */
-        /* 4. Lightbox (for Gallery) */
-        /* ------------------- */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: none; /* Initially hidden */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-        .lightbox.active {
-            display: flex;
-        }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 3rem;
-            color: white;
-            cursor: pointer;
-            transition: transform var(--transition-speed);
-        }
-        .lightbox-close:hover {
-            transform: scale(1.2);
-        }
-
-        /* ------------------- */
-        /* 5. Responsive Design */
-        /* ------------------- */
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.2rem; }
-            .hero h2 { font-size: 1.2rem; }
-            .content-card { padding: 30px; }
-
-            .deep-dive, .deep-dive:nth-child(even) {
-                flex-direction: column;
+            .mech-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -544,89 +91,94 @@
         <div class="hero-content">
             <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
             <h1>Annie's Quest</h1>
-            <h2>A Game by NL</h2>
+            <h2>Responsive platforming, spell combat, and solo-built gameplay systems</h2>
             <a href="#overview" class="hero-button">View Project</a>
         </div>
     </header>
 
     <main class="main-content">
-
         <section id="overview" class="scroll-target">
-            <h2>Overview & Highlight Reel</h2>
+            <h2>Overview</h2>
             <div class="content-card">
                 <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/rvz0YgiN8TQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/rvz0YgiN8TQ" title="Annie's Quest gameplay trailer" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <p>2D Platformer side scrolling game with base building and spell casting</p>
+                <p>Annie's Quest is a side-scrolling 2D platformer built as a personal portfolio project in Unity. The project focuses on tight player movement, readable combat feel, expressive character presentation, and a set of supporting systems that make the core platforming loop feel complete rather than prototype-level.</p>
+                <p>Alongside traversal and spell combat, the game explores light base-building and progression ideas while keeping the moment-to-moment experience grounded in responsive controls and fast feedback.</p>
                 <div class="project-links">
                     <a href="https://nikolargine.itch.io/annies-quest" target="_blank" rel="noopener noreferrer" class="project-button">
-                         <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
                     </a>
-        </div>
+                </div>
             </div>
         </section>
 
-      <section id="role" class="scroll-target">
+        <section id="role" class="scroll-target">
             <h2>My Role: Solo Developer</h2>
             <div class="content-card">
-                <p>As a solo developer, the project was created as a fun personal/portfolio project. The project focuses on implementing and creating gameplay systems for a 2D platforming game using Spine2D playable characters.
-                   It features all of the core features for a complete platforming experience.</p>
+                <p>I built Annie's Quest as a solo portfolio project to explore how strong platforming feel, readable combat, and expressive character work could support a more complete side-scrolling game loop.</p>
                 <ul class="role-list">
-                    <li>Gameplay Programming & Systems Design (C#)</li>
-                    <li>UI/UX Design & Implementation</li>
+                    <li>Gameplay Programming &amp; Systems Design (C#)</li>
+                    <li>UI/UX Design &amp; Implementation</li>
                     <li>Spine2D animated characters</li>
                     <li>Sprite characters with various poses and expressions</li>
-                    <li>Story and Dialogue</li>
-                    <li>Sound Design & Integration</li>
-                    <li>Game and Level Design</li>
-                    <li>Project Management & Version Control (Git)</li>
+                    <li>Story and dialogue implementation</li>
+                    <li>Sound design &amp; integration</li>
+                    <li>Game and level design</li>
+                    <li>Project management &amp; version control (Git)</li>
                 </ul>
             </div>
         </section>
 
         <section id="jump-mechs" class="scroll-target">
-            <h2>Jump mechanics</h2>
+            <h2>Key Systems</h2>
             <div class="content-card">
-                <p>To make movement feel responsive and “fair,” I implemented a set of platformer-friendly jump systems:</p>
+                <p>To make movement feel responsive and fair, I implemented a set of platformer-friendly jump systems that focus on readability, forgiveness, and player control:</p>
 
                 <div class="mech-grid">
-                  <div class="mech-item">
-                    <h3><i class="fa-solid fa-chart-line"></i> Acceleration curves</h3>
-                    <p>Instead of instant max speed, jumps ramp up velocity over the first few frames, making movement feel more responsive and natural.</p>
-                  </div>
+                    <div class="mech-item">
+                        <h3><i class="fa-solid fa-chart-line"></i> Acceleration curves</h3>
+                        <p>Instead of instant max speed, jumps ramp up velocity over the first few frames, making movement feel more responsive and natural.</p>
+                    </div>
 
-                  <div class="mech-item">
-                    <h3><i class="fa-solid fa-down-long"></i> Gravity scaling</h3>
-                    <p>Different gravity values depending on context - stronger gravity when falling than rising, or reduced gravity while holding jump for variable heights.</p>
-                  </div>
+                    <div class="mech-item">
+                        <h3><i class="fa-solid fa-down-long"></i> Gravity scaling</h3>
+                        <p>Different gravity values depending on context, such as stronger gravity when falling or reduced gravity while holding jump for variable heights.</p>
+                    </div>
 
-                  <div class="mech-item">
-                    <h3><i class="fa-solid fa-hourglass-half"></i> Input buffering</h3>
-                    <p>If you press jump slightly before landing, the game “remembers” it for a few frames and triggers the jump as soon as you touch down.</p>
-                  </div>
+                    <div class="mech-item">
+                        <h3><i class="fa-solid fa-hourglass-half"></i> Input buffering</h3>
+                        <p>If the player presses jump slightly before landing, the game remembers that input briefly and executes it on touchdown.</p>
+                    </div>
 
-                  <div class="mech-item">
-                    <h3><i class="fa-solid fa-person-falling"></i> Coyote time</h3>
-                    <p>You can still jump for a few frames after walking off a ledge, which makes platforming feel more forgiving and fair.</p>
-                  </div>
+                    <div class="mech-item">
+                        <h3><i class="fa-solid fa-person-falling"></i> Coyote time</h3>
+                        <p>You can still jump for a few frames after walking off a ledge, which makes platforming feel more forgiving and fair.</p>
+                    </div>
 
-                  <div class="mech-item">
-                    <h3><i class="fa-solid fa-keyboard"></i> Jump buffering</h3>
-                    <p>The game remembers jump input briefly so a slightly-early press executes instantly on landing (less “I pressed it!” frustration).</p>
-                  </div>
+                    <div class="mech-item">
+                        <h3><i class="fa-solid fa-keyboard"></i> Jump buffering</h3>
+                        <p>The same buffering logic reduces missed inputs and keeps platforming from feeling punishing when timing is slightly early.</p>
+                    </div>
 
-                  <div class="mech-item">
-                    <h3><i class="fa-solid fa-burst"></i> Hit stop</h3>
-                    <p>When an attack lands, the player and enemy pauses for a few frames to add weight and impact (exaggerated here for feel).</p>
-                  </div>
+                    <div class="mech-item">
+                        <h3><i class="fa-solid fa-burst"></i> Hit stop</h3>
+                        <p>When an attack lands, both player and enemy pause for a few frames to add weight and impact to combat feedback.</p>
+                    </div>
                 </div>
-
             </div>
         </section>
 
+        <section id="design" class="scroll-target">
+            <h2>Design Decisions</h2>
+            <div class="content-card">
+                <p>The main design goal was to avoid the stiffness that often makes early platformer prototypes feel unfinished. Systems like coyote time, buffering, gravity tuning, and hit stop were added not as extras, but as core pieces of the player's sense of control.</p>
+                <p>That same thinking shaped the rest of the project: expressive character work, readable spells, and supporting progression systems all exist to reinforce the fantasy without muddying the core movement loop.</p>
+            </div>
+        </section>
 
         <section id="tech" class="scroll-target">
-            <h2>Tools & Technologies</h2>
+            <h2>Tools &amp; Technologies</h2>
             <div class="content-card">
                 <div class="tech-grid">
                     <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
@@ -643,24 +195,22 @@
             <h2>In-Game Gallery</h2>
             <div class="content-card">
                 <div class="gallery-grid">
-                    <img src="Project5G1.png" alt="Game Screenshot 1">
-                    <img src="Project5G2.png" alt="Game Screenshot 2">
-                    <img src="Project5G3.png" alt="Game Screenshot 3">
-
+                    <img src="Project5G1.png" alt="Annie's Quest platforming environment and core traversal view" loading="lazy">
+                    <img src="Project5G2.png" alt="Annie's Quest gameplay showing combat and movement timing" loading="lazy">
+                    <img src="Project5G3.png" alt="Annie's Quest scene showing art direction and spell-focused gameplay" loading="lazy">
                 </div>
             </div>
         </section>
-        
+
         <section id="contact" class="scroll-target">
             <h2>Get In Touch</h2>
             <div class="content-card" style="text-align: center;">
-                <p>I'm currently seeking new opportunities. Feel free to reach out!</p>
+                <p>Thanks for checking out Annie's Quest. I'm always happy to talk through the project, the systems behind it, or related opportunities.</p>
                 <div class="contact-links">
                     <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>
@@ -669,41 +219,22 @@
 
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged Screenshot" class="lightbox-content" id="lightbox-img">
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
     </div>
 
     <script>
-        // --- JAVASCRIPT ---
-
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. On-Scroll Animations
-            // ---------------------------------
             const targets = document.querySelectorAll('.scroll-target');
-
-            const observerOptions = {
-                root: null, // observes intersections relative to the viewport
-                rootMargin: '0px',
-                threshold: 0.1 // trigger when 10% of the element is visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Optional: stop observing the element once it's visible
-                        // observer.unobserve(entry.target); 
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1 });
 
-            targets.forEach(target => {
-                observer.observe(target);
-            });
+            targets.forEach(target => observer.observe(target));
 
-
-            // 2. Lightbox Functionality
-            // ---------------------------------
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const galleryImages = document.querySelectorAll('.gallery-grid img');
@@ -712,6 +243,7 @@
             const openLightbox = (e) => {
                 lightbox.classList.add('active');
                 lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
             };
 
             const closeLightbox = () => {
@@ -722,7 +254,6 @@
                 img.addEventListener('click', openLightbox);
             });
 
-            // Close lightbox by clicking close button or overlay
             lightboxClose.addEventListener('click', closeLightbox);
             lightbox.addEventListener('click', (e) => {
                 if (e.target !== lightboxImg) {
@@ -730,13 +261,11 @@
                 }
             });
 
-            // Close lightbox with Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                     closeLightbox();
                 }
             });
-            
         });
     </script>
 </body>

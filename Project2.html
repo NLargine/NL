@@ -10,459 +10,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* --- CSS --- */
-
-        /* ------------------- */
-        /* 1. Global Styles & Variables */
-        /* ------------------- */
-        :root {
-            --bg-color: #121212;
-            --panel-color: #1E1E1E;
-            --accent-color: #00BFFF;
-            --text-color: #EAEAEA;
-            --text-muted: #a0a0a0;
-            --font-heading: 'Poppins', sans-serif;
-            --font-body: 'Roboto', sans-serif;
-            --container-width: 1000px;
-            --transition-speed: 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            font-size: 18px;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .main-content {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-        
-        section {
-            padding: 60px 0;
-            opacity: 0; /* Hidden for scroll animation */
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            color: var(--accent-color);
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(0, 191, 255, 0.2);
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-        
-        p {
-            margin-bottom: 20px;
-            color: var(--text-muted);
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        /* ------------------- */
-        /* 2. Hero Section */
-        /* ------------------- */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            padding: 20px;
-        }
-
         .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            /* For a static image background */
-             background: url('GOUCover.png') no-repeat center center/cover;
-        }
-        
-        .hero::after { /* Dark overlay */
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: -1;
+            background: url('GOUCover.png') no-repeat center center/cover;
         }
 
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-        }
-        
-        .hero h2 {
-            font-size: 1.5rem;
-            font-family: var(--font-body);
-            border: none;
-            margin-bottom: 40px;
-            color: var(--text-color);
-        }
-
-        .hero-button {
-            background-color: var(--accent-color);
-            color: #121212;
-            padding: 15px 35px;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            text-transform: uppercase;
-        }
-        
-        .hero-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
-            color: #121212;
-        }
-
-        .back-link {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            color: var(--text-muted);
-            font-family: var(--font-body);
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            z-index: 10;
-        }
-
-        .back-link:hover {
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        .back-link i {
-            margin-right: 8px;
-        }
-
-        /* Make it responsive for mobile */
-        @media (max-width: 768px) {
-            .back-link {
-                top: 20px;
-                left: 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* ------------------- */
-        /* 3. Content Sections */
-        /* ------------------- */
-        .content-card {
-            background-color: var(--panel-color);
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Video Embed */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Role & Responsibilities */
-        .role-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .role-list li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 10px;
-        }
-        .role-list li::before {
-            content: '\f00c'; /* Font Awesome check mark */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 4px;
-            color: var(--accent-color);
-        }
-
-        /* Project Page External Links Button */
-        .project-links {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .project-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background-color: transparent;
-            color: var(--accent-color);
-            padding: 12px 25px;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            border: 2px solid var(--accent-color);
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .project-button:hover {
-            background-color: var(--accent-color);
-            color: #121212; /* Dark background color for text */
-            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .project-button i {
-            font-size: 1.2rem;
-        }
-
-        /* Tools & Technologies */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
-            text-align: center;
-        }
-        .tech-item {
-            background-color: var(--bg-color);
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-        .tech-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 191, 255, 0.15);
-        }
-        .tech-item i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-        .tech-item span {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        /* Style for feature list in deep dive */
-        .feature-list {
-            list-style: none; /* Removes default black dot */
-            padding-left: 0;
-            margin-top: 15px;
-        }
-
-        .feature-list li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-        }
-
-        .feature-list li::before {
-            content: '\f105'; /* Font Awesome angle-right icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 4px;
-            color: var(--accent-color);
-        }
-
-        /* Technical Deep Dive */
-        .deep-dive {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            margin-top: 40px;
-        }
-        .deep-dive .text-content, .deep-dive .media-content {
-            flex: 1;
-            min-width: 300px;
-        }
-        .deep-dive .media-content img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-        }
-        /* Alternating layout */
         .deep-dive:nth-child(even) {
-             flex-direction: row-reverse;
-        }
-        
-        /* Screenshot Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .gallery-grid img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-        .gallery-grid img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.2);
-        }
-
-        /* Contact */
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .contact-links a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            border: 2px solid transparent;
-            border-radius: 50px;
-            transition: all var(--transition-speed);
-        }
-        .contact-links a:hover {
-            color: white;
-            border-color: var(--accent-color);
-            background-color: rgba(0, 191, 255, 0.1);
-        }
-        .contact-links i {
-            font-size: 1.5rem;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #2a2a2a;
-        }
-
-        /* ------------------- */
-        /* 4. Lightbox (for Gallery) */
-        /* ------------------- */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: none; /* Initially hidden */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-        .lightbox.active {
-            display: flex;
-        }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 3rem;
-            color: white;
-            cursor: pointer;
-            transition: transform var(--transition-speed);
-        }
-        .lightbox-close:hover {
-            transform: scale(1.2);
-        }
-
-        /* ------------------- */
-        /* 5. Responsive Design */
-        /* ------------------- */
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.2rem; }
-            .hero h2 { font-size: 1.2rem; }
-            .content-card { padding: 30px; }
-
-            .deep-dive, .deep-dive:nth-child(even) {
-                flex-direction: column;
-            }
+            flex-direction: row-reverse;
         }
     </style>
 </head>
@@ -472,48 +29,47 @@
         <div class="hero-content">
             <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
             <h1>Ghost Of Us</h1>
-            <h2>A Game by NL</h2>
+            <h2>Narrative adventure with party systems, quests, and reactive world state</h2>
             <a href="#overview" class="hero-button">View Project</a>
         </div>
     </header>
-    
-    <main class="main-content">
 
+    <main class="main-content">
         <section id="overview" class="scroll-target">
-            <h2>Overview & Highlight Reel</h2>
+            <h2>Overview</h2>
             <div class="content-card">
                 <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/-cigF5MzsDo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/-cigF5MzsDo" title="Ghost Of Us gameplay trailer" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <p>After being separated for what seems like an eternity, can a friendship be rekindled into a bond that lasts forever? </p>
+                <p>Ghost Of Us is a narrative adventure built in Unity that combines character-driven storytelling with exploration, inventory, combat support systems, and reactive environmental states. The project expands on ideas from earlier work by aiming for a more cohesive, believable world rather than a sequence of disconnected mechanics.</p>
+                <p>Its strongest portfolio value is the number of interconnected systems it brings together: party management, quest progression, inventory, dialogue, interactables, and persistent state changes across scenes.</p>
                 <div class="project-links">
-            <a href="https://nikolargine.itch.io/ghost-of-us" target="_blank" rel="noopener noreferrer" class="project-button">
-                <i class="fa-brands fa-itch-io"></i> Play on itch.io
-            </a>
-        </div>
+                    <a href="https://nikolargine.itch.io/ghost-of-us" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                    </a>
+                </div>
             </div>
         </section>
 
         <section id="role" class="scroll-target">
             <h2>My Role: Solo Developer</h2>
             <div class="content-card">
-                <p>As a solo developer, the project was created as a fun personal project. The project focuses on Sprite characters, Spine2D playable characters, and a believable, interactable environments to enhance the player experience on their adventure.
-                    It expands on the systems in Trash Through The Dimensions, introducing more streamlined interactions, advanced inventory systems, shop systems, and more.</p>
+                <p>I built Ghost Of Us solo, handling the game systems, narrative implementation, UI, interaction logic, and much of the content-facing setup needed to make the world feel reactive and inhabited.</p>
                 <ul class="role-list">
-                    <li>Gameplay Programming & Systems Design (C#)</li>
-                    <li>UI/UX Design & Implementation</li>
+                    <li>Gameplay Programming &amp; Systems Design (C#)</li>
+                    <li>UI/UX Design &amp; Implementation</li>
                     <li>Spine2D animated characters</li>
                     <li>Sprite characters with various poses and expressions</li>
-                    <li>Story and Dialogue</li>
-                    <li>Sound Design & Integration</li>
-                    <li>Game and Level Design</li>
-                    <li>Project Management & Version Control (Git)</li>
+                    <li>Story and dialogue implementation</li>
+                    <li>Sound design &amp; integration</li>
+                    <li>Game and level design</li>
+                    <li>Project management &amp; version control (Git)</li>
                 </ul>
             </div>
         </section>
-        
+
         <section id="tech" class="scroll-target">
-            <h2>Tools & Technologies</h2>
+            <h2>Tools &amp; Technologies</h2>
             <div class="content-card">
                 <div class="tech-grid">
                     <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
@@ -527,126 +83,135 @@
         </section>
 
         <section id="deep-dive" class="scroll-target">
-            <h2>Technical Deep Dive</h2>
+            <h2>Key Systems</h2>
             <div class="content-card">
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Unity Lighting system</h3>
-                        <p>To enhance the magic of the aquarium experience, runtime states were used to track the aquarium lighting, allowing the player to control and interact with their environment.</p>
+                        <h3>Runtime Lighting &amp; Environmental Reactivity</h3>
+                        <p>Runtime states track the aquarium lighting sequence and other environmental conditions, allowing the player to interact with the world and see those interactions reflected back in the scene.</p>
                     </div>
                     <div class="media-content">
-                        <img src="LightsDemo.gif" alt="[Game systems]">
+                        <img src="LightsDemo.gif" alt="Aquarium lighting system reacting to player interaction" loading="lazy">
                     </div>
                 </div>
+
                 <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Inventory System</h3>
-                        <p>Inventory system that contains consumables, key items, equippable items such as weapons, flashlights, and traps that can be placed.
-                        The inventory has data persistence and can be rearranged as the player wishes. The player may also give items to their party members.</p>
+                        <h3>Inventory &amp; Party Equipment</h3>
+                        <p>The inventory system supports consumables, key items, equippables such as weapons and flashlights, and placeable traps. It includes persistence, player-controlled rearrangement, and party-aware item transfers.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Inventory.png" alt="Inventory">
+                        <img src="Inventory.png" alt="Inventory UI showing item categories and party equipment management" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Quest System and Quest Log</h3>
-                        <p>An advanced quest system that allows for any type of quest. The quest supports long quests with requirements, various steps, as well as quest rewards and world manipulation depending on their progress.
-                        In The Ghost Of Us, quests affect the environment, such as in the aquarium, fixing the power issues opens the main entry and exit to the Jellyfish Exhibit. NPCs also change their
-                        dialogue to reflect the changes in quest progression.</p>
+                        <h3>Quest System &amp; Quest Log</h3>
+                        <p>The quest system supports long-form quests with multiple steps, requirements, rewards, and world manipulation. In Ghost Of Us, quest progress can unlock access, change the environment, and alter NPC dialogue to reflect the player's actions.</p>
                     </div>
                     <div class="media-content">
-                        <img src="QuestLog.png" alt="QuestLog">
+                        <img src="QuestLog.png" alt="Quest log UI showing multi-step quest progression" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Runtime States</h3>
-                        <p>The game keeps track of runtime states. This is used to track the completion of the initial three adventures to unlock the Festival. Additionally, destructible objects remain destroyed,
-                        respawn after a timer, and allows cross scene state tracking such as whether the player has triggered the aquarium lights.</p>
+                        <h3>Runtime State Tracking</h3>
+                        <p>The game tracks persistent runtime states across scenes. That system is used for adventure completion, destructible object behaviour, time-based respawns, and continuity checks such as whether the player has already triggered certain world events.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Project2G7.png" alt="Runtime States">
+                        <img src="Project2G7.png" alt="Scene demonstrating runtime state-driven progression" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Puzzles</h3>
-                        <p>A puzzle minigame for the player to solve by collecting clues at the aquarium</p>
+                        <h3>Puzzles &amp; Minigames</h3>
+                        <p>The project includes puzzle interactions and bespoke minigames, such as clue-based problem solving in the aquarium, to diversify the pacing of exploration.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Minigame.gif" alt="Live2D animations">
+                        <img src="Minigame.gif" alt="Puzzle minigame sequence in the aquarium level" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Party System</h3>
-                        <p>The Party System allows the player to switch and control any member of the party. Party members can follow the player,
-                        support them in combat. Party members can be downed, where they can be revived by the player and other party members. They can also revive the player and
-                        have different priorities based on their various factors such as their affinity.</p>
+                        <p>The player can switch between party members, have allies follow in the world, receive combat support, and engage with revive logic that works for both the player and AI companions. Different priorities and relationship-driven behaviour help the system feel less static.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Project2G3.png" alt="Live2D animations">
+                        <img src="Project2G3.png" alt="Party management and character support gameplay" loading="lazy">
                     </div>
                 </div>
 
                 <div class="deep-dive">
-                    <div class="Dialogue System">
-                        <h3>Asset Creation</h3>
-                        <p>An advanced dialogue system that supports sprite/Live2D characters, as well as their animations/expression
-                        changes. The dialogue system allows characters to move, SFX/music to be played, player choices, and affect run time states.</p>
+                    <div class="text-content">
+                        <h3>Dialogue System</h3>
+                        <p>The dialogue system supports sprite and Live2D characters along with animation changes, expressions, player choices, audio cues, and hooks into runtime state logic. That made it a central piece of both the narrative and systems side of the project.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Project2G1.png" alt="Live2D animations">
+                        <img src="Project2G1.png" alt="Dialogue scene with animated character presentation" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Interactable Environment</h3>
-                        <p>Interactable Environments for the player to engage with</p>
+                        <h3>Interactable Environments</h3>
+                        <p>Interactable objects throughout the game help sell the world as a space the player can engage with rather than just move through.</p>
                     </div>
                     <div class="media-content">
-                        <img src="InteractableDemo.gif" alt="Live2D animations">
+                        <img src="InteractableDemo.gif" alt="Interactable environment sequence from Ghost Of Us" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Asset Creation</h3>
-                        <p>The creation of Sprites, illustrations, game assets, UI, and Spine2D playable characters</p>
+                        <p>I created sprites, illustrations, game assets, UI, and Spine2D playable characters to support the tone and readability of the experience.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Running.gif" alt="Live2D animations">
+                        <img src="Running.gif" alt="Animated character asset work for Ghost Of Us" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Shop System</h3>
-                        <p>The shop system allows the player to purchase items, adding a sense of immersion.</p>
+                        <p>The shop system gives the player a grounded way to buy items and reinforces the feeling that the world has functional spaces and routines.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Project2G2.png" alt="Live2D animations">
+                        <img src="Project2G2.png" alt="Shop interface and in-world purchasing flow" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Other Features</h3>
-
+                        <h3>Other Supporting Features</h3>
                         <ul class="feature-list">
-                            <li><b>Dynamic Audio:</b> Sound effects dynamically adjust based on player proximity, creating a deeper sense of immersion.</li>
-                            <li><b>4 Distinct Environments:</b> Each with unique adventures and challenges.</li>
-                            <li><b>Equippable items: </b> such as the flashlight and weapons which possess various parameters such as durability.</li>
-                            <li><b>Interactive Minigames:</b> Including a Haunted House and a Shooting Range.</li>
-                            <li><b>NPC Management System:</b> For characters like the mushroom folk, Alice, and Karen.</li>
-                            <li><b>Core Systems:</b> A full Save/Load system and an Ability system for special gameplay sequences.</li>
-                            <li><b>Accessibility Options:</b> Includes adjustable text speed and volume controls.</li>
-                            <li><b>Advanced Ability System</b> Details on the ability/crafting systems are further explained In Lost Kingdoms Project.</li>
+                            <li><b>Dynamic audio:</b> Sound effects adjust based on player proximity.</li>
+                            <li><b>4 distinct environments:</b> Each with its own adventure flow and interactions.</li>
+                            <li><b>Equippable items:</b> Flashlights, weapons, and other tools with their own parameters.</li>
+                            <li><b>Interactive minigames:</b> Including a haunted house and shooting range.</li>
+                            <li><b>NPC management:</b> Support for persistent characters and reactive world dialogue.</li>
+                            <li><b>Core systems:</b> Save/load and ability systems for longer-form progression.</li>
+                            <li><b>Accessibility:</b> Adjustable text speed and volume controls.</li>
                         </ul>
                     </div>
                     <div class="media-content">
-                        <img src="Beach.png" alt="Beach environment from the game">
+                        <img src="Beach.png" alt="Beach environment from Ghost Of Us" loading="lazy">
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="design" class="scroll-target">
+            <h2>Design Decisions</h2>
+            <div class="content-card">
+                <p>One of the key goals for Ghost Of Us was making the world feel reactive rather than static. Systems such as quests, lighting states, dialogue progression, party behaviour, and interactables were all built to reinforce the idea that the player's actions have tangible effects on the space around them.</p>
+                <p>The result is a project that reads less like a single-mechanic prototype and more like a systems-rich narrative adventure where exploration, story, and progression support each other.</p>
             </div>
         </section>
 
@@ -654,29 +219,27 @@
             <h2>In-Game Gallery</h2>
             <div class="content-card">
                 <div class="gallery-grid">
-                    <img src="Project2G1.png" alt="Game Screenshot 1">
-                    <img src="Project2G2.png" alt="Game Screenshot 2">
-                    <img src="Project2G3.png" alt="Game Screenshot 3">
-                    <img src="Project2G4.png" alt="Game Screenshot 4">
-                    <img src="Project2G5.png" alt="Game Screenshot 5">
-                    <img src="Project2G6.png" alt="Game Screenshot 6">
-                    <img src="Project2G7.png" alt="Game Screenshot 7">
-                    <img src="Beach.png" alt="Game Screenshot ">
+                    <img src="Project2G1.png" alt="Dialogue presentation in Ghost Of Us" loading="lazy">
+                    <img src="Project2G2.png" alt="Shop and item interaction scene" loading="lazy">
+                    <img src="Project2G3.png" alt="Party gameplay and character support systems" loading="lazy">
+                    <img src="Project2G4.png" alt="Exploration scene from Ghost Of Us" loading="lazy">
+                    <img src="Project2G5.png" alt="Narrative environment and atmospheric scene" loading="lazy">
+                    <img src="Project2G6.png" alt="Another in-game location from Ghost Of Us" loading="lazy">
+                    <img src="Project2G7.png" alt="Progression scene showing persistent world state" loading="lazy">
+                    <img src="Beach.png" alt="Beach environment artwork and gameplay setting" loading="lazy">
                 </div>
             </div>
         </section>
-        
+
         <section id="contact" class="scroll-target">
             <h2>Get In Touch</h2>
             <div class="content-card" style="text-align: center;">
-                <p>I'm currently seeking new opportunities. Feel free to reach out!</p>
+                <p>Thanks for taking a look at Ghost Of Us. Feel free to get in touch if you'd like to talk about the game or the systems behind it.</p>
                 <div class="contact-links">
-
                     <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>
@@ -685,41 +248,24 @@
 
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged Screenshot" class="lightbox-content" id="lightbox-img">
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
     </div>
 
     <script>
-        // --- JAVASCRIPT ---
-
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. On-Scroll Animations
-            // ---------------------------------
             const targets = document.querySelectorAll('.scroll-target');
-
-            const observerOptions = {
-                root: null, // observes intersections relative to the viewport
-                rootMargin: '0px',
-                threshold: 0.1 // trigger when 10% of the element is visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Optional: stop observing the element once it's visible
-                        // observer.unobserve(entry.target); 
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1 });
 
             targets.forEach(target => {
                 observer.observe(target);
             });
 
-
-            // 2. Lightbox Functionality
-            // ---------------------------------
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const galleryImages = document.querySelectorAll('.gallery-grid img');
@@ -728,6 +274,7 @@
             const openLightbox = (e) => {
                 lightbox.classList.add('active');
                 lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
             };
 
             const closeLightbox = () => {
@@ -738,7 +285,6 @@
                 img.addEventListener('click', openLightbox);
             });
 
-            // Close lightbox by clicking close button or overlay
             lightboxClose.addEventListener('click', closeLightbox);
             lightbox.addEventListener('click', (e) => {
                 if (e.target !== lightboxImg) {
@@ -746,13 +292,11 @@
                 }
             });
 
-            // Close lightbox with Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                     closeLightbox();
                 }
             });
-            
         });
     </script>
 </body>

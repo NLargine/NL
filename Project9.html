@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>War On Water | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url('WarOnWaterGameplay.png') no-repeat center center/cover;
+        }
+
+        .pdf-viewer {
+            display: none;
+            margin-top: 30px;
+            width: 100%;
+            height: 800px;
+        }
+
+        .pdf-viewer embed {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #2a2a2a;
+            border-radius: 8px;
+        }
+
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>War On Water</h1>
+            <h2>Team-built top-down survivor-like with gameplay systems, upgrades, and UI integration</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dT3L0hvrM1A" title="War On Water gameplay trailer" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p>War On Water is a short-session survival shooter built in Unity where the player controls a fire elemental holding out against escalating waves of water enemies. A full run lasts around five minutes, with the core loop centered on movement, positioning, and fast upgrade choices under pressure.</p>
+                <p>This was a team project and my main contribution was driving the game into a cohesive, playable whole. I led development across gameplay programming, systems design, UI implementation, and technical integration so the combat loop, progression, enemy pressure, and feedback all worked together cleanly.</p>
+                <div class="project-links">
+                    <a href="https://nikolargine.itch.io/war-on-water" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                    </a>
+                    <button class="btn-view-pdf" data-pdf-src="WarOnWaterDesignDocument.pdf" type="button">
+                        <i class="fa-solid fa-file-pdf"></i> View PDF
+                    </button>
+                </div>
+                <div class="pdf-viewer"></div>
+            </div>
+        </section>
+
+        <section id="role" class="scroll-target">
+            <h2>My Role: Systems Lead &amp; Integrator</h2>
+            <div class="content-card">
+                <p>I took ownership of the gameplay foundation and the technical glue that made the project feel complete rather than disconnected.</p>
+                <ul class="role-list">
+                    <li>Led gameplay programming, systems design, and UI implementation in a team project setting</li>
+                    <li>Designed and implemented the core gameplay loop: movement, auto-attack, progression, and upgrade decisions</li>
+                    <li>Built the major gameplay architecture and integration points between systems</li>
+                    <li>Developed UI flows for upgrade cards, pause, death, and victory screens</li>
+                    <li>Acted as primary integrator to keep features cohesive across the project</li>
+                    <li>Contributed shaders, particle work, and sprite support for gameplay feedback</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tech" class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C#</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cubes"></i><span>ScriptableObjects</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-layer-group"></i><span>Object Pooling</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Shaders</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-sparkles"></i><span>Particles &amp; VFX</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="systems" class="scroll-target">
+            <h2>Key Systems</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Wave Director &amp; Enemy Pressure</h3>
+                        <p>I built the core survival loop around escalating waves that scale enemy count, speed, and health over the course of a run. Multiple enemy types, including melee, ranged, explosive, and boss encounters with phase-based behaviour, create different kinds of pressure rather than just bigger numbers.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="WarOnWaterGameplay.png" alt="War On Water gameplay screenshot showing the top-down survival combat loop" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Modular Ability &amp; Upgrade System</h3>
+                        <p>The upgrade structure uses ScriptableObjects and a weighted random "choose 1 of 3" card system to keep progression readable while still allowing variation between runs. I implemented nine active and passive abilities with multi-tier upgrades and designed the system to be easy to extend and rebalance.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="WarOnWaterUI.png" alt="War On Water upgrade UI showing the card-based progression system" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Performance for High Enemy Density</h3>
+                        <p>Because the game's readability depends on maintaining pressure without technical slowdown, I implemented custom object pooling for enemies, projectiles, and effects. That reduced runtime instantiation overhead and let the game sustain denser combat scenarios more reliably.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="WarOnWaterParticleSystems.png" alt="War On Water combat effects showing dense gameplay feedback and particle usage" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>UI, Feedback &amp; VFX Integration</h3>
+                        <p>I developed the full gameplay UI flow, including HUD, level-up cards, pause, death, and victory states, then paired that with hit effects, particles, trails, and shader work to improve combat readability. That integration work was important because the game needed to stay legible as enemy counts and overlapping effects increased.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="WarOnWaterDissolveShader.png" alt="War On Water dissolve shader effect used for visual feedback and enemy presentation" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="challenge" class="scroll-target">
+            <h2>Challenge &amp; Problem Solving</h2>
+            <div class="content-card">
+                <p>A major challenge was preserving game feel and readability under high enemy density. As the run scales up, large numbers of enemies and effects can quickly turn into visual noise, especially in a top-down survivor-like where the player needs to read danger, impact, and safe movement space at a glance.</p>
+                <p>To solve that, I introduced clearer particle and hit feedback, tuned ability visuals to better communicate impact and area coverage, and balanced scaling so later waves still felt threatening without overwhelming the screen. The result was a more readable and satisfying late-game combat state, which was one of the most important quality improvements on the project.</p>
+            </div>
+        </section>
+
+        <section id="outcome" class="scroll-target">
+            <h2>Outcome &amp; Learnings</h2>
+            <div class="content-card">
+                <p>War On Water was especially valuable because it demonstrates a different strength than my solo work: operating inside a team while still taking ownership of production-critical systems. It shows that I can lead implementation, build modular gameplay architecture, and act as the integrator who keeps the whole project moving toward a coherent result.</p>
+                <ul class="role-list">
+                    <li>Built a complete, replayable survival loop with scalable enemy and upgrade systems</li>
+                    <li>Gained stronger experience designing modular systems for rapid iteration in a team context</li>
+                    <li>Improved my ability to balance around player perception and readability, not just raw numbers</li>
+                    <li>Took ownership of production-level responsibilities across programming, UI, and integration</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="gallery" class="scroll-target">
+            <h2>Screenshots</h2>
+            <div class="gallery-grid">
+                <img src="WarOnWaterGameplay.png" alt="War On Water gameplay showing the player surrounded by escalating enemy pressure" loading="lazy">
+                <img src="WarOnWaterUI.png" alt="War On Water user interface and upgrade card presentation" loading="lazy">
+                <img src="WarOnWaterParticleSystems.png" alt="War On Water particle systems used for combat readability and impact" loading="lazy">
+                <img src="WarOnWaterDissolveShader.png" alt="War On Water dissolve shader effect used in enemy or ability presentation" loading="lazy">
+                <img src="WarOnWaterStochasticShader.png" alt="War On Water stochastic shader experiment and stylized rendering effect" loading="lazy">
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for taking a look at War On Water. If you'd like to talk about my role on the project, team collaboration, or the systems behind it, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nicholas Morris</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-grid img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+
+            galleryImages.forEach(img => img.addEventListener('click', (e) => {
+                lightbox.classList.add('active');
+                lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
+            }));
+
+            lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target !== lightboxImg) {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            const viewButtons = document.querySelectorAll('.btn-view-pdf');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const contentCard = button.closest('.content-card');
+                    const pdfViewer = contentCard.querySelector('.pdf-viewer');
+                    const pdfSrc = button.getAttribute('data-pdf-src');
+
+                    if (pdfViewer.innerHTML !== '') {
+                        pdfViewer.innerHTML = '';
+                        pdfViewer.style.display = 'none';
+                        button.innerHTML = '<i class="fa-solid fa-file-pdf"></i> View PDF';
+                        return;
+                    }
+
+                    pdfViewer.innerHTML = `
+                        <embed
+                            src="${pdfSrc}"
+                            type="application/pdf"
+                            width="100%"
+                            height="100%"
+                        >
+                    `;
+                    pdfViewer.style.display = 'block';
+                    button.innerHTML = '<i class="fa-solid fa-xmark"></i> Close PDF';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

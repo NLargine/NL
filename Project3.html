@@ -10,506 +10,49 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* --- CSS --- */
-
-        /* ------------------- */
-        /* 1. Global Styles & Variables */
-        /* ------------------- */
-        :root {
-            --bg-color: #121212;
-            --panel-color: #1E1E1E;
-            --accent-color: #00BFFF;
-            --text-color: #EAEAEA;
-            --text-muted: #a0a0a0;
-            --font-heading: 'Poppins', sans-serif;
-            --font-body: 'Roboto', sans-serif;
-            --container-width: 1000px;
-            --transition-speed: 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            font-size: 18px;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .main-content {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-        
-        section {
-            padding: 60px 0;
-            opacity: 0; /* Hidden for scroll animation */
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            color: var(--accent-color);
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(0, 191, 255, 0.2);
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-        
-        p {
-            margin-bottom: 20px;
-            color: var(--text-muted);
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        /* ------------------- */
-        /* 2. Hero Section */
-        /* ------------------- */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            padding: 20px;
-        }
-
         .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            /* For a static image background */
-             background: url('Project3CoverFull.jpg') no-repeat center center/cover;
-        }
-        
-        .hero::after { /* Dark overlay */
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: -1;
+            background: url('Project3CoverFull.jpg') no-repeat center center/cover;
         }
 
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
-        }
-        
-        .hero h2 {
-            font-size: 1.5rem;
-            font-family: var(--font-body);
-            border: none;
-            margin-bottom: 40px;
-            color: var(--text-color);
-        }
-
-        .hero-button {
-            background-color: var(--accent-color);
-            color: #121212;
-            padding: 15px 35px;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            text-transform: uppercase;
-        }
-        
-        .hero-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
-            color: #121212;
-        }
-
-        .back-link {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            color: var(--text-muted);
-            font-family: var(--font-body);
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            z-index: 10;
-        }
-
-        .back-link:hover {
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        .back-link i {
-            margin-right: 8px;
-        }
-
-        /* Make it responsive for mobile */
-        @media (max-width: 768px) {
-            .back-link {
-                top: 20px;
-                left: 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* ------------------- */
-        /* 3. Content Sections */
-        /* ------------------- */
-        .content-card {
-            background-color: var(--panel-color);
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Style for the single showcase image */
         .image-showcase-container {
             margin-top: 30px;
         }
 
         .image-showcase-container img {
-            width: 100%; /* Make it fill the container's width */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 8px; /* Match the site's aesthetic */
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4); /* Match other media */
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
             display: block;
         }
 
-        /* Style for the Video + Image 2-Column Grid */
         .media-pair-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-top: 30px;
-            align-items: start; /* Aligns items to the top */
+            align-items: start;
         }
 
-        .media-item {
-            /* This is a simple container */
-        }
-
-        /* Styles for the accompanying image(s) */
         .showcase-sub-image {
             width: 100%;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
             display: block;
         }
 
-        /* Adds space if you stack multiple images in the 2nd column */
-        .showcase-sub-image:not(:last-child) {
-            margin-bottom: 20px;
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
         }
 
-
-        /* Make the grid responsive for mobile */
         @media (max-width: 768px) {
             .media-pair-grid {
-                grid-template-columns: 1fr; /* Stacks the columns */
-            }
-        }
-
-        /* Video Embed */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Role & Responsibilities */
-        .role-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .role-list li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 10px;
-        }
-        .role-list li::before {
-            content: '\f00c'; /* Font Awesome check mark */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 4px;
-            color: var(--accent-color);
-        }
-
-        /* Project Page External Links Button */
-        .project-links {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .project-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background-color: transparent;
-            color: var(--accent-color);
-            padding: 12px 25px;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            border: 2px solid var(--accent-color);
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .project-button:hover {
-            background-color: var(--accent-color);
-            color: #121212; /* Dark background color for text */
-            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .project-button i {
-            font-size: 1.2rem;
-        }
-
-        /* Tools & Technologies */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
-            text-align: center;
-        }
-        .tech-item {
-            background-color: var(--bg-color);
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-        .tech-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 191, 255, 0.15);
-        }
-        .tech-item i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-        .tech-item span {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        /* Style for feature list in deep dive */
-        .feature-list {
-            list-style: none; /* Removes default black dot */
-            padding-left: 0;
-            margin-top: 15px;
-        }
-
-        .feature-list li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 15px;
-            color: var(--text-muted);
-        }
-
-        .feature-list li::before {
-            content: '\f105'; /* Font Awesome angle-right icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 4px;
-            color: var(--accent-color);
-        }
-
-        /* Technical Deep Dive */
-        .deep-dive {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            margin-top: 40px;
-        }
-        .deep-dive .text-content, .deep-dive .media-content {
-            flex: 1;
-            min-width: 300px;
-        }
-        .deep-dive .media-content img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-        }
-        /* Alternating layout */
-        .deep-dive:nth-child(even) {
-             flex-direction: row-reverse;
-        }
-        
-        /* Screenshot Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .gallery-grid img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-        .gallery-grid img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.2);
-        }
-
-        /* Contact */
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .contact-links a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            border: 2px solid transparent;
-            border-radius: 50px;
-            transition: all var(--transition-speed);
-        }
-        .contact-links a:hover {
-            color: white;
-            border-color: var(--accent-color);
-            background-color: rgba(0, 191, 255, 0.1);
-        }
-        .contact-links i {
-            font-size: 1.5rem;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #2a2a2a;
-        }
-
-        /* ------------------- */
-        /* 4. Lightbox (for Gallery) */
-        /* ------------------- */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: none; /* Initially hidden */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-        .lightbox.active {
-            display: flex;
-        }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 3rem;
-            color: white;
-            cursor: pointer;
-            transition: transform var(--transition-speed);
-        }
-        .lightbox-close:hover {
-            transform: scale(1.2);
-        }
-
-        /* ------------------- */
-        /* 5. Responsive Design */
-        /* ------------------- */
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.2rem; }
-            .hero h2 { font-size: 1.2rem; }
-            .content-card { padding: 30px; }
-
-            .deep-dive, .deep-dive:nth-child(even) {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -520,50 +63,47 @@
         <div class="hero-content">
             <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
             <h1>Lost Kingdoms</h1>
-            <h2>A Game by NL</h2>
+            <h2>Systems-heavy RPG prototype focused on expeditions, kingdom building, and progression</h2>
             <a href="#overview" class="hero-button">View Project</a>
         </div>
     </header>
-    
-    <main class="main-content">
 
+    <main class="main-content">
         <section id="overview" class="scroll-target">
             <h2>Overview</h2>
             <div class="content-card">
                 <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/jLxz5eSKKR8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/jLxz5eSKKR8" title="Lost Kingdoms gameplay overview" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <p>An ambitious, for fun Work In Progress. Lost Kingdoms has extensive systems, focused around Kingdom building. In the Guild House and Expeditions Dev Log, an expedition is shown where the player can complete a mission
-                to earn rewards and experience. The expeditions are procedurally generated, and the missions given to the player as a random selection (think hell divers). The player can farm materials in these areas. As the player progresses the main story,
-                new expeditions are unlocked with access to rarer materials, but more difficult enemies. The game currently features 4 enemy factions - Zombies, Boars, Skeletons, Dark Elves, and later Dragons. Expeditions involves diving into the unknown, completing
-                the objective, and escaping with anything looted.</p>
+                <p>Lost Kingdoms is an ambitious work-in-progress RPG prototype built around kingdom building, expedition design, party progression, and long-form system interplay. The project leans into breadth: the player develops a home base, ventures into procedural mission spaces, gathers materials, unlocks stronger regions, and gradually takes on more dangerous enemy factions.</p>
+                <p>One of the strongest portfolio signals here is how many connected gameplay layers are already in motion: procedural expeditions, base upgrading, resource loops, party management, ability progression, and combat encounters that demand more than simple stat checks.</p>
                 <div class="project-links">
-            <a href="https://nikolargine.itch.io/lost-kingdom" target="_blank" rel="noopener noreferrer" class="project-button">
-                <i class="fa-brands fa-itch-io"></i> Play on itch.io
-            </a>
-        </div>
+                    <a href="https://nikolargine.itch.io/lost-kingdom" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                    </a>
+                </div>
             </div>
         </section>
 
         <section id="role" class="scroll-target">
             <h2>My Role: Solo Developer</h2>
             <div class="content-card">
-                <p>Lost Kingdoms implements many advanced systems and features that were inspired by other games that I like</p>
+                <p>I built Lost Kingdoms as a solo prototype to explore larger-scale RPG systems and how they could feed into each other over longer play sessions. The project combines moment-to-moment combat features with broader progression, world management, and mission structure.</p>
                 <ul class="role-list">
-                    <li>Gameplay Programming & Systems Design (C#)</li>
-                    <li>UI/UX Design & Implementation</li>
+                    <li>Gameplay Programming &amp; Systems Design (C#)</li>
+                    <li>UI/UX Design &amp; Implementation</li>
                     <li>Spine2D animated characters</li>
-                    <li>Sprite characters with various poses and expressions</li>
-                    <li>Story and Dialogue</li>
-                    <li>Sound Design & Integration</li>
-                    <li>Game and Level Design</li>
-                    <li>Project Management & Version Control (Git)</li>
+                    <li>Sprite characters with varied expressions and presentation states</li>
+                    <li>Story and dialogue implementation</li>
+                    <li>Sound design &amp; integration</li>
+                    <li>Game and level design</li>
+                    <li>Project management &amp; version control (Git)</li>
                 </ul>
             </div>
         </section>
-        
+
         <section id="tech" class="scroll-target">
-            <h2>Tools & Technologies</h2>
+            <h2>Tools &amp; Technologies</h2>
             <div class="content-card">
                 <div class="tech-grid">
                     <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
@@ -577,217 +117,193 @@
         </section>
 
         <section id="deep-dive" class="scroll-target">
-            <h2>Technical Deep Dive</h2>
+            <h2>Key Systems</h2>
             <div class="content-card">
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Traps/Item placement feature</h3>
-                        <p>The trap/item placement feature allows traps and other items to be placed in scenes. Their position is recorded, allowing traps/items.furniture
-                        to be placed safely and retain their data persistence</p>
+                        <h3>Trap and Item Placement</h3>
+                        <p>The trap and placement system allows items, traps, and furniture to be placed into scenes while retaining their stored position and persistent state. That makes player construction and preparation feel grounded rather than temporary.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Traps.png" alt="[Game systems]">
+                        <img src="Traps.png" alt="Trap placement and persistent item setup in Lost Kingdoms" loading="lazy">
                     </div>
                 </div>
+
                 <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Object pooling and other optimisations</h3>
-                        <p>Due to the large number of items that may be placed at any time, the game uses object pooling system to place pre-existing objects, removing the
-                        need to create them on the fly. The system also merges large numbers of untouched numbers, similar to minecraft where their quantities are merged into a single block.</p>
+                        <h3>Object Pooling and Optimization</h3>
+                        <p>Because the game can contain large numbers of placeable items, it uses object pooling to reuse existing objects instead of instantiating everything at runtime. Similar objects can also be merged when untouched, reducing clutter and helping the world scale more efficiently.</p>
                     </div>
                     <div class="media-content">
-                        <img src="ObjectPooling.png" alt="Inventory">
+                        <img src="ObjectPooling.png" alt="Object pooling and world optimization systems" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Boss Battle</h3>
-                        <p> A Boss battle with unique mechanics, such as using traps to stun the boss, or hiding behind pillars to make
-                        them collapse onto the boss when he charges. The boss also retreats to heal and has various moves</p>
+                        <h3>Boss Encounters</h3>
+                        <p>Boss fights are built around more than raw damage. Encounters can include mechanics like stunning a boss with traps, using pillars to create environmental knockdowns, and handling heal retreats and phase-style move variation.</p>
                     </div>
                     <div class="media-content">
-                        <img src="BossBattle.png" alt="Inventory">
+                        <img src="BossBattle.png" alt="Boss battle encounter showing mechanics and combat staging" loading="lazy">
                     </div>
                 </div>
+
                 <div class="deep-dive">
                     <div class="text-content">
-                        <h3>Ability System</h3>
-                        <p>The game has a expansive ability/spell casting system that allows players and party members to use different types of abilities, whether offensive, supporting or healing.
-                        Each ability has its own progression/mastery, allowing abilities to be levelled up and improved. There are multiple skill sets, allowing players to create and cycle through
-                        various abilities.</p>
+                        <h3>Ability and Spell System</h3>
+                        <p>The ability system supports offensive, support, and healing skills for both the player and party members. Each ability can progress individually, with multiple skill sets encouraging build variety and flexible combat roles.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Abilities.png" alt="QuestLog">
+                        <img src="Abilities.png" alt="Ability and spell progression interface" loading="lazy">
                     </div>
                 </div>
 
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Party System</h3>
-                        <p>The Party System allows the player to switch and control any member of the party. Party members can follow the player,
-                        support them in combat. Party members can be downed, where they can be revived by the player and other party members. They can also revive the player and
-                        have different priorities based on their various factors such as their affinity.</p>
+                        <p>The party system allows the player to switch between characters, receive combat support from followers, and interact with downed and revival states. Companion behaviour also varies based on internal priorities, which helps the system feel less rigid.</p>
                     </div>
                     <div class="media-content">
-                        <img src="Project2G3.png" alt="Live2D animations">
+                        <img src="Project2G3.png" alt="Party management and combat support systems reused in Lost Kingdoms" loading="lazy">
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="design" class="scroll-target">
+            <h2>Design Decisions</h2>
+            <div class="content-card">
+                <p>Lost Kingdoms is less about a single standout mechanic and more about how multiple systems support a longer-term fantasy of rebuilding, exploring, and steadily becoming more capable. Expeditions, material gathering, ability progression, and kingdom upgrades were designed to feed each other rather than exist as disconnected features.</p>
+                <p>That makes it a useful portfolio piece for showing large-system thinking: the challenge is not just building each mechanic, but making them all point in the same direction.</p>
             </div>
         </section>
 
         <section id="TrainingGrounds" class="scroll-target">
             <h2>Training Grounds</h2>
             <div class="content-card">
-                <p>The training grounds acts as an arena for player to test their weapons and abilities. It also has various training missions from base defense to Night survival</p>
-
+                <p>The training grounds act as an arena where the player can test weapons, abilities, and mission variations ranging from base defence to night survival.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/QVoHpvHHdyo" title="Full Game Playthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/QVoHpvHHdyo" title="Lost Kingdoms training grounds" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="shader-showcase" class="scroll-target">
-            <h2>Shader Showcase: Dynamic Lava + Directional aiming</h2>
+            <h2>Shader Showcase</h2>
             <div class="content-card">
-                <p>Using stochastic texturing shader to add randomness to the repeating lava, the 2D shader graph also provides rotation and translation to provide dynamically moving lava in the dungeons. The video also shows
-                the full 2D directional aiming of the Spine2D, allowing characters to aim and attack in all directions with their animated sprite.</p>
-
+                <p>This shader showcase combines stochastic texturing for less repetitive lava surfaces with 2D shader graph motion controls. It also demonstrates full directional aiming for Spine2D characters, allowing attacks and animation to line up across all aim directions.</p>
                 <div class="media-pair-grid">
-
                     <div class="media-item">
                         <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/thfFoAYayh4" title="Lava Shader Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/thfFoAYayh4" title="Lost Kingdoms lava shader showcase" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
-
                     <div class="media-item">
-                        <img src="stochasticMoving.png" alt="[Lava Shader Graph]" class="showcase-sub-image">
-
+                        <img src="stochasticMoving.png" alt="Lava shader graph and stochastic texturing result" class="showcase-sub-image" loading="lazy">
                     </div>
-
                 </div>
             </div>
         </section>
 
         <section id="MushroomKingdom" class="scroll-target">
-            <h2>Mushroom Kingdom Dev Look</h2>
+            <h2>Mushroom Kingdom Hub</h2>
             <div class="content-card">
-                <p>A quick walk around one of central hubs - the mushroom Kingdom and the adjacent area. The Northern area is a scenic area that surrounds the Kingdom</p>
-
+                <p>A development look at one of the central hubs: the Mushroom Kingdom and its surrounding scenic northern area.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/YRXxJv444AU" title="Full Game Playthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/YRXxJv444AU" title="Lost Kingdoms Mushroom Kingdom hub" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="EnemyCamp" class="scroll-target">
-            <h2>Enemy Camp testing</h2>
+            <h2>Enemy Camp Encounter</h2>
             <div class="content-card">
-                <p>Dev Log testing the first encounter/raid against the Boar Camp in the main quest. The player and his party he recruits uses crafted/looted weapons/abilities to navigate and destroy the enemy camp.</p>
-
+                <p>This dev log tests an early raid against the Boar Camp. The player and recruited party members use crafted and looted gear to navigate the encounter and destroy the enemy position.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/vkLc4atufNo" title="Raid" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/vkLc4atufNo" title="Lost Kingdoms enemy camp raid" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="Farm" class="scroll-target">
-            <h2>Farming / Neutral creatures</h2>
+            <h2>Farming and Neutral Creatures</h2>
             <div class="content-card">
-                <p>As part of the Kingdom building, there are neutral animals which the player can farm. Cows can be milked, chickens drop eggs, and other animals can be slaughtered for their items such as leather and meat.</p>
-
+                <p>As part of the kingdom-building loop, neutral animals can be farmed for resources such as milk, eggs, leather, and meat, feeding back into the wider economy and crafting progression.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/OK7g_H4fHSQ" title="Farming" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/OK7g_H4fHSQ" title="Lost Kingdoms farming systems" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="Vaults" class="scroll-target">
-            <h2>Vaults</h2>
+            <h2>Vaults and Clue Solving</h2>
             <div class="content-card">
-                <p>By searching for clues throughout the game, the player can find rare skill books to learn unique skills. This triggers a mini game to unlock the vault from the clues gathered.</p>
-
+                <p>By searching for clues throughout the game, the player can find rare skill books and trigger a vault-solving minigame to unlock them.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/xqejJoPvdn8" title="Vaults" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/xqejJoPvdn8" title="Lost Kingdoms vault puzzle" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="BaseBuilding" class="scroll-target">
-            <h2>Kingdom Building + Storage + Crafting</h2>
+            <h2>Kingdom Building, Storage, and Crafting</h2>
             <div class="content-card">
-                <p>The game features an extensive Kingdom building system. In the video, I use a hidden storage chest to get materials for the showcase. The storage is persistent, and allows retrieval and depositing of items.
-                The game features a HQ, which starts as a tent, and as it is upgraded changes into a larger structure. In the video it starts as a small tent at level 1, and becomes a larger tent at level 2. Upgrading the HQ provides numerous benefits.
-                Upgrading buildings provide benefits such as increased stats, healing buffs; farm buildings give item production; research buildings reduce upgrade costs; and buildings like the smithy in the video unlock new tiers of crafting recipes
-                such as wooden and stone tools/weapons. There are also defensive buildings such as the archer towers, which may be upgraded to help with Kingdom defense missions. The Kingdom follows the day night cycle, so light crystals can be created.</p>
-
+                <p>The kingdom-building system supports persistent storage, HQ upgrades, production structures, research bonuses, and defensive buildings. Upgrading the HQ and supporting structures expands crafting, improves stats, and opens up stronger progression options across the rest of the game.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/ymuvCYOTrsg" title="Vaults" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/ymuvCYOTrsg" title="Lost Kingdoms kingdom building and crafting" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="BaseBuilding2" class="scroll-target">
-            <h2>Kingdom Building 2</h2>
+            <h2>Kingdom Building Follow-up</h2>
             <div class="content-card">
-                <p>Second video of the base building show case</p>
-
+                <p>A second showcase covering more of the base-building loop and progression flow.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/fxfIyDGcjKg" title="Vaults" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/fxfIyDGcjKg" title="Lost Kingdoms second kingdom building showcase" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="DayNight" class="scroll-target">
-            <h2>Day/Night System</h2>
+            <h2>Day and Night System</h2>
             <div class="content-card">
-                <p>The Day Night system runs on a time system and affects various aspects of the game, most notably the lighting. Players can sleep to pass eight hours to skip night.</p>
-
+                <p>The day-night system runs on a time model that affects lighting and broader world presentation. Players can also sleep to skip forward and manage risk or pacing.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/45KIks4l8Ec" title="Vaults" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/45KIks4l8Ec" title="Lost Kingdoms day and night system" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="Harvesting" class="scroll-target">
-            <h2>Dungeons + Harvesting</h2>
+            <h2>Dungeons and Harvesting</h2>
             <div class="content-card">
-                <p>The player can give items to party members, such as harvesting tools to help to harvest many of the various resources. Harvesting tools can also be used to destroy buildings/fortifications (e.g wooden walls can be destroyed
-                by an axe more easily). Different tools are more effective of different resource types. Currently, there are wooden, rock/stone/mineral, and ground types (e.g sand). There are different tiers of resources, which have a minimum
-                harvesting value, encouraging players to upgrade their gear to access higher level resources, like in many other games such as minecraft. Tools also have durability.</p>
-
+                <p>Harvesting tools can be given to party members and are used across multiple resource types. Different tiers of resources require stronger tools, tying gathering progression directly into crafting, exploration, and combat readiness.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/sPQzzKRx5iA" title="Vaults" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/sPQzzKRx5iA" title="Lost Kingdoms harvesting systems" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="rts" class="scroll-target">
-            <h2>RTS Style quest</h2>
+            <h2>RTS-Style Quest</h2>
             <div class="content-card">
-                <p>Inspired by Age Of Empires, there are RTS style quests using the building system. One of the major quests starts after constructing the player faction's
-                command centre. Upon construction the quest starts. There are two lanes, like a MOBA game, where the enemy sends raids. The player has walls and can
-                construct Archer Towers and Mortars, and upgrade them. The mortars can be constructed by gathering iron from raiding the enemy supply lines.
-                Supply corps of the enemy travel to their fort. Defeating the enemy supply troop weakens the enemy fort, until they can no longer use their mortars. While attacking
-                the enemy fort while their mortars are active will lead to game over quickly. If the enemy supply troop does successfully reach their fort, it triggers a powerful raid.
-                This includes an elf wizard, an enemy from a higher level zone, making the player try to manage both lanes to stop supply troops reaching the enemy. The objective is
-                to destroy the enemy command centre while protecting your own. Resources can also be gathered around the map to construct traps or for upgrading the defenses. The player
-                can also destroy the various enemy encampments, that spawn troops, or in the case of teepees, also heal the enemy that are nearby.</p>
-
+                <p>This quest line takes inspiration from Age of Empires and MOBA lane structures. The player constructs defences, intercepts supply lines, manages two active fronts, and works toward destroying the enemy command centre while keeping their own base intact.</p>
                 <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/MLBVe8t12T0" title="Vaults" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/MLBVe8t12T0" title="Lost Kingdoms RTS-style quest" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
         <section id="showcase-image" class="scroll-target">
-            <h2>Visual Novel Shaders</h2>
+            <h2>Visual Novel Shader Work</h2>
             <div class="content-card">
-                <p>The Visual Novel system uses shaders for transitioning sprites, backgrounds and cinematics</p>
-
+                <p>The visual novel presentation layer uses shaders to transition sprites, backgrounds, and cinematic moments more smoothly than simple hard cuts.</p>
                 <div class="image-showcase-container">
-                    <img src="VNShaderGraph.png" alt="[Descriptive alt text for the image]">
+                    <img src="VNShaderGraph.png" alt="Shader graph used for visual novel presentation transitions" loading="lazy">
                 </div>
             </div>
         </section>
@@ -795,36 +311,33 @@
         <section id="gallery" class="scroll-target">
             <h2>In-Game Gallery</h2>
             <div class="gallery-grid">
-                <img src="Project3G1.png" alt="Game Screenshot 1">
-                <img src="Project3G2.png" alt="Game Screenshot 2">
-                <img src="Project3G3.png" alt="Game Screenshot 3">
-                <img src="Project3G4.png" alt="Game Screenshot 4">
-                <img src="Project3G5.png" alt="Game Screenshot 5">
-                <img src="Project3G6.png" alt="Game Screenshot 6">
-                <img src="Project3G7.png" alt="Game Screenshot 7">
-                <img src="Project3G8.png" alt="Game Screenshot 8">
-                <img src="Project3G9.png" alt="Game Screenshot 9">
-                <img src="Project3G10.png" alt="Game Screenshot 10">
-                <img src="Project3G11.png" alt="Game Screenshot 11">
-                <img src="Project3G12.png" alt="Game Screenshot 12">
-                <img src="Project3G13.png" alt="Game Screenshot 13">
-                <img src="Project3G14.png" alt="Game Screenshot 14">
-                <img src="Project3G15.png" alt="Game Screenshot 15">
-
+                <img src="Project3G1.png" alt="Lost Kingdoms scene showing exploration and UI" loading="lazy">
+                <img src="Project3G2.png" alt="Combat or traversal scene from Lost Kingdoms" loading="lazy">
+                <img src="Project3G3.png" alt="World or encounter screenshot from Lost Kingdoms" loading="lazy">
+                <img src="Project3G4.png" alt="Another gameplay scene from Lost Kingdoms" loading="lazy">
+                <img src="Project3G5.png" alt="Environment presentation in Lost Kingdoms" loading="lazy">
+                <img src="Project3G6.png" alt="Development screenshot highlighting progression systems" loading="lazy">
+                <img src="Project3G7.png" alt="RPG encounter or quest scene in Lost Kingdoms" loading="lazy">
+                <img src="Project3G8.png" alt="Additional world or hub screenshot from Lost Kingdoms" loading="lazy">
+                <img src="Project3G9.png" alt="Gameplay screenshot from Lost Kingdoms showing player movement and interface" loading="lazy">
+                <img src="Project3G10.png" alt="Scene showing more of Lost Kingdoms' presentation and systems" loading="lazy">
+                <img src="Project3G11.png" alt="Lost Kingdoms screenshot focused on environment and progression" loading="lazy">
+                <img src="Project3G12.png" alt="Moment from Lost Kingdoms showing another gameplay slice" loading="lazy">
+                <img src="Project3G13.png" alt="Additional Lost Kingdoms capture from development" loading="lazy">
+                <img src="Project3G14.png" alt="Further gameplay state from Lost Kingdoms" loading="lazy">
+                <img src="Project3G15.png" alt="Late gallery screenshot from Lost Kingdoms" loading="lazy">
             </div>
         </section>
-        
+
         <section id="contact" class="scroll-target">
             <h2>Get In Touch</h2>
             <div class="content-card" style="text-align: center;">
-                <p>I'm currently seeking new opportunities. Feel free to reach out!</p>
+                <p>Thanks for checking out Lost Kingdoms. If you'd like to talk through the project or the systems behind it, feel free to reach out.</p>
                 <div class="contact-links">
-
                     <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>
@@ -833,41 +346,24 @@
 
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged Screenshot" class="lightbox-content" id="lightbox-img">
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
     </div>
 
     <script>
-        // --- JAVASCRIPT ---
-
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. On-Scroll Animations
-            // ---------------------------------
             const targets = document.querySelectorAll('.scroll-target');
-
-            const observerOptions = {
-                root: null, // observes intersections relative to the viewport
-                rootMargin: '0px',
-                threshold: 0.1 // trigger when 10% of the element is visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Optional: stop observing the element once it's visible
-                        // observer.unobserve(entry.target); 
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1 });
 
             targets.forEach(target => {
                 observer.observe(target);
             });
 
-
-            // 2. Lightbox Functionality
-            // ---------------------------------
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const galleryImages = document.querySelectorAll('.gallery-grid img');
@@ -876,6 +372,7 @@
             const openLightbox = (e) => {
                 lightbox.classList.add('active');
                 lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
             };
 
             const closeLightbox = () => {
@@ -886,7 +383,6 @@
                 img.addEventListener('click', openLightbox);
             });
 
-            // Close lightbox by clicking close button or overlay
             lightboxClose.addEventListener('click', closeLightbox);
             lightbox.addEventListener('click', (e) => {
                 if (e.target !== lightboxImg) {
@@ -894,13 +390,11 @@
                 }
             });
 
-            // Close lightbox with Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                     closeLightbox();
                 }
             });
-            
         });
     </script>
 </body>

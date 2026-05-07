@@ -35,6 +35,69 @@
         .deep-dive:nth-child(even) {
             flex-direction: row-reverse;
         }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .feature-card i {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+        }
+
+        .gif-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .gif-placeholder {
+            min-height: 220px;
+            border: 2px dashed #3a3a3a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .gif-placeholder span {
+            opacity: 0.8;
+            font-weight: 700;
+        }
+
+        .stat-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            list-style: none;
+            padding-left: 0;
+            margin-top: 25px;
+        }
+
+        .stat-list li {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 16px;
+        }
     </style>
 </head>
 <body>
@@ -43,7 +106,7 @@
         <div class="hero-content">
             <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
             <h1>War On Water</h1>
-            <h2>Team-built top-down survivor-like with gameplay systems, upgrades, and UI integration</h2>
+            <h2>Team-built top-down survivor-like with elemental abilities, upgrade systems, enemy escalation, and UI integration</h2>
             <a href="#overview" class="hero-button">View Project</a>
         </div>
     </header>
@@ -56,7 +119,7 @@
                     <iframe src="https://www.youtube.com/embed/dT3L0hvrM1A" title="War On Water gameplay trailer" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <p>War On Water is a short-session survival shooter built in Unity where the player controls a fire elemental holding out against escalating waves of water enemies. A full run lasts around five minutes, with the core loop centered on movement, positioning, and fast upgrade choices under pressure.</p>
-                <p>This was a team project and my main contribution was driving the game into a cohesive, playable whole. I led development across gameplay programming, systems design, UI implementation, and technical integration so the combat loop, progression, enemy pressure, and feedback all worked together cleanly.</p>
+                <p>This was a team project and my main contribution was driving the game into a cohesive, playable whole. I led development across gameplay programming, systems design, UI implementation, technical integration, ability progression, and combat readability so the progression loop, enemy pressure, and visual feedback all worked together cleanly.</p>
                 <div class="project-links">
                     <a href="https://nikolargine.itch.io/war-on-water" target="_blank" rel="noopener noreferrer" class="project-button">
                         <i class="fa-brands fa-itch-io"></i> Play on itch.io
@@ -77,9 +140,10 @@
                     <li>Led gameplay programming, systems design, and UI implementation in a team project setting</li>
                     <li>Designed and implemented the core gameplay loop: movement, auto-attack, progression, and upgrade decisions</li>
                     <li>Built the major gameplay architecture and integration points between systems</li>
-                    <li>Developed UI flows for upgrade cards, pause, death, and victory screens</li>
+                    <li>Implemented elemental abilities, altar-based ability rewards, Rain Mode, and higher-tier enemy escalation</li>
+                    <li>Developed UI flows for upgrade cards, pause, death, victory, altar indicators, and progression feedback</li>
                     <li>Acted as primary integrator to keep features cohesive across the project</li>
-                    <li>Contributed shaders, particle work, and sprite support for gameplay feedback</li>
+                    <li>Contributed shaders, particle work, lighting, and sprite support for gameplay feedback</li>
                 </ul>
             </div>
         </section>
@@ -93,6 +157,8 @@
                     <div class="tech-item"><i class="fa-solid fa-cubes"></i><span>ScriptableObjects</span></div>
                     <div class="tech-item"><i class="fa-solid fa-layer-group"></i><span>Object Pooling</span></div>
                     <div class="tech-item"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Shaders</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cloud-showers-heavy"></i><span>Rain VFX</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-bolt"></i><span>Ability VFX</span></div>
                     <div class="tech-item"><i class="fa-solid fa-sparkles"></i><span>Particles &amp; VFX</span></div>
                 </div>
             </div>
@@ -104,7 +170,7 @@
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Wave Director &amp; Enemy Pressure</h3>
-                        <p>I built the core survival loop around escalating waves that scale enemy count, speed, and health over the course of a run. Multiple enemy types, including melee, ranged, explosive, and boss encounters with phase-based behaviour, create different kinds of pressure rather than just bigger numbers.</p>
+                        <p>I built the core survival loop around escalating waves that scale enemy count, speed, and health over the course of a run. Multiple enemy types, including melee, ranged, explosive, boss encounters, and Tier 2 glowing enemies, create different kinds of pressure rather than just bigger numbers.</p>
                     </div>
                     <div class="media-content">
                         <img src="WarOnWaterGameplay.png" alt="War On Water gameplay screenshot showing the top-down survival combat loop" loading="lazy">
@@ -116,10 +182,42 @@
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>Modular Ability &amp; Upgrade System</h3>
-                        <p>The upgrade structure uses ScriptableObjects and a weighted random "choose 1 of 3" card system to keep progression readable while still allowing variation between runs. I implemented nine active and passive abilities with multi-tier upgrades and designed the system to be easy to extend and rebalance.</p>
+                        <p>The upgrade structure uses ScriptableObjects and a weighted random "choose 1 of 3" card system to keep progression readable while still allowing variation between runs. I extended the player's fire ability set from 2 upgrade tiers to 5 upgrade tiers, covering 7 active fire abilities and 2 passive fire abilities.</p>
+                        <p>I also implemented elemental ability sets for lightning, earth, and wind. Each element includes 3 unique abilities or augments, creating 9 unique elemental abilities total, with 2-3 upgrade tiers per ability.</p>
                     </div>
                     <div class="media-content">
                         <img src="WarOnWaterUI.png" alt="War On Water upgrade UI showing the card-based progression system" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="gif-row">
+                    <img src="lightning-ability-1.gif" alt="Lightning elemental ability gameplay showcase" loading="lazy">
+                    <img src="lightning-ability-2.gif" alt="Lightning elemental augment and combat effects showcase" loading="lazy">
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Elemental Altars</h3>
+                        <p>I implemented elemental altars as an in-run reward mechanic for receiving elemental abilities. Altars spawn during the run and create a clear objective that pulls the player into riskier movement decisions instead of only kiting enemies around the arena.</p>
+                        <p>To support the mechanic, I added altar spawning logic and a UI indicator that points toward the altar's location, helping the player read the objective without breaking the pace of combat.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="WarOnWaterGameplay.png" alt="War On Water gameplay screenshot representing altar-driven objective play" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Rain Mode Escalation</h3>
+                        <p>Rain Mode continues the game's central theme of a "War on Water" by turning the environment itself into part of the escalation. I implemented rain visuals and shader work, splash particle effects, and additional lighting on abilities to make the mode feel more dramatic and visually reactive.</p>
+                        <p>As the player's build grows to include up to 18 abilities, Rain Mode increases challenge through Tier 2 glowing enemies, preserving engagement and difficulty when the player has gained a much stronger toolset.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="rain-mode.gif" alt="Rain Mode gameplay showing enhanced visuals, lighting effects, and increased enemy difficulty" loading="lazy">
                     </div>
                 </div>
 
@@ -140,7 +238,8 @@
                 <div class="deep-dive">
                     <div class="text-content">
                         <h3>UI, Feedback &amp; VFX Integration</h3>
-                        <p>I developed the full gameplay UI flow, including HUD, level-up cards, pause, death, and victory states, then paired that with hit effects, particles, trails, and shader work to improve combat readability. That integration work was important because the game needed to stay legible as enemy counts and overlapping effects increased.</p>
+                        <p>I developed the full gameplay UI flow, including HUD, level-up cards, pause, death, victory states, altar indicators, and objective feedback, then paired that with hit effects, particles, trails, shaders, and lighting work to improve combat readability.</p>
+                        <p>That integration work was important because the game needed to stay legible as enemy counts, elemental abilities, rain visuals, and overlapping effects increased.</p>
                     </div>
                     <div class="media-content">
                         <img src="WarOnWaterDissolveShader.png" alt="War On Water dissolve shader effect used for visual feedback and enemy presentation" loading="lazy">
@@ -149,11 +248,48 @@
             </div>
         </section>
 
+        <section id="feature-summary" class="scroll-target">
+            <h2>Feature Expansion Summary</h2>
+            <div class="content-card">
+                <p>This expansion pushed War On Water from a fire-focused survival shooter into a broader elemental combat system with stronger build variety, clearer objectives, and a more intense late-game state.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-bolt"></i>
+                        <h3>Elemental Abilities</h3>
+                        <p>Implemented lightning, earth, and wind elements with 3 abilities or augments each, creating 9 unique elemental abilities total with 2-3 upgrade tiers per ability.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                        <h3>Expanded Fire Progression</h3>
+                        <p>Extended the existing player fire abilities from 2 upgrade tiers to 5 upgrade tiers across 7 active abilities and 2 passive abilities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <h3>Elemental Altars</h3>
+                        <p>Implemented altar spawning, elemental ability rewards, and a UI indicator that guides the player toward altar locations during active combat.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-cloud-showers-heavy"></i>
+                        <h3>Rain Mode</h3>
+                        <p>Added rain visuals, shader work, splash particles, ability lighting, and Tier 2 glowing enemies to escalate difficulty and reinforce the water theme.</p>
+                    </div>
+                </div>
+
+                <ul class="stat-list">
+                    <li><strong>9</strong><br>Unique elemental abilities across lightning, earth, and wind</li>
+                    <li><strong>2-3</strong><br>Upgrade tiers for each elemental ability</li>
+                    <li><strong>5</strong><br>Upgrade tiers for expanded fire abilities</li>
+                    <li><strong>18</strong><br>Potential abilities supported by the expanded build system</li>
+                </ul>
+            </div>
+        </section>
+
         <section id="challenge" class="scroll-target">
             <h2>Challenge &amp; Problem Solving</h2>
             <div class="content-card">
-                <p>A major challenge was preserving game feel and readability under high enemy density. As the run scales up, large numbers of enemies and effects can quickly turn into visual noise, especially in a top-down survivor-like where the player needs to read danger, impact, and safe movement space at a glance.</p>
-                <p>To solve that, I introduced clearer particle and hit feedback, tuned ability visuals to better communicate impact and area coverage, and balanced scaling so later waves still felt threatening without overwhelming the screen. The result was a more readable and satisfying late-game combat state, which was one of the most important quality improvements on the project.</p>
+                <p>A major challenge was preserving game feel and readability under high enemy density. As the run scales up, large numbers of enemies, rain effects, elemental abilities, and overlapping particles can quickly turn into visual noise, especially in a top-down survivor-like where the player needs to read danger, impact, and safe movement space at a glance.</p>
+                <p>To solve that, I introduced clearer particle and hit feedback, tuned ability visuals to better communicate impact and area coverage, added lighting to improve the appeal and readability of abilities in Rain Mode, and balanced Tier 2 enemies so later waves still felt threatening without overwhelming the screen. The result was a more readable and satisfying late-game combat state, which was one of the most important quality improvements on the project.</p>
             </div>
         </section>
 
@@ -163,21 +299,27 @@
                 <p>War On Water was especially valuable because it demonstrates a different strength than my solo work: operating inside a team while still taking ownership of production-critical systems. It shows that I can lead implementation, build modular gameplay architecture, and act as the integrator who keeps the whole project moving toward a coherent result.</p>
                 <ul class="role-list">
                     <li>Built a complete, replayable survival loop with scalable enemy and upgrade systems</li>
+                    <li>Expanded the game from fire-only progression into a larger elemental ability framework</li>
+                    <li>Implemented altar objectives that changed player decision-making during active combat</li>
+                    <li>Added Rain Mode as a thematic and mechanical escalation of the core "War on Water" idea</li>
                     <li>Gained stronger experience designing modular systems for rapid iteration in a team context</li>
                     <li>Improved my ability to balance around player perception and readability, not just raw numbers</li>
-                    <li>Took ownership of production-level responsibilities across programming, UI, and integration</li>
+                    <li>Took ownership of production-level responsibilities across programming, UI, VFX, and integration</li>
                 </ul>
             </div>
         </section>
 
         <section id="gallery" class="scroll-target">
-            <h2>Screenshots</h2>
+            <h2>Screenshots &amp; GIFs</h2>
             <div class="gallery-grid">
                 <img src="WarOnWaterGameplay.png" alt="War On Water gameplay showing the player surrounded by escalating enemy pressure" loading="lazy">
                 <img src="WarOnWaterUI.png" alt="War On Water user interface and upgrade card presentation" loading="lazy">
                 <img src="WarOnWaterParticleSystems.png" alt="War On Water particle systems used for combat readability and impact" loading="lazy">
                 <img src="WarOnWaterDissolveShader.png" alt="War On Water dissolve shader effect used in enemy or ability presentation" loading="lazy">
                 <img src="WarOnWaterStochasticShader.png" alt="War On Water stochastic shader experiment and stylized rendering effect" loading="lazy">
+                <img src="lightning-ability-1.gif" alt="Lightning elemental ability gameplay GIF placeholder" loading="lazy">
+                <img src="lightning-ability-2.gif" alt="Second lightning elemental ability gameplay GIF placeholder" loading="lazy">
+                <img src="rain-mode.gif" alt="Rain Mode gameplay GIF placeholder showing rain visuals and escalated combat" loading="lazy">
             </div>
         </section>
 

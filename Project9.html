@@ -225,6 +225,23 @@
 
                 <div class="deep-dive">
                     <div class="text-content">
+                        <h3>Environmental Hazards &amp; Area Denial</h3>
+                        <p>To further reinforce the game's central theme of escalating conflict against water, I implemented environmental water hazards that appear during specific high-pressure waves, including Rain Mode encounters. These hazards create temporary danger zones that apply damage-over-time and movement slows, forcing the player to reposition more carefully instead of relying purely on damage scaling.</p>
+
+                        <p>The system added another layer of decision-making to combat by introducing environmental pressure alongside enemy density, helping later stages feel more dynamic and mechanically demanding without simply increasing enemy numbers.</p>
+                    </div>
+
+                    <div class="media-content">
+                        <img src="water-hazard.png"
+                             alt="Water hazard gameplay showing environmental danger zones during combat"
+                             loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
                         <h3>Performance for High Enemy Density</h3>
                         <p>Because the game's readability depends on maintaining pressure without technical slowdown, I implemented custom object pooling for enemies, projectiles, and effects. That reduced runtime instantiation overhead and let the game sustain denser combat scenarios more reliably.</p>
                     </div>

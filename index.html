@@ -137,6 +137,24 @@
             transform: translateX(5px);
         }
 
+        /* WIP badge */
+        .wip-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            z-index: 4;
+            background: rgba(220, 80, 40, 0.85);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+        }
+
         @media (min-width: 768px) {
             .project-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -175,10 +193,13 @@
     </header>
 
     <main class="main-container">
+
+        <!-- FEATURED PROJECTS -->
         <section id="shipped" class="scroll-target">
             <h2>Featured Projects</h2>
             <p class="section-subtitle">Playable work and case studies that show systems thinking, implementation depth, and creative range.</p>
             <div class="project-grid">
+
                 <a href="Project8.html" class="project-card">
                     <img src="LastStand.jpg" class="card-bg" alt="Annie's Last Stand key art showing the game's defensive last-stand atmosphere" loading="lazy">
                     <div class="card-overlay"></div>
@@ -299,34 +320,43 @@
                         <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
                     </div>
                 </a>
+
             </div>
         </section>
 
+        <!-- IN DEVELOPMENT -->
         <section id="wip" class="scroll-target">
             <h2>In Development</h2>
             <p class="section-subtitle">Current experiments and longer-horizon ideas still taking shape.</p>
             <div class="project-grid">
-                <a href="Project4.html" class="project-card">
-                    <img src="GPCover.png" class="card-bg" alt="Ghost Protocol concept image" loading="lazy">
+
+                <a href="Project10.html" class="project-card">
+                    <img src="IronRemnantHero.png" class="card-bg" alt="Iron Remnant — isometric action RTS prequel to Annie's Last Stand" loading="lazy">
                     <div class="card-overlay"></div>
+                    <span class="wip-badge">WIP</span>
                     <div class="card-content">
-                        <h3>Ghost Protocol</h3>
-                        <p>Spy-themed work in progress exploring character presentation, combat direction, and visual identity.</p>
+                        <h3>Iron Remnant</h3>
+                        <p>Isometric action RTS with enemy base AI, troop economy, shared party inventory, equipment system and full stat overhaul. Prequel to Annie's Last Stand.</p>
                         <ul class="card-tags">
-                            <li>Character Art</li>
                             <li>Unity</li>
                             <li>C#</li>
+                            <li>RTS</li>
+                            <li>Base Building</li>
+                            <li>Systems Design</li>
                         </ul>
-                        <div class="card-action">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="card-action">View Project <i class="fa-solid fa-arrow-right"></i></div>
                     </div>
                 </a>
+
             </div>
         </section>
 
+        <!-- ART & OTHER -->
         <section id="other" class="scroll-target">
-            <h2>Art & Other Work</h2>
+            <h2>Art &amp; Other Work</h2>
             <p class="section-subtitle">Supporting art, 3D work, and adjacent technical projects that broaden the portfolio.</p>
             <div class="project-grid">
+
                 <a href="illustrations.html" class="project-card">
                     <img src="rr1.jpg" class="card-bg" alt="Illustration portfolio cover image" loading="lazy">
                     <div class="card-overlay"></div>
@@ -356,9 +386,26 @@
                         <div class="card-action">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
                     </div>
                 </a>
+
+                <a href="Project4.html" class="project-card">
+                    <img src="GPCover.png" class="card-bg" alt="Ghost Protocol concept image" loading="lazy">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <h3>Ghost Protocol</h3>
+                        <p>Spy-themed work exploring character presentation, combat direction, and visual identity.</p>
+                        <ul class="card-tags">
+                            <li>Character Art</li>
+                            <li>Unity</li>
+                            <li>C#</li>
+                        </ul>
+                        <div class="card-action">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </a>
+
             </div>
         </section>
 
+        <!-- CONTACT -->
         <section id="contact" class="scroll-target">
             <h2>Get In Touch</h2>
             <p class="section-subtitle">Best contact for portfolio, freelance, and full-time opportunities.</p>
@@ -366,10 +413,11 @@
                 <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email Nicholas</a>
             </div>
         </section>
+
     </main>
 
     <footer>
-        <p>&copy; 2025 Nicholas Morris</p>
+        <p>&copy; 2026 Nicholas Morris</p>
     </footer>
 
     <script>
@@ -377,15 +425,10 @@
             const targets = document.querySelectorAll('.scroll-target');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
             }, { threshold: 0.1 });
-
-            targets.forEach(target => {
-                observer.observe(target);
-            });
+            targets.forEach(target => observer.observe(target));
         });
     </script>
 </body>

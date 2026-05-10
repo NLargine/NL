@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Iron Remnant | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url('IronRemnantHero.png') no-repeat center center/cover;
+        }
+
+        /* WIP Banner */
+        .wip-banner {
+            background: linear-gradient(90deg, rgba(220, 80, 40, 0.15), rgba(220, 80, 40, 0.08), rgba(220, 80, 40, 0.15));
+            border: 1px solid rgba(220, 80, 40, 0.35);
+            border-radius: 10px;
+            padding: 14px 22px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .wip-banner i {
+            color: #e05030;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .wip-banner p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .wip-banner strong {
+            color: #e05030;
+        }
+
+        /* Deep dive layout — mirrors existing pages */
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Stat table */
+        .stat-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .stat-table th {
+            text-align: left;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            padding: 10px 12px;
+            border-bottom: 2px solid rgba(0, 191, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #2a2a2a;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        .stat-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .stat-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .stat-name-cell {
+            font-family: var(--font-heading);
+            color: var(--text-color) !important;
+            font-size: 0.95rem !important;
+            white-space: nowrap;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-offence {
+            background: rgba(220, 80, 60, 0.15);
+            color: #e07060;
+            border: 1px solid rgba(220, 80, 60, 0.3);
+        }
+
+        .tag-defence {
+            background: rgba(0, 191, 255, 0.12);
+            color: var(--accent-color);
+            border: 1px solid rgba(0, 191, 255, 0.25);
+        }
+
+        .tag-utility {
+            background: rgba(160, 220, 100, 0.12);
+            color: #90d060;
+            border: 1px solid rgba(160, 220, 100, 0.25);
+        }
+
+        .tag-shared {
+            background: rgba(160, 160, 160, 0.1);
+            color: #999;
+            border: 1px solid rgba(160, 160, 160, 0.2);
+        }
+
+        /* Equipment slots visual */
+        .equip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .equip-slot {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .equip-slot i {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .equip-slot h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+            font-family: var(--font-heading);
+            color: var(--text-color);
+        }
+
+        .equip-slot p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Feature pills */
+        .feature-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .pill {
+            background: rgba(0, 191, 255, 0.08);
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-size: 0.88rem;
+            color: var(--accent-color);
+            font-family: var(--font-heading);
+        }
+
+        /* GIF placeholder grid */
+        .gif-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .gif-slot {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .gif-slot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gif-caption {
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid #2a2a2a;
+        }
+
+        /* Roadmap list */
+        .roadmap-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .roadmap-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .roadmap-list li i {
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .done i { color: #60c060; }
+        .wip i  { color: #e0a030; }
+        .todo i { color: #555; }
+
+        .done span { color: var(--text-color); }
+        .wip  span { color: #e0a030; }
+        .todo span { color: #555; }
+
+        @media (max-width: 768px) {
+            .stat-table { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Iron Remnant</h1>
+            <h2>Solo-built isometric action RTS with base building, troop economy, equipment systems and a full stat overhaul — prequel to Annie's Last Stand</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <div class="wip-banner">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p><strong>Work In Progress</strong> — Active development. Systems shown here are implemented and functional. Playable build and full trailer coming soon.</p>
+                </div>
+                <p>Iron Remnant is a solo-built isometric action game set on a post-apocalyptic Earth overrun by an autonomous mech faction. It is a direct prequel to Annie's Last Stand, depicting the military operations that preceded Annie's final solo defence.</p>
+                <p>The player commands a party of two — the Commander and Annie — across assault missions against enemy mech bases. Each mission involves establishing a forward operating base, training troops that autonomously lane toward the enemy command centre, and fighting through defences in real-time. Between missions, a persistent destroyer acts as the home base, upgraded with installable modules that carry permanent bonuses into future battles.</p>
+                <p>Iron Remnant builds on Annie's Last Stand's combat foundation and extends it with a fully featured base-vs-base economy system, a troop lane system, shared party inventory, a modular equipment page, and a comprehensive stat overhaul covering offence, defence, and utility for all entities in the game.</p>
+                <div class="project-links">
+                    <a href="https://nikolargine.itch.io/annies-last-stand" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play Annie's Last Stand
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROLE -->
+        <section id="role" class="scroll-target">
+            <h2>My Role: Solo Developer</h2>
+            <div class="content-card">
+                <p>Designed and built end to end across active development, reusing and extending the Annie's Last Stand codebase as a foundation.</p>
+                <ul class="role-list">
+                    <li>Gameplay programming and systems architecture (C#, Unity)</li>
+                    <li>Enemy base AI — Threat resource system, building placement, troop spawning, upgrades and repairs</li>
+                    <li>Troop lane system — A* pathfinding to objective with lightweight context solver for combat engagement</li>
+                    <li>Shared party inventory and per-character equipment loadout system</li>
+                    <li>Equipment UI page — weapon, armour and accessory slots for all party members</li>
+                    <li>Full stat system overhaul — offence, defence and utility stats across all entities</li>
+                    <li>ScriptableObject-driven item and armour tier architecture</li>
+                    <li>Party follow and free-swap system — active character player-controlled, others auto-follow and attack</li>
+                    <li>World map territory control — Warlords-style region capture and hold between missions</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TECH -->
+        <section id="tech" class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C#</span></div>
+                    <div class="tech-item"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cubes"></i><span>ScriptableObjects</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-layer-group"></i><span>Object Pooling</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-route"></i><span>A* Pathfinding</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-boxes-stacked"></i><span>Inventory System</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-chart-line"></i><span>Stat Architecture</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ENEMY BASE SYSTEM -->
+        <section id="enemy-base" class="scroll-target">
+            <h2>Key Systems</h2>
+            <div class="content-card">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Enemy Base Economy &amp; Threat System</h3>
+                        <p>The enemy base runs on a <strong>Threat</strong> resource that generates passively from the Command Centre and is multiplied by Resource Collector buildings. Rather than scripted waves, the enemy base behaves like a living economy — constantly accumulating Threat and spending it according to a priority queue.</p>
+                        <p>Threat is consumed in order: spawn troops first, upgrade barracks to unlock new unit tiers second, and rebuild destroyed buildings third. This means destroying a Resource Collector directly starves the enemy's ability to escalate — a meaningful strategic decision, not just clearing a health bar.</p>
+                        <div class="feature-pills">
+                            <span class="pill">Passive Threat generation</span>
+                            <span class="pill">Resource Collectors multiply rate</span>
+                            <span class="pill">Priority spend queue</span>
+                            <span class="pill">Reactive rebuilding</span>
+                            <span class="pill">Barracks tier upgrades</span>
+                        </div>
+                    </div>
+                    <div class="media-content">
+                        <div class="gif-slot">
+                            <img src="ir_resource_collector.gif" alt="Enemy base placing a Resource Collector building and generating Threat income">
+                            <div class="gif-caption">Enemy base placing a Resource Collector — increases Threat generation rate</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                 <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <!-- STAT OVERHAUL -->
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Full Stat System Overhaul</h3>
+                        <p>Iron Remnant introduces a comprehensive stat architecture applied universally to the player party, all enemy types, and structures. Stats are split into three categories: offence, defence and utility. Every value is driven by equipment, level and ScriptableObject-defined base profiles — no hardcoded numbers.</p>
+
+                    </div>
+                    <div class="media-content">
+                        <div class="gif-slot">
+                            <img src="ir_stats_page.gif" alt="Stats page showing the full stat overhaul with offence, defence and utility categories">
+                            <div class="gif-caption">Stats page — full stat overhaul applied to all entities including enemies and structures</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="equip-grid">
+                    <div class="equip-slot">
+                        <i class="fa-solid fa-sword"></i>
+                        <div>
+                            <h4>Weapon Slot</h4>
+                            <p>Any weapon type equippable by any character. Stat profile guides role — no hard class locks.</p>
+                        </div>
+                    </div>
+                    <div class="equip-slot">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <h4>Armour Slot</h4>
+                            <p>Four armour types across four rarity tiers. Tactical, Combat, Heavy Plate and Tech Suit profiles.</p>
+                        </div>
+                    </div>
+                    <div class="equip-slot">
+                        <i class="fa-solid fa-gem"></i>
+                        <div>
+                            <h4>Accessory Slot</h4>
+                            <p>Rings, relics and amulets providing passive stat bonuses — crit chance, elemental resist, gold gain.</p>
+                        </div>
+                    </div>
+                    <div class="equip-slot">
+                        <i class="fa-solid fa-wrench"></i>
+                        <div>
+                            <h4>Tool Slot</h4>
+                            <p>Gathering tools auto-assigned party members near resource nodes. No manual item-giving required.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="stat-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Stat</th>
+                            <th>Description</th>
+                            <th>Applies To</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag tag-offence">Offence</span></td>
+                            <td class="stat-name-cell">Attack Damage</td>
+                            <td>Base physical damage per hit before mitigation.</td>
+                            <td>All entities</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-offence">Offence</span></td>
+                            <td class="stat-name-cell">Crit Chance</td>
+                            <td>Probability of landing a critical hit. Multiplicative with Crit Damage.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-offence">Offence</span></td>
+                            <td class="stat-name-cell">Crit Damage</td>
+                            <td>Damage multiplier applied on a critical hit. Base 150%.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-offence">Offence</span></td>
+                            <td class="stat-name-cell">Hit Chance</td>
+                            <td>Accuracy rating. Checked against target Evasion to determine if attack connects.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-offence">Offence</span></td>
+                            <td class="stat-name-cell">Attack Speed</td>
+                            <td>Rate of attacks or fire. Scales with weapon type base values.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-offence">Offence</span></td>
+                            <td class="stat-name-cell">Penetration</td>
+                            <td>Reduces target's effective Defence by a flat or percentage amount.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-defence">Defence</span></td>
+                            <td class="stat-name-cell">Max HP</td>
+                            <td>Total health pool. Scaled by armour type and level.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-defence">Defence</span></td>
+                            <td class="stat-name-cell">Max MP</td>
+                            <td>Total MP pool. Scaled by armour type and level.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-defence">Defence</span></td>
+                            <td class="stat-name-cell">Health regen</td>
+                            <td>Rate of Health Regeneration</td>
+                        </tr>
+                                                <tr>
+                            <td><span class="tag tag-defence">Defence</span></td>
+                            <td class="stat-name-cell">Mana regen</td>
+                            <td>Rate of Mana Regeneration</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-defence">Defence</span></td>
+                            <td class="stat-name-cell">Defence</td>
+                            <td>Reduces incoming damage.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-defence">Defence</span></td>
+                            <td class="stat-name-cell">Evasion</td>
+                            <td>Chance to completely dodge an incoming attack. Checked against attacker Hit Chance.</td>
+
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-defence">Defence</span></td>
+                            <td class="stat-name-cell">Endurance</td>
+                            <td>Reduces probability of an incoming attack landing a critical hit.</td>
+
+                        </tr>
+
+                        <tr>
+                            <td><span class="tag tag-shared">Shared</span></td>
+                            <td class="stat-name-cell">Level</td>
+                            <td>Scales base stat profiles. Party members level from XP; enemy buildings tier from Threat.</td>
+                            <td>All entities</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <!-- CONNECTION TO ALS -->
+        <section id="prequel" class="scroll-target">
+            <h2>Connection to Annie's Last Stand</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>A Shared Universe &amp; Codebase</h3>
+                        <p>Iron Remnant is built as a direct prequel to Annie's Last Stand. Annie appears as a playable character, the mech enemy roster is reused in full, and the combat feel — 360-degree free-aim, bullet pooling, continuous enemy pressure — is inherited and extended rather than rebuilt.</p>
+                        <p>The inventory, equipment, and stat systems are architected as a shared engine intended to power both Iron Remnant and a third project, Eldoria, a fantasy RPG kingdom builder currently in design. One codebase, three games — demonstrating architecture that scales beyond a single project.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="LastStand.jpg" alt="Annie's Last Stand — the sequel that Iron Remnant leads into" loading="lazy">
+                    </div>
+                </div>
+                <div class="feature-pills" style="margin-top: 20px;">
+                    <span class="pill">Shared mech enemy roster</span>
+                    <span class="pill">Inherited 360° free-aim combat</span>
+                    <span class="pill">Bullet pooling reused</span>
+                    <span class="pill">Shared inventory engine</span>
+                    <span class="pill">Shared stat architecture</span>
+                    <span class="pill">Narrative continuity</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for checking out Iron Remnant. If you'd like to talk about the systems, the design decisions, or my broader portfolio, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nicholas Morris</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                }), { threshold: 0.1 };
+            });
+            targets.forEach(target => observer.observe(target));
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+
+            document.querySelectorAll('.gallery-grid img').forEach(img => {
+                img.addEventListener('click', (e) => {
+                    lightbox.classList.add('active');
+                    lightboxImg.src = e.target.src;
+                    lightboxImg.alt = e.target.alt;
+                });
+            });
+
+            lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target !== lightboxImg) lightbox.classList.remove('active');
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') lightbox.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

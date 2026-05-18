@@ -316,6 +316,168 @@
             </div>
         </section>
 
+
+        <!-- TERRAIN SHADER -->
+        <section id="terrain-shader" class="scroll-target">
+            <h2>Terrain Shader & Environment Rendering</h2>
+            <div class="content-card">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Procedural Terrain Blending Shader</h3>
+
+                        <p>
+                            Built a custom Shader Graph terrain material for Iron Remnant focused on creating RTS environments without visible hard texture seams or obvious texture repetition.
+                            Rather than using traditional painted terrain layers, the shader procedurally blends terrain types together using world-space gradients, layered detail textures and noise-driven edge breakup.
+                        </p>
+
+                        <p>
+                            The system was designed specifically for the game's camera height where large uninterrupted terrain surfaces are constantly visible.
+                            The goal was to achieve readable terrain transitions while still retaining enough fine detail to avoid flat colour fields at gameplay zoom levels.
+                        </p>
+
+                        <div class="feature-pills">
+                            <span class="pill">Shader Graph</span>
+                            <span class="pill">World-space blending</span>
+                            <span class="pill">Noise-driven transitions</span>
+                            <span class="pill">Detail texture layering</span>
+                            <span class="pill">UV tiling controls</span>
+                            <span class="pill">Edge breakup masking</span>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="gif-slot">
+                            <img src="terrain_blend_showcase.png" alt="Sand to grass terrain blend created with a custom Shader Graph material">
+                            <div class="gif-caption">
+                                Procedural grass-to-sand transition with layered noise breakup and detail masking
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Shader Graph Breakdown</h3>
+
+                        <p>
+                            The terrain blend begins with a world-space position gradient which determines the broad transition area between terrain types.
+                            This base mask is then distorted using a tiled edge-noise texture to break up the perfectly linear transition and create more organic terrain shapes.
+                        </p>
+
+                        <p>
+                            Additional high-frequency detail textures are layered separately from the large-scale blend mask.
+                            This allows terrain micro-detail to remain readable without affecting the overall transition shape.
+                            Exposed controls were added for detail scale, noise strength, edge contrast and blend softness so terrain can be tuned per-biome directly in the editor.
+                        </p>
+
+                        <table class="stat-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="stat-name-cell">World Position Gradient</td>
+                                    <td>Creates directional terrain blending independent of mesh UVs.</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat-name-cell">Edge Noise Mask</td>
+                                    <td>Breaks up straight blend lines into more natural terrain shapes.</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat-name-cell">Smoothstep Blend</td>
+                                    <td>Controls transition softness between terrain materials.</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat-name-cell">Detail Texture Overlay</td>
+                                    <td>Adds fine-scale terrain variation at gameplay zoom levels.</td>
+                                </tr>
+                                <tr>
+                                    <td class="stat-name-cell">Exposed Shader Parameters</td>
+                                    <td>Allows real-time tuning of blend sharpness, tiling and contrast.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="gif-row">
+
+                            <div class="gif-slot">
+                                <img src="shadergraph_overview.png" alt="Overview of the terrain Shader Graph setup">
+                                <div class="gif-caption">
+                                    Terrain Shader Graph overview — world-space blend mask and layered detail system
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Visual Iteration & Terrain Readability</h3>
+
+                        <p>
+                            Multiple terrain passes were iterated on to balance realism with gameplay readability.
+                            Early versions relied too heavily on high-frequency noise which created visual speckling at gameplay distance.
+                            Later iterations reduced noise density, softened the blend mask and separated micro-detail from macro terrain shapes.
+                        </p>
+
+                        <p>
+                            Final terrain materials were tuned specifically for readability under the game's lighting model and top-down camera angle.
+                            This helped maintain clear silhouettes for units and buildings while still avoiding flat or repetitive ground surfaces.
+                        </p>
+
+                        <div class="feature-pills">
+                            <span class="pill">Gameplay readability</span>
+                            <span class="pill">Reduced texture repetition</span>
+                            <span class="pill">Biome blending</span>
+                            <span class="pill">Large-scale environment coverage</span>
+                            <span class="pill">Runtime parameter tuning</span>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="gif-row">
+
+                            <div class="gif-slot">
+                                <img src="terrain_iteration_01.png" alt="Early terrain blend iteration">
+                                <div class="gif-caption">
+                                    Earlier iteration — noisier terrain breakup with denser high-frequency detail
+                                </div>
+                            </div>
+
+                            <div class="gif-slot">
+                                <img src="terrain_iteration_02.png" alt="Refined terrain blend iteration">
+                                <div class="gif-caption">
+                                    Refined blend pass — softer transitions and more readable terrain composition
+                                </div>
+                            </div>
+
+                            <div class="gif-slot">
+                                <img src="terrain_ingame.png" alt="Terrain shader visible during gameplay">
+                                <div class="gif-caption">
+                                    Added procedural detailing of the grass
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- ENEMY BASE SYSTEM -->
         <section id="enemy-base" class="scroll-target">
             <h2>Key Systems</h2>

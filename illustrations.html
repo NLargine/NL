@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,50 +19,25 @@
             background: url('rr1.jpg') no-repeat center center/cover;
         }
 
-        .pdf-embed-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            padding-top: 141.42%;
-            margin: 30px 0;
-            border-radius: 8px;
-            background-color: #2a2a2a;
-        }
-
-        .pdf-embed-container iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         .pdf-link-container {
             text-align: center;
             margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid #2a2a2a;
         }
 
         .pdf-button {
             display: inline-flex;
             align-items: center;
             gap: 15px;
-            background-color: var(--accent-color);
-            color: #121212;
+            background-color: #444;
+            color: #999;
             padding: 15px 30px;
             font-family: var(--font-heading);
             font-size: 1.1rem;
             font-weight: 700;
             border-radius: 50px;
             text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .pdf-button:hover {
-            box-shadow: 0 5px 20px rgba(0, 191, 255, 0.4);
-            transform: translateY(-5px);
-            color: #121212;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         section {
@@ -84,24 +60,20 @@
         <section id="overview">
             <h2>Portfolio Overview</h2>
             <div class="content-card">
-                <p>This illustration portfolio focuses on clear character acting, readable silhouettes, and work that supports games and worldbuilding rather than standing apart from them. The pieces prioritize communication, personality, and fast visual readability while still leaving room for variety in mood and presentation.</p>
-                <p>The PDF includes character art, supporting concepts, and finished illustration work that sits alongside the game-focused side of the portfolio.</p>
-
-                <div class="pdf-embed-container">
-                    <iframe src="illustrations.pdf" title="Illustration portfolio PDF" loading="lazy"></iframe>
-                </div>
+                <p>This section is currently unavailable while the illustration portfolio is being updated and reorganised.</p>
 
                 <div class="pdf-link-container">
-                    <a href="illustrations.pdf" target="_blank" rel="noopener noreferrer" class="pdf-button">
-                        <i class="fa-solid fa-file-arrow-down"></i> Open or Download PDF
-                    </a>
+                    <span class="pdf-button">
+                        <i class="fa-solid fa-lock"></i> Portfolio Currently Hidden
+                    </span>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Nicholas Morris</p>
+        <p>&copy; 2026 Nicholas Morris</p>
     </footer>
 </body>
 </html>
+```

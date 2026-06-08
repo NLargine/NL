@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Iron Remnant: Breakout Mission | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        :root {
+            --mission-orange: #e06a3a;
+            --mission-orange-soft: rgba(224, 106, 58, 0.16);
+            --mission-blue-soft: rgba(0, 191, 255, 0.10);
+            --panel-border: rgba(255, 255, 255, 0.10);
+        }
+
+        .hero-background {
+            background:
+                linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.86)),
+                url('M2_Breakout_RR.png') no-repeat center center/cover;
+        }
+
+        .mission-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(224, 106, 58, 0.35);
+            background: rgba(224, 106, 58, 0.10);
+            color: var(--mission-orange);
+            font-family: var(--font-heading, 'Poppins', sans-serif);
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .mission-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .summary-card,
+        .feature-card,
+        .callout-card {
+            border: 1px solid var(--panel-border);
+            background: rgba(255, 255, 255, 0.035);
+            border-radius: 14px;
+        }
+
+        .summary-card {
+            padding: 18px;
+        }
+
+        .summary-card i {
+            color: var(--accent-color, #00bfff);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .summary-card h3,
+        .feature-card h3,
+        .callout-card h3 {
+            margin: 0 0 8px 0;
+            color: var(--text-color, #f4f4f4);
+            font-family: var(--font-heading, 'Poppins', sans-serif);
+            font-size: 1rem;
+        }
+
+        .summary-card p,
+        .feature-card p,
+        .callout-card p {
+            margin: 0;
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .feature-card {
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color, #00bfff), var(--mission-orange));
+            opacity: 0.8;
+        }
+
+        .feature-card i {
+            color: var(--mission-orange);
+            font-size: 1.4rem;
+            margin-bottom: 14px;
+        }
+
+        .mission-list {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 0 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .mission-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.6;
+        }
+
+        .mission-list i {
+            color: var(--accent-color, #00bfff);
+            margin-top: 5px;
+            width: 18px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .split-section {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 24px;
+            align-items: stretch;
+            margin-top: 24px;
+        }
+
+        .callout-card {
+            padding: 24px;
+        }
+
+        .callout-card.warning {
+            background: linear-gradient(135deg, rgba(224, 106, 58, 0.14), rgba(255, 255, 255, 0.03));
+            border-color: rgba(224, 106, 58, 0.28);
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 13px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 191, 255, 0.22);
+            background: var(--mission-blue-soft);
+            color: var(--accent-color, #00bfff);
+            font-family: var(--font-heading, 'Poppins', sans-serif);
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 1px solid var(--panel-border);
+            background: #050505;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section-lead {
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.75;
+            font-size: 1rem;
+            margin-top: 0;
+        }
+
+        .dev-note {
+            margin-top: 26px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--mission-orange);
+            background: rgba(224, 106, 58, 0.08);
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.65;
+        }
+
+        @media (max-width: 850px) {
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <div class="mission-kicker"><i class="fa-solid fa-shield-halved"></i> New Mission Update</div>
+            <h1>Iron Remnant: Breakout</h1>
+            <h2>A fort defence mission update adding new troops, buildings, enemy mechs, orbital stratagems, warships, reload systems and major performance optimisations.</h2>
+            <a href="#overview" class="hero-button">View Mission</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Mission Overview</h2>
+            <div class="content-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/7N5AZ2jPhPI" title="Iron Remnant Breakout mission update" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
+                <div class="mission-summary">
+                    <div class="summary-card">
+                        <i class="fa-solid fa-fort-awesome"></i>
+                        <h3>Breakout Mission</h3>
+                        <p>A new defensive mission centred around holding a fort or stronghold against escalating enemy pressure.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fa-solid fa-users-gear"></i>
+                        <h3>Expanded Player Army</h3>
+                        <p>New Sharpshooter and Medic troops add longer range support and battlefield sustain to the player side.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fa-solid fa-satellite-dish"></i>
+                        <h3>Stratagem Support</h3>
+                        <p>A new stratagem system introduces two orbital strike options for dealing with high-pressure threats.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <h3>Performance Pass</h3>
+                        <p>Major optimisation work improves heavy enemy scenarios and player settler behaviour during larger battles.</p>
+                    </div>
+                </div>
+
+                <p class="dev-note">This page focuses only on the new Breakout mission update and its supporting systems: new player troops, new buildings, new enemies, new combat UI, stratagems, warships and optimisation work.</p>
+            </div>
+        </section>
+
+        <section id="player-tools" class="scroll-target">
+            <h2>New Player Tools</h2>
+            <div class="content-card">
+                <p class="section-lead">The update expands the player's tactical options by adding support-focused troops and stronger defensive infrastructure. The goal is to make fort defence more active than simply surviving waves.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-crosshairs"></i>
+                        <h3>Sharpshooters</h3>
+                        <p>New player troops focused on ranged fire support. They give the player another way to control enemy pressure before it reaches the fort line.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-kit-medical"></i>
+                        <h3>Medics</h3>
+                        <p>New support troops designed around keeping the player, party and allied troops alive during extended defensive fights.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-person-rifle"></i>
+                        <h3>Reloading Combat Loop</h3>
+                        <p>Magazine size, reloading mechanics and matching UI were added so ranged combat has clearer pacing and feedback.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="buildings" class="scroll-target">
+            <h2>New Player Buildings</h2>
+            <div class="content-card">
+                <p class="section-lead">Breakout adds new player-side structures that support both the economy and the defensive mission flow.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-hospital"></i>
+                        <h3>Hospitals</h3>
+                        <p>Hospitals heal and buff nearby player units, party members and troops, giving the stronghold a support hub during defence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-dungeon"></i>
+                        <h3>Forts, Walls and Gates</h3>
+                        <p>Fort structures create the core defensive space for the Breakout mission, with walls and gates supporting a stronger hold-the-line setup.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                        <h3>Mills</h3>
+                        <p>Mills generate food for the player, adding another economy layer to support troops and defensive preparation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="enemy-expansion" class="scroll-target">
+            <h2>Enemy Expansion</h2>
+            <div class="content-card">
+                <p class="section-lead">The enemy roster is expanded to make the fort defence scenario more varied and dangerous.</p>
+
+                <div class="split-section">
+                    <div class="callout-card">
+                        <h3><i class="fa-solid fa-robot"></i> New Melee Mech Types</h3>
+                        <ul class="mission-list">
+                            <li><i class="fa-solid fa-check"></i><span>Two new enemy melee mech types added to increase close-range pressure.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Designed to threaten defensive lines and force the player to react instead of only relying on ranged control.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="callout-card warning">
+                        <h3><i class="fa-solid fa-ship"></i> Enemy Warships</h3>
+                        <ul class="mission-list">
+                            <li><i class="fa-solid fa-check"></i><span>Enemy warships add a larger battlefield threat to the mission.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Their presence helps the update feel bigger than a standard ground-only defence encounter.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stratagems" class="scroll-target">
+            <h2>Stratagem System</h2>
+            <div class="content-card">
+                <p class="section-lead">A new stratagem system gives the player access to orbital strike support. This adds a deliberate, high-impact layer on top of troop control, base defence and direct combat.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-meteor"></i>
+                        <h3>Orbital Strike</h3>
+                        <p>One of two new orbital strike tools added through the stratagem system for dealing with powerful enemies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-burst"></i>
+                        <h3>Orbital Barrage</h3>
+                        <p>An orbital barrage to lay down fire over a large area to respond to clustered or dangerous enemy pushes.</p>
+                    </div>
+                </div>
+
+                <div class="tag-row">
+                    <span class="tag-pill"><i class="fa-solid fa-satellite"></i> Stratagem system</span>
+                    <span class="tag-pill"><i class="fa-solid fa-crosshairs"></i> Orbital support</span>
+                    <span class="tag-pill"><i class="fa-solid fa-triangle-exclamation"></i> Emergency pressure relief</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="breakout" class="scroll-target">
+            <h2>Breakout: Fort Defence</h2>
+            <div class="content-card">
+                <p class="section-lead">Breakout is the new mission built around defending a fort or stronghold. The added troops, buildings, enemies, warships and orbital strikes all support this mission direction.</p>
+
+                <ul class="mission-list">
+                    <li><i class="fa-solid fa-shield"></i><span>Hold the stronghold against enemy attacks.</span></li>
+                    <li><i class="fa-solid fa-archway"></i><span>Use forts, walls and gates to define the defensive front.</span></li>
+                    <li><i class="fa-solid fa-kit-medical"></i><span>Use Hospitals to keep nearby player forces alive and buffed.</span></li>
+                    <li><i class="fa-solid fa-wheat-awn"></i><span>Use Mills to generate food and support the player's economy.</span></li>
+                    <li><i class="fa-solid fa-satellite-dish"></i><span>Call in orbital stratagems when the defensive line is under heavy pressure.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="optimisation" class="scroll-target">
+            <h2>Optimisation & Polish</h2>
+            <div class="content-card">
+                <p class="section-lead">Alongside the new content, the update includes major optimisation work focused on the areas most likely to become expensive during a large defence mission.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-microchip"></i>
+                        <h3>Enemy Optimisations</h3>
+                        <p>Improved enemy performance to better support larger battles and heavier pressure during the Breakout mission.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-people-carry-box"></i>
+                        <h3>Settler Optimisations</h3>
+                        <p>Player settler behaviour was a major focus so the economy layer can scale more cleanly during active defence gameplay.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-bars-progress"></i>
+                        <h3>Combat UI Polish</h3>
+                        <p>Magazine size, reload mechanics and UI feedback were added to make weapon state easier to read in combat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="role" class="scroll-target">
+            <div class="content-card">
+                <p class="section-lead">For this mission update, my work focused on expanding the player-side army and buildings, adding enemy threats, implementing the stratagem layer, building the Breakout mission structure, and improving performance for larger battles.</p>
+
+                <ul class="mission-list">
+                    <li><i class="fa-solid fa-code"></i><span>Implemented new gameplay systems and mission content in Unity/C#.</span></li>
+                    <li><i class="fa-solid fa-house-medical"></i><span>Added player buildings: Hospitals, Forts, Walls, Gates and Mills.</span></li>
+                    <li><i class="fa-solid fa-users"></i><span>Added new player troops: Sharpshooters and Medics.</span></li>
+                    <li><i class="fa-solid fa-robot"></i><span>Added two new enemy melee mech types and enemy warships.</span></li>
+                    <li><i class="fa-solid fa-satellite-dish"></i><span>Added a stratagem system with two orbital strikes.</span></li>
+                    <li><i class="fa-solid fa-gauge-high"></i><span>Optimised enemies and player settlers for larger mission scenarios.</span></li>
+                    <li><i class="fa-solid fa-gun"></i><span>Added magazine size, reloading mechanics and combat UI feedback.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for checking out the Breakout mission update. If you'd like to talk about the design, implementation or wider Iron Remnant project, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nicholas Morris</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Iron Remnant: Counter Attack Mission | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        :root {
+            --mission-red: #e24f3b;
+            --mission-gold: #f0b84b;
+            --mission-red-soft: rgba(226, 79, 59, 0.15);
+            --mission-gold-soft: rgba(240, 184, 75, 0.12);
+            --mission-blue-soft: rgba(0, 191, 255, 0.10);
+            --panel-border: rgba(255, 255, 255, 0.10);
+        }
+
+        .hero-background {
+            background:
+                linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.86)),
+                url('M3_IntoTheCaves.png') no-repeat center center/cover;
+        }
+
+        .mission-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(226, 79, 59, 0.35);
+            background: var(--mission-red-soft);
+            color: var(--mission-red);
+            font-family: var(--font-heading, 'Poppins', sans-serif);
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .mission-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .summary-card,
+        .feature-card,
+        .callout-card {
+            border: 1px solid var(--panel-border);
+            background: rgba(255, 255, 255, 0.035);
+            border-radius: 14px;
+        }
+
+        .summary-card {
+            padding: 18px;
+        }
+
+        .summary-card i {
+            color: var(--mission-gold);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .summary-card h3,
+        .feature-card h3,
+        .callout-card h3 {
+            margin: 0 0 8px 0;
+            color: var(--text-color, #f4f4f4);
+            font-family: var(--font-heading, 'Poppins', sans-serif);
+            font-size: 1rem;
+        }
+
+        .summary-card p,
+        .feature-card p,
+        .callout-card p {
+            margin: 0;
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .feature-card {
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--mission-red), var(--mission-gold));
+            opacity: 0.86;
+        }
+
+        .feature-card i {
+            color: var(--mission-red);
+            font-size: 1.4rem;
+            margin-bottom: 14px;
+        }
+
+        .mission-list {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 0 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .mission-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.6;
+        }
+
+        .mission-list i {
+            color: var(--mission-gold);
+            margin-top: 5px;
+            width: 18px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .split-section {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 24px;
+            align-items: stretch;
+            margin-top: 24px;
+        }
+
+        .callout-card {
+            padding: 24px;
+        }
+
+        .callout-card.warning {
+            background: linear-gradient(135deg, rgba(226, 79, 59, 0.14), rgba(255, 255, 255, 0.03));
+            border-color: rgba(226, 79, 59, 0.28);
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .tag-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 13px;
+            border-radius: 999px;
+            border: 1px solid rgba(240, 184, 75, 0.24);
+            background: var(--mission-gold-soft);
+            color: var(--mission-gold);
+            font-family: var(--font-heading, 'Poppins', sans-serif);
+            font-size: 0.78rem;
+            letter-spacing: 0.3px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 1px solid var(--panel-border);
+            background: #050505;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section-lead {
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.75;
+            font-size: 1rem;
+            margin-top: 0;
+        }
+
+        .dev-note {
+            margin-top: 26px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--mission-red);
+            background: var(--mission-red-soft);
+            color: var(--text-muted, #b8b8b8);
+            line-height: 1.65;
+        }
+
+        @media (max-width: 850px) {
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Iron Remnant: Counter Attack</h1>
+            <h2>An offense-focused mission update with vehicle troops, artillery production, airstrike stratagems, smarter enemy base AI and layered subobjectives.</h2>
+            <a href="#overview" class="hero-button">View Mission</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Mission Overview</h2>
+            <div class="content-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/btMoybwKXKI" title="Iron Remnant Counter Attack mission update" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+
+                <div class="mission-summary">
+                    <div class="summary-card">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <h3>Counter Attack Mission</h3>
+                        <p>A larger offensive mission built around pushing into enemy territory, clearing subobjectives and breaking the enemy base network.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fa-solid fa-truck-monster"></i>
+                        <h3>Vehicle Troops</h3>
+                        <p>Mobile Artillery and Tanks expand the player army with heavier, vehicle-based firepower for base assaults.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fa-solid fa-jet-fighter-up"></i>
+                        <h3>Airstrike Stratagems</h3>
+                        <p>A new ability type adds three airstrikes alongside a new orbital option, giving the player stronger offensive support tools.</p>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fa-solid fa-brain"></i>
+                        <h3>Smarter Enemy AI</h3>
+                        <p>The enemy can choose what barracks to use, where to train troops and how to weight threats around objectives and the player HQ.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                        <h3>Seamless Mission Loading</h3>
+                        <p>Introduced an improved loading screen and transition system that reduces abrupt scene changes and provides a smoother flow between missions and gameplay.</p>
+                    </div>
+                </div>
+
+                <p class="dev-note">This page focuses on the Counter Attack mission update: a bigger offensive scenario with subobjectives, new player and enemy production, revamped enemy forces, troop leveling, airstrikes and improved enemy decision-making.</p>
+            </div>
+        </section>
+
+        <section id="mission-structure" class="scroll-target">
+            <h2>Offensive Mission Structure</h2>
+            <div class="content-card">
+                <p class="section-lead">Counter Attack pushes Iron Remnant into a larger offensive mission format. Instead of only surviving pressure, the player advances through enemy-held territory, breaks production points and completes layered subobjectives before the final push.</p>
+
+                <ul class="mission-list">
+                    <li><i class="fa-solid fa-route"></i><span>Built around a bigger mission map with multiple offensive lanes and objective pressure points.</span></li>
+                    <li><i class="fa-solid fa-list-check"></i><span>Subobjectives give the player smaller targets to clear.</span></li>
+                    <li><i class="fa-solid fa-house-flag"></i><span>The player HQ remains strategically important, giving the AI a meaningful target while the player commits to the counter-attack.</span></li>
+                    <li><i class="fa-solid fa-explosion"></i><span>Vehicle troops, artillery and stratagems are designed to support base assault rather than only defensive survival.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="player-tools" class="scroll-target">
+            <h2>New Player Tools</h2>
+            <div class="content-card">
+                <p class="section-lead">The player's army expands with heavier offensive options, including the first vehicle-focused troop additions and a new building for producing artillery units.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-truck-monster"></i>
+                        <h3>Mobile Artillery</h3>
+                        <p>A new troop vehicle focused on long-range bombardment. It gives the player a way to pressure enemy bases, clustered troops and fortified positions from safer distances.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-tank"></i>
+                        <h3>Tank</h3>
+                        <p>A new armoured troop vehicle for frontline assaults, designed to anchor offensive pushes and absorb pressure while infantry and support fire advance behind it.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-industry"></i>
+                        <h3>Artillery Foundry</h3>
+                        <p>A new player building that supports the production and progression of heavier artillery-focused troops for the Counter Attack mission flow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="enemy-expansion" class="scroll-target">
+            <h2>Enemy Expansion</h2>
+            <div class="content-card">
+                <p class="section-lead">The enemy side has been expanded with new production buildings and a revamped combat roster, making offensive pushes more contested and less predictable.</p>
+
+                <div class="split-section">
+                    <div class="callout-card">
+                        <h3><i class="fa-solid fa-warehouse"></i> Enemy Production</h3>
+                        <ul class="mission-list">
+                            <li><i class="fa-solid fa-check"></i><span>Enemy Mech Barracks added to train mech-based threats from dedicated production points.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Enemy Artillery Foundry added so the opposing base can field heavier long-range pressure.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Enemy AI can choose which barracks should train units based on objective proximity and battlefield need.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="callout-card warning">
+                        <h3><i class="fa-solid fa-robot"></i> Revamped Enemy Forces</h3>
+                        <ul class="mission-list">
+                            <li><i class="fa-solid fa-check"></i><span>Enemy transports added to move pressure across the battlefield.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Mech lasers and Mech machine gunners added for new ranged threat profiles. </span></li>
+                            <li><i class="fa-solid fa-check"></i><span>New Enemy Skirmisher type to counter the player and sharpshooters.</span></li>
+                            <li><i class="fa-solid fa-check"></i><span>Gunships revamped and added as stronger airborne threats during the assault.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stratagems" class="scroll-target">
+            <h2>Stratagems & Airstrikes</h2>
+            <div class="content-card">
+                <p class="section-lead">Counter Attack expands the stratagem layer with four new options: one new orbital strike and three new airstrikes under a new ability type. The aim is to give the player more decisive offensive tools during large assaults.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-meteor"></i>
+                        <h3>New Orbital Stratagem</h3>
+                        <p>A new orbital option adds another high-impact support call-in for clearing dangerous targets or opening a path through enemy defences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-jet-fighter-up"></i>
+                        <h3>Airstrike Ability Type</h3>
+                        <p>A new stratagem category built around aircraft-delivered attacks, expanding support beyond orbital-only abilities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-burst"></i>
+                        <h3>Three New Airstrikes</h3>
+                        <p>Three airstrike variants add more choice in how the player handles entrenched enemies, spread-out forces and high-priority threats.</p>
+                    </div>
+                </div>
+
+                <div class="tag-row">
+                    <span class="tag-pill"><i class="fa-solid fa-satellite"></i> New orbital</span>
+                    <span class="tag-pill"><i class="fa-solid fa-plane"></i> Airstrike type</span>
+                    <span class="tag-pill"><i class="fa-solid fa-crosshairs"></i> Offensive support</span>
+                    <span class="tag-pill"><i class="fa-solid fa-explosion"></i> Base assault tools</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="leveling" class="scroll-target">
+            <h2>Troop & Enemy Leveling</h2>
+            <div class="content-card">
+                <p class="section-lead">The mission update adds leveling support for player troops and enemies, helping larger battles scale more clearly across the mission and giving unit progression a stronger role in combat balance.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-users-gear"></i>
+                        <h3>Player Troop Leveling</h3>
+                        <p>Player troops can scale through levels, allowing the player to fight masses of enemies with stronger troops.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-robot"></i>
+                        <h3>Enemy Leveling</h3>
+                        <p>Enemies can also scale by level, allowing the mission to introduce stronger threats as the player pushes deeper into enemy territory.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h3>Mission Scaling</h3>
+                        <p>Leveling supports a bigger mission arc, where late-stage fights can escalate without relying only on larger unit counts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai" class="scroll-target">
+            <h2>Improved Enemy AI</h2>
+            <div class="content-card">
+                <p class="section-lead">The enemy AI has been upgraded to make smarter production and spawning decisions during offensive missions. Instead of acting from a single static pattern, it can evaluate objectives, barracks placement and current threats.</p>
+
+                <ul class="mission-list">
+                    <li><i class="fa-solid fa-warehouse"></i><span>Chooses which barracks or production building should train the next wave.</span></li>
+                    <li><i class="fa-solid fa-map-location-dot"></i><span>Trains troops closer to the AI objective or the player HQ when that produces stronger pressure.</span></li>
+                    <li><i class="fa-solid fa-scale-balanced"></i><span>Uses threat weighting to decide where enemy pressure should be applied.</span></li>
+                    <li><i class="fa-solid fa-person-military-rifle"></i><span>Supports different troop types across mech barracks, artillery foundries and revamped enemy forces.</span></li>
+                    <li><i class="fa-solid fa-brain"></i><span>Creates a more reactive enemy during large offense-focused missions with multiple subobjectives.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="role" class="scroll-target">
+            <h2>My Role</h2>
+            <div class="content-card">
+                <p class="section-lead">For this mission update, my work focused on expanding Iron Remnant's offensive mission structure, adding vehicle troops, building new production systems, broadening stratagem support and improving the enemy AI so it can respond more intelligently to the player.</p>
+
+                <ul class="mission-list">
+                    <li><i class="fa-solid fa-code"></i><span>Implemented new gameplay systems and mission content in Unity/C#.</span></li>
+                    <li><i class="fa-solid fa-bullseye"></i><span>Built the Counter Attack mission structure around offense and subobjectives.</span></li>
+                    <li><i class="fa-solid fa-truck-monster"></i><span>Added new player vehicle troops: Mobile Artillery and Tank.</span></li>
+                    <li><i class="fa-solid fa-industry"></i><span>Added player and enemy Artillery Foundry production support.</span></li>
+                    <li><i class="fa-solid fa-warehouse"></i><span>Added enemy Mech Barracks and smarter enemy training decisions.</span></li>
+                    <li><i class="fa-solid fa-helicopter"></i><span>Added and revamped enemy transports, mech lasers, machine gunners and gunships.</span></li>
+                    <li><i class="fa-solid fa-jet-fighter-up"></i><span>Added four new stratagems, including one orbital and three airstrikes.</span></li>
+                    <li><i class="fa-solid fa-chart-line"></i><span>Added player troop and enemy leveling for better mission scaling.</span></li>
+                    <li><i class="fa-solid fa-brain"></i><span>Improved enemy AI with objective-aware spawning, barracks selection and threat weighting.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for checking out the Counter Attack mission update. If you'd like to talk about the design, implementation or wider Iron Remnant project, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nicholas Morris</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
+        });
+    </script>
+</body>
+</html>

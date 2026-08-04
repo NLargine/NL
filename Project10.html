@@ -3,767 +3,721 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Iron Remnant is a large-scale sci-fi action strategy game developed solo by Nicholas Morris in Unity.">
     <meta name="robots" content="noindex">
-
     <title>Iron Remnant | Nicholas Morris</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        .hero-background {
-            background: url('IronRemnantBG2.png') no-repeat center center/cover;
+        :root {
+            --ir-ink: #070a0d;
+            --ir-panel: #11171c;
+            --ir-panel-2: #172127;
+            --ir-line: rgba(157, 193, 198, 0.19);
+            --ir-cyan: #67d5df;
+            --ir-cyan-bright: #a9f8ff;
+            --ir-rust: #e4713e;
+            --ir-cream: #e8e3d6;
+            --ir-muted: #a4b2b5;
+            --ir-heading: "Barlow Condensed", sans-serif;
+            --ir-body: "Inter", sans-serif;
         }
 
-        /* WIP Banner */
-        .wip-banner {
-            background: linear-gradient(90deg, rgba(220, 80, 40, 0.15), rgba(220, 80, 40, 0.08), rgba(220, 80, 40, 0.15));
-            border: 1px solid rgba(220, 80, 40, 0.35);
-            border-radius: 10px;
-            padding: 14px 22px;
-            margin-bottom: 30px;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 12% 12%, rgba(103, 213, 223, 0.06), transparent 28rem),
+                var(--ir-ink);
+            color: var(--ir-cream);
+            font-family: var(--ir-body);
+            font-size: 17px;
+            line-height: 1.68;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; }
+        img { max-width: 100%; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+
+        .skip-link {
+            position: fixed;
+            top: 8px;
+            left: 8px;
+            padding: 10px 15px;
+            background: var(--ir-cyan-bright);
+            color: var(--ir-ink);
+            transform: translateY(-150%);
+            z-index: 1001;
+        }
+        .skip-link:focus { transform: none; }
+
+        .site-nav {
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 76px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            justify-content: space-between;
+            padding: 0 clamp(20px, 4vw, 62px);
+            z-index: 20;
+            border-bottom: 1px solid rgba(255,255,255,.12);
+            background: linear-gradient(to bottom, rgba(3,6,8,.84), transparent);
         }
-
-        .wip-banner i {
-            color: #e05030;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .wip-banner p {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .wip-banner strong {
-            color: #e05030;
-        }
-
-        /* Deep dive layout — mirrors existing pages */
-        .deep-dive:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        /* Stat table */
-        .stat-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .stat-table th {
-            text-align: left;
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            padding: 10px 12px;
-            border-bottom: 2px solid rgba(0, 191, 255, 0.2);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-table td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #2a2a2a;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            vertical-align: top;
-        }
-
-        .stat-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .stat-table tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .stat-name-cell {
-            font-family: var(--font-heading);
-            color: var(--text-color) !important;
-            font-size: 0.95rem !important;
-            white-space: nowrap;
-        }
-
-        /* Tags */
-        .tag {
-            display: inline-block;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-family: var(--font-heading);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .tag-offence {
-            background: rgba(220, 80, 60, 0.15);
-            color: #e07060;
-            border: 1px solid rgba(220, 80, 60, 0.3);
-        }
-
-        .tag-defence {
-            background: rgba(0, 191, 255, 0.12);
-            color: var(--accent-color);
-            border: 1px solid rgba(0, 191, 255, 0.25);
-        }
-
-        .tag-utility {
-            background: rgba(160, 220, 100, 0.12);
-            color: #90d060;
-            border: 1px solid rgba(160, 220, 100, 0.25);
-        }
-
-        .tag-shared {
-            background: rgba(160, 160, 160, 0.1);
-            color: #999;
-            border: 1px solid rgba(160, 160, 160, 0.2);
-        }
-
-        /* Equipment slots visual */
-        .equip-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .equip-slot {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #2a2a2a;
-            border-radius: 10px;
-            padding: 18px;
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-        }
-
-        .equip-slot i {
-            font-size: 1.4rem;
-            color: var(--accent-color);
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .equip-slot h4 {
-            margin: 0 0 4px 0;
-            font-size: 0.95rem;
-            font-family: var(--font-heading);
-            color: var(--text-color);
-        }
-
-        .equip-slot p {
-            margin: 0;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Feature pills */
-        .feature-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 18px;
-        }
-
-        .pill {
-            background: rgba(0, 191, 255, 0.08);
-            border: 1px solid rgba(0, 191, 255, 0.2);
-            border-radius: 30px;
-            padding: 6px 16px;
-            font-size: 0.88rem;
-            color: var(--accent-color);
-            font-family: var(--font-heading);
-        }
-
-        /* GIF placeholder grid */
-        .gif-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .gif-slot {
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid #2a2a2a;
-            background: rgba(255,255,255,0.02);
-        }
-
-        .gif-slot img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .gif-caption {
-            padding: 10px 14px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px solid #2a2a2a;
-        }
-
-        /* Roadmap list */
-        .roadmap-list {
-            list-style: none;
-            padding: 0;
-            margin: 16px 0 0 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .roadmap-list li {
+        .site-nav a { text-decoration: none; }
+        .brand-lockup {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 0.95rem;
-            color: var(--text-muted);
+            color: #fff;
+            font-family: var(--ir-heading);
+            font-weight: 700;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+        .brand-mark {
+            width: 31px;
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--ir-cyan);
+            color: var(--ir-cyan-bright);
+            transform: rotate(45deg);
+        }
+        .brand-mark i { transform: rotate(-45deg); font-size: .85rem; }
+        .nav-links { display: flex; align-items: center; gap: 26px; }
+        .nav-links a {
+            color: rgba(255,255,255,.72);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+        .nav-links a:hover, .nav-links a:focus-visible { color: var(--ir-cyan-bright); }
+
+        .ir-hero {
+            min-height: min(960px, 100svh);
+            position: relative;
+            display: grid;
+            align-items: end;
+            overflow: hidden;
+            isolation: isolate;
+            padding: 130px clamp(20px, 7vw, 120px) clamp(70px, 9vh, 110px);
+        }
+        .hero-image {
+            position: absolute;
+            inset: 0;
+            z-index: -3;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(.72) contrast(1.08);
+        }
+        .ir-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background:
+                linear-gradient(90deg, rgba(4,7,9,.97) 0%, rgba(4,7,9,.72) 43%, rgba(4,7,9,.18) 74%),
+                linear-gradient(0deg, var(--ir-ink) 0%, transparent 39%, rgba(0,0,0,.2) 100%);
+        }
+        .ir-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: .22;
+            background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(to right, black, transparent 80%);
+        }
+        .hero-content { max-width: 850px; }
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin: 0 0 18px;
+            color: var(--ir-cyan-bright);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        .eyebrow::before { content: ""; width: 38px; height: 2px; background: var(--ir-rust); }
+        .ir-hero h1 {
+            margin: 0;
+            max-width: 780px;
+            color: #fff;
+            font: 800 clamp(4.8rem, 12vw, 10.5rem)/.76 var(--ir-heading);
+            letter-spacing: -.035em;
+            text-transform: uppercase;
+            text-shadow: 0 12px 44px rgba(0,0,0,.6);
+        }
+        .hero-deck {
+            max-width: 720px;
+            margin: 26px 0 0;
+            color: #d6dee0;
+            font-size: clamp(1.05rem, 1.65vw, 1.35rem);
+            line-height: 1.55;
+        }
+        .hero-deck strong { color: #fff; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 34px; }
+        .button {
+            min-height: 52px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+            padding: 13px 22px;
+            border: 1px solid var(--ir-cyan);
+            background: var(--ir-cyan);
+            color: #071013;
+            text-decoration: none;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+        .button:hover, .button:focus-visible { background: var(--ir-cyan-bright); transform: translateY(-2px); }
+        .button.secondary { background: rgba(7,10,13,.62); color: #fff; border-color: rgba(255,255,255,.4); }
+        .button.secondary:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+        .button.disabled { cursor: not-allowed; opacity: .62; }
+        .hero-status {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 24px;
+            margin-top: 28px;
+            color: rgba(255,255,255,.66);
+            font-size: .77rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+        .hero-status span { display: flex; align-items: center; gap: 8px; }
+        .hero-status i { color: var(--ir-rust); }
+
+        .proof-strip {
+            position: relative;
+            z-index: 3;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            max-width: 1180px;
+            margin: -32px auto 0;
+            background: rgba(17,23,28,.96);
+            border: 1px solid var(--ir-line);
+            box-shadow: 0 24px 80px rgba(0,0,0,.35);
+        }
+        .proof-item { min-height: 104px; padding: 23px 27px; border-right: 1px solid var(--ir-line); }
+        .proof-item:last-child { border-right: 0; }
+        .proof-label { display: block; color: var(--ir-muted); font-size: .67rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+        .proof-value { display: block; margin-top: 5px; color: #fff; font: 700 1.38rem/1.15 var(--ir-heading); text-transform: uppercase; }
+
+        .page-shell { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+        .ir-section { padding: 112px 0; opacity: 1; transform: none; }
+        .ir-section + .ir-section { border-top: 1px solid var(--ir-line); }
+        .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 500px); gap: 70px; align-items: end; margin-bottom: 44px; }
+        .section-index { color: var(--ir-rust); font: 700 .8rem var(--ir-heading); letter-spacing: .17em; text-transform: uppercase; }
+        .ir-section h2 {
+            margin: 8px 0 0;
+            padding: 0;
+            border: 0;
+            color: #fff;
+            font: 700 clamp(2.7rem, 5.5vw, 5.15rem)/.92 var(--ir-heading);
+            letter-spacing: -.02em;
+            text-transform: uppercase;
+        }
+        .section-head p { margin: 0; color: var(--ir-muted); font-size: 1.04rem; }
+        .section-head p strong { color: var(--ir-cream); }
+        .section-kicker { color: var(--ir-cyan-bright); }
+
+        .video-frame {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            border: 1px solid var(--ir-line);
+            background: #000;
+            overflow: hidden;
+            box-shadow: 0 28px 70px rgba(0,0,0,.33);
+        }
+        .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .media-note { display: flex; justify-content: space-between; gap: 25px; margin-top: 15px; color: #77888c; font-size: .73rem; letter-spacing: .06em; text-transform: uppercase; }
+
+        .loop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; counter-reset: loop; }
+        .loop-card {
+            min-height: 260px;
+            padding: 27px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(23,33,39,.96), rgba(11,15,18,.96));
+            border: 1px solid var(--ir-line);
+            counter-increment: loop;
+        }
+        .loop-card::after { content: "0" counter(loop); position: absolute; right: 14px; bottom: -24px; color: rgba(255,255,255,.035); font: 800 7rem var(--ir-heading); }
+        .loop-icon { width: 44px; height: 44px; display: grid; place-items: center; color: var(--ir-cyan-bright); border: 1px solid rgba(103,213,223,.45); }
+        .loop-card h3 { margin: 45px 0 10px; color: #fff; font: 700 1.6rem var(--ir-heading); text-transform: uppercase; }
+        .loop-card p { margin: 0; color: var(--ir-muted); font-size: .91rem; }
+
+        .system-feature { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 500px; background: var(--ir-panel); border: 1px solid var(--ir-line); }
+        .system-feature + .system-feature { margin-top: 24px; }
+        .system-feature:nth-child(even) .system-copy { order: 2; }
+        .system-feature:nth-child(even) .system-media { order: 1; }
+        .system-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(34px, 5vw, 66px); }
+        .system-number { color: var(--ir-rust); font: 700 .72rem var(--ir-heading); letter-spacing: .16em; text-transform: uppercase; }
+        .system-copy h3 { margin: 12px 0 15px; color: #fff; font: 700 clamp(2rem, 4vw, 3.3rem)/.95 var(--ir-heading); text-transform: uppercase; }
+        .system-copy p { margin: 0; color: var(--ir-muted); }
+        .system-list { display: grid; gap: 10px; list-style: none; padding: 0; margin: 25px 0 0; }
+        .system-list li { display: flex; gap: 11px; color: #c5ced0; font-size: .88rem; }
+        .system-list i { color: var(--ir-cyan); margin-top: 6px; font-size: .68rem; }
+        .system-media { position: relative; min-height: 360px; overflow: hidden; background: #080b0d; }
+        .system-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .system-media::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 70px rgba(0,0,0,.35); pointer-events: none; }
+        .media-label { position: absolute; left: 18px; bottom: 18px; z-index: 2; padding: 7px 11px; background: rgba(4,7,9,.84); color: #d7e2e3; font-size: .67rem; letter-spacing: .1em; text-transform: uppercase; }
+
+        .command-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .command-card { position: relative; min-height: 420px; overflow: hidden; border: 1px solid var(--ir-line); background: var(--ir-panel); }
+        .command-card img { width: 100%; height: 240px; object-fit: cover; display: block; filter: saturate(.75); transition: transform .4s ease, filter .4s ease; }
+        .command-card:hover img { transform: scale(1.025); filter: saturate(1); }
+        .command-copy { padding: 25px; }
+        .command-copy h3 { margin: 0 0 9px; color: #fff; font: 700 1.55rem var(--ir-heading); text-transform: uppercase; }
+        .command-copy p { margin: 0; color: var(--ir-muted); font-size: .88rem; }
+
+        .adversary-panel { display: grid; grid-template-columns: .9fr 1.1fr; background: linear-gradient(130deg, #15191b, #0b1013); border: 1px solid var(--ir-line); overflow: hidden; }
+        .adversary-copy { padding: clamp(38px, 5vw, 68px); }
+        .adversary-copy h3 { margin: 12px 0 16px; color: #fff; font: 700 clamp(2.4rem, 5vw, 4.5rem)/.91 var(--ir-heading); text-transform: uppercase; }
+        .adversary-copy p { color: var(--ir-muted); }
+        .threat-flow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+        .threat-step { padding: 9px 11px; border: 1px solid rgba(228,113,62,.38); color: #f0b093; font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+        .threat-arrow { display: grid; place-items: center; color: #6b7779; }
+        .adversary-art { min-height: 500px; position: relative; }
+        .adversary-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .adversary-art::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #111618, transparent 45%), linear-gradient(0deg, rgba(0,0,0,.55), transparent 50%); z-index: 1; }
+
+        .asgard-layout { display: grid; grid-template-columns: 1.35fr .65fr; gap: 24px; }
+        .asgard-image { min-height: 580px; border: 1px solid var(--ir-line); overflow: hidden; }
+        .asgard-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .asgard-sidebar { display: grid; gap: 14px; }
+        .asgard-card { padding: 25px; background: var(--ir-panel); border: 1px solid var(--ir-line); }
+        .asgard-card i { color: var(--ir-cyan); }
+        .asgard-card h3 { margin: 18px 0 8px; color: #fff; font: 700 1.35rem var(--ir-heading); text-transform: uppercase; }
+        .asgard-card p { margin: 0; color: var(--ir-muted); font-size: .85rem; }
+
+        .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .tool-card { background: var(--ir-panel); border: 1px solid var(--ir-line); overflow: hidden; }
+        .tool-placeholder { min-height: 300px; position: relative; padding: 24px; background: #0b1013; border-bottom: 1px solid var(--ir-line); }
+        .placeholder-bar { height: 31px; display: flex; align-items: center; justify-content: space-between; padding: 0 11px; border: 1px solid #344249; color: #87999d; font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; }
+        .placeholder-body { display: grid; grid-template-columns: 108px 1fr; gap: 10px; margin-top: 10px; height: 180px; }
+        .placeholder-nav, .placeholder-main { border: 1px solid #263239; background: linear-gradient(135deg, rgba(103,213,223,.035), transparent); }
+        .placeholder-nav { padding: 12px 9px; }
+        .placeholder-line { height: 7px; margin-bottom: 10px; background: #243137; }
+        .placeholder-line.active { background: rgba(103,213,223,.5); }
+        .placeholder-main { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; padding: 12px; }
+        .placeholder-cell { border: 1px solid #263239; background: #10171a; }
+        .capture-badge { position: absolute; right: 20px; bottom: 18px; color: #79888b; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; }
+        .tool-copy { padding: 29px; }
+        .tool-copy h3 { margin: 0 0 10px; color: #fff; font: 700 1.75rem var(--ir-heading); text-transform: uppercase; }
+        .tool-copy p { color: var(--ir-muted); font-size: .9rem; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .tag-list span { padding: 6px 9px; border: 1px solid var(--ir-line); color: #b8c5c7; font-size: .65rem; letter-spacing: .06em; text-transform: uppercase; }
+
+        .operations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .operation-card { position: relative; min-height: 520px; display: flex; align-items: end; overflow: hidden; border: 1px solid var(--ir-line); text-decoration: none; }
+        .operation-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+        .operation-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,7,9,.98), rgba(4,7,9,.18) 72%); }
+        .operation-card:hover img { transform: scale(1.03); }
+        .operation-copy { position: relative; z-index: 2; padding: 35px; }
+        .operation-code { color: var(--ir-cyan-bright); font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+        .operation-copy h3 { margin: 8px 0 11px; color: #fff; font: 700 clamp(2.2rem, 4vw, 3.6rem)/.9 var(--ir-heading); text-transform: uppercase; }
+        .operation-copy p { max-width: 500px; margin: 0 0 20px; color: #b7c1c3; font-size: .88rem; }
+        .operation-link { color: var(--ir-rust); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+
+        .status-panel { display: grid; grid-template-columns: .8fr 1.2fr; border: 1px solid var(--ir-line); background: var(--ir-panel); }
+        .status-title { padding: clamp(38px, 5vw, 65px); background: linear-gradient(145deg, rgba(103,213,223,.09), transparent); }
+        .status-title .status-pill { display: inline-flex; align-items: center; gap: 9px; padding: 7px 10px; color: #ffc19f; border: 1px solid rgba(228,113,62,.42); font-size: .65rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+        .status-title h3 { margin: 25px 0 12px; color: #fff; font: 700 clamp(2.5rem, 5vw, 4.3rem)/.9 var(--ir-heading); text-transform: uppercase; }
+        .status-title p { color: var(--ir-muted); }
+        .status-list { display: grid; padding: 22px 35px; }
+        .status-row { display: grid; grid-template-columns: 150px 1fr; gap: 25px; align-items: center; padding: 21px 0; border-bottom: 1px solid var(--ir-line); }
+        .status-row:last-child { border-bottom: 0; }
+        .status-row strong { color: #fff; font: 700 1rem var(--ir-heading); letter-spacing: .04em; text-transform: uppercase; }
+        .status-row span { color: var(--ir-muted); font-size: .86rem; }
+        .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: #7acb9b; box-shadow: 0 0 12px rgba(122,203,155,.45); }
+        .status-dot.wip { background: var(--ir-rust); box-shadow: 0 0 12px rgba(228,113,62,.45); }
+
+        .final-cta { position: relative; overflow: hidden; padding: 120px 30px; text-align: center; border-top: 1px solid var(--ir-line); background: #090d10; }
+        .final-cta::before { content: ""; position: absolute; inset: 0; opacity: .18; background: url('IronRemnantBG2.png') center/cover; filter: grayscale(1); }
+        .final-cta::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(7,10,13,.55), #070a0d 75%); }
+        .final-content { position: relative; z-index: 2; max-width: 830px; margin: 0 auto; }
+        .final-cta h2 { margin: 10px 0 18px; padding: 0; border: 0; color: #fff; font: 800 clamp(3.5rem, 8vw, 7.6rem)/.82 var(--ir-heading); text-transform: uppercase; }
+        .final-cta p { max-width: 650px; margin: 0 auto 28px; color: #b7c3c5; }
+        .final-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+        .placeholder-note { margin-top: 15px; color: #68777a; font-size: .67rem; letter-spacing: .08em; text-transform: uppercase; }
+
+        .ir-footer { display: flex; justify-content: space-between; gap: 25px; padding: 35px clamp(20px, 5vw, 70px); color: #778689; border-top: 1px solid var(--ir-line); font-size: .75rem; }
+        .ir-footer p { margin: 0; }
+        .ir-footer a { color: #a9b8ba; text-decoration: none; }
+
+        .lightbox { position: fixed; inset: 0; z-index: 1000; display: none; place-items: center; padding: 30px; background: rgba(0,0,0,.94); }
+        .lightbox.active { display: grid; }
+        .lightbox img { max-width: min(1500px, 94vw); max-height: 90vh; object-fit: contain; }
+        .lightbox button { position: absolute; right: 24px; top: 18px; width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.3); background: #0b1013; color: #fff; font-size: 1.3rem; cursor: pointer; }
+        .lightbox-trigger { cursor: zoom-in; }
+
+        @media (max-width: 980px) {
+            .nav-links a:not(:last-child) { display: none; }
+            .proof-strip { margin: 0; grid-template-columns: repeat(2, 1fr); }
+            .proof-item:nth-child(2) { border-right: 0; }
+            .proof-item:nth-child(-n+2) { border-bottom: 1px solid var(--ir-line); }
+            .section-head { grid-template-columns: 1fr; gap: 22px; }
+            .loop-grid { grid-template-columns: repeat(2, 1fr); }
+            .command-grid { grid-template-columns: 1fr; }
+            .command-card { min-height: auto; display: grid; grid-template-columns: .85fr 1.15fr; }
+            .command-card img { height: 100%; min-height: 260px; }
+            .adversary-panel, .asgard-layout, .status-panel { grid-template-columns: 1fr; }
+            .adversary-art { min-height: 420px; }
+            .asgard-sidebar { grid-template-columns: repeat(3, 1fr); }
         }
 
-        .roadmap-list li i {
-            font-size: 0.9rem;
-            flex-shrink: 0;
+        @media (max-width: 720px) {
+            body { font-size: 16px; }
+            .site-nav { height: 66px; padding: 0 18px; }
+            .brand-lockup span:last-child { display: none; }
+            .ir-hero { min-height: 820px; padding: 120px 20px 70px; }
+            .ir-hero::before { background: linear-gradient(0deg, var(--ir-ink), rgba(4,7,9,.65) 76%, rgba(4,7,9,.5)); }
+            .ir-hero h1 { font-size: clamp(4.5rem, 25vw, 7rem); }
+            .proof-strip, .loop-grid, .tool-grid, .operations-grid { grid-template-columns: 1fr; }
+            .proof-item, .proof-item:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--ir-line); }
+            .proof-item:last-child { border-bottom: 0; }
+            .page-shell { padding: 0 18px; }
+            .ir-section { padding: 78px 0; }
+            .system-feature, .system-feature:nth-child(even) { grid-template-columns: 1fr; }
+            .system-feature:nth-child(even) .system-copy, .system-feature:nth-child(even) .system-media { order: initial; }
+            .system-media { min-height: 290px; }
+            .command-card { grid-template-columns: 1fr; }
+            .command-card img { min-height: 220px; }
+            .asgard-image { min-height: 400px; }
+            .asgard-sidebar { grid-template-columns: 1fr; }
+            .operation-card { min-height: 440px; }
+            .status-list { padding: 15px 26px; }
+            .status-row { grid-template-columns: 1fr; gap: 7px; }
+            .ir-footer { flex-direction: column; }
         }
 
-        .done i { color: #60c060; }
-        .wip i  { color: #e0a030; }
-        .todo i { color: #555; }
-
-        .done span { color: var(--text-color); }
-        .wip  span { color: #e0a030; }
-        .todo span { color: #555; }
-
-        @media (max-width: 768px) {
-            .stat-table { font-size: 0.85rem; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
         }
     </style>
 </head>
 <body>
-    <header class="hero" id="home">
-        <div class="hero-background"></div>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a class="brand-lockup" href="index.html" aria-label="Back to Nicholas Morris portfolio">
+            <span class="brand-mark"><i class="fa-solid fa-n"></i></span>
+            <span>Nicholas Morris</span>
+        </a>
+        <div class="nav-links">
+            <a href="#systems">Systems</a>
+            <a href="#operations">Operations</a>
+            <a href="#tools">Tools</a>
+            <a href="#demo">Demo</a>
+        </div>
+    </nav>
+
+    <header class="ir-hero">
+        <img class="hero-image" src="IronRemnantBG2.png" alt="Iron Remnant soldiers and machinery on a hostile science-fiction battlefield">
         <div class="hero-content">
-            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
-            <h1>Iron Remnant</h1>
-            <h2>Solo-built isometric action RTS with base building, troop economy, equipment systems and a full stat overhaul — prequel to Annie's Last Stand</h2>
-            <a href="#overview" class="hero-button">View Project</a>
+            <p class="eyebrow">Solo-developed in Unity</p>
+            <h1>Iron<br>Remnant</h1>
+            <p class="hero-deck"><strong>Fight on the front line. Build the war machine behind it.</strong> A third-person action strategy game where direct combat, troop command, base construction and a reactive enemy operate on the same battlefield.</p>
+            <div class="hero-actions">
+                <a class="button" href="#overview"><i class="fa-solid fa-play"></i> Watch gameplay</a>
+                <span class="button secondary disabled" aria-disabled="true" title="Steam page link will be added when available"><i class="fa-brands fa-steam"></i> Steam page coming soon</span>
+            </div>
+            <div class="hero-status" aria-label="Project summary">
+                <span><i class="fa-solid fa-user-gear"></i> Design, programming &amp; production</span>
+                <span><i class="fa-solid fa-flask"></i> Next Fest demo in final integration</span>
+            </div>
         </div>
     </header>
 
-    <main class="main-content">
+    <div class="proof-strip" aria-label="Project facts">
+        <div class="proof-item"><span class="proof-label">Role</span><span class="proof-value">Solo Developer</span></div>
+        <div class="proof-item"><span class="proof-label">Engine</span><span class="proof-value">Unity / C#</span></div>
+        <div class="proof-item"><span class="proof-label">Genre</span><span class="proof-value">Action Strategy</span></div>
+        <div class="proof-item"><span class="proof-label">Current Goal</span><span class="proof-value">Steam Next Fest</span></div>
+    </div>
 
-        <!-- OVERVIEW -->
-        <section id="overview" class="scroll-target">
-            <h2>Overview</h2>
-            <div class="content-card">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/QjHI7TN7y6U" title="Iron Remnant tutorial early testing" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <main id="main">
+        <section class="ir-section" id="overview">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">01 / The game</span>
+                        <h2>One soldier.<br><span class="section-kicker">An entire war.</span></h2>
+                    </div>
+                    <p>Iron Remnant asks the player to operate at two scales at once: survive as a capable third-person combatant, then step back just far enough to shape the army, economy and fortifications around them. <strong>Every layer feeds the next fight.</strong></p>
                 </div>
-                <div class="wip-banner" style="margin-top: 30px;">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <p><strong>Work In Progress</strong> — Active development. Systems shown here are implemented and functional. Playable build and full trailer coming soon.</p>
+                <div class="video-frame">
+                    <iframe src="https://www.youtube.com/embed/QjHI7TN7y6U" title="Iron Remnant gameplay overview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <p>Iron Remnant is a solo-built isometric action game set on a post-apocalyptic Earth overrun by an autonomous mech faction. It is a direct prequel to Annie's Last Stand, depicting the military operations that preceded Annie's final solo defence.</p>
-                <p>The player commands a party of two — the Commander and Annie — across assault missions against enemy mech bases. Each mission involves establishing a forward operating base, training troops that autonomously lane toward the enemy command centre, and fighting through defences in real-time. Between missions, a persistent destroyer acts as the home base, upgraded with installable modules that carry permanent bonuses into future battles.</p>
-                <p>Iron Remnant builds on Annie's Last Stand's combat foundation and extends it with a fully featured base-vs-base economy system, a troop lane system, shared party inventory, a modular equipment page, and a comprehensive stat overhaul covering offence, defence, and utility for all entities in the game.</p>
-                <div class="project-links">
-                    <a href="https://nikolargine.itch.io/iron-remnant-tutorial-demo" target="_blank" rel="noopener noreferrer" class="project-button">
-                        <i class="fa-brands fa-itch-io"></i> Play Iron Remnant Tutorial Demo
-                    </a>
+                <div class="media-note"><span>Gameplay overview</span><span>Earlier development footage — current build has expanded significantly</span></div>
+            </div>
+        </section>
+
+        <section class="ir-section" id="loop">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">02 / Core loop</span>
+                        <h2>Pressure creates<br><span class="section-kicker">decisions.</span></h2>
+                    </div>
+                    <p>The game is structured as a reinforcing loop instead of a collection of disconnected features. Resources become infrastructure; infrastructure produces battlefield power; battlefield wins unlock the campaign.</p>
+                </div>
+                <div class="loop-grid">
+                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-cubes-stacked"></i></div><h3>Secure</h3><p>Capture ground, gather resources and protect the logistics that keep the army moving.</p></article>
+                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-hammer"></i></div><h3>Build</h3><p>Place generators, production buildings, walls, gates and battlefield support structures.</p></article>
+                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-users-gear"></i></div><h3>Command</h3><p>Train troops, form a fighting force and redirect squads as the front line changes.</p></article>
+                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-crosshairs"></i></div><h3>Break through</h3><p>Fight alongside the army, call in support and dismantle an enemy that builds back.</p></article>
                 </div>
             </div>
         </section>
 
-        <!-- ROLE -->
-        <section id="role" class="scroll-target">
-            <h2>My Role: Solo Developer</h2>
-            <div class="content-card">
-                <p>Designed and built end to end across active development, reusing and extending the Annie's Last Stand codebase as a foundation.</p>
-                <ul class="role-list">
-                    <li>Gameplay programming and systems architecture (C#, Unity)</li>
-                    <li>Enemy base AI — Threat resource system, building placement, troop spawning, upgrades and repairs</li>
-                    <li>Troop lane system — A* pathfinding to objective with lightweight context solver for combat engagement</li>
-                    <li>Shared party inventory and per-character equipment loadout system</li>
-                    <li>Equipment UI page — weapon, armour and accessory slots for all party members</li>
-                    <li>Full stat system overhaul — offence, defence and utility stats across all entities</li>
-                    <li>ScriptableObject-driven item and armour tier architecture</li>
-                    <li>Party follow and free-swap system — active character player-controlled, others auto-follow and attack</li>
-                    <li>World map territory control — Warlords-style region capture and hold between missions</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- TECH -->
-        <section id="tech" class="scroll-target">
-            <h2>Tools &amp; Technologies</h2>
-            <div class="content-card">
-                <div class="tech-grid">
-                    <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
-                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C#</span></div>
-                    <div class="tech-item"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
-                    <div class="tech-item"><i class="fa-solid fa-cubes"></i><span>ScriptableObjects</span></div>
-                    <div class="tech-item"><i class="fa-solid fa-layer-group"></i><span>Object Pooling</span></div>
-                    <div class="tech-item"><i class="fa-solid fa-route"></i><span>A* Pathfinding</span></div>
-                    <div class="tech-item"><i class="fa-solid fa-boxes-stacked"></i><span>Inventory System</span></div>
-                    <div class="tech-item"><i class="fa-solid fa-chart-line"></i><span>Stat Architecture</span></div>
+        <section class="ir-section" id="systems">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">03 / Playable systems</span>
+                        <h2>Built to work<br><span class="section-kicker">together.</span></h2>
+                    </div>
+                    <p>The flagship page shows the connective tissue. Mission pages can then go deeper on particular encounters, additions and production challenges without repeating the whole game.</p>
                 </div>
+
+                <article class="system-feature">
+                    <div class="system-copy">
+                        <span class="system-number">System 01 — Battlefield economy</span>
+                        <h3>Build under fire</h3>
+                        <p>Settlers collect resources and sustain a player-directed base. Construction is part of the combat rhythm: the player chooses whether the next investment becomes production, defence or immediate battlefield support.</p>
+                        <ul class="system-list">
+                            <li><i class="fa-solid fa-chevron-right"></i><span>Resource gathering, storage and production chains</span></li>
+                            <li><i class="fa-solid fa-chevron-right"></i><span>Player-built walls, gates, forts, generators and support buildings</span></li>
+                            <li><i class="fa-solid fa-chevron-right"></i><span>Repair, upgrade and placement flows designed for active missions</span></li>
+                        </ul>
+                    </div>
+                    <div class="system-media">
+                        <img class="lightbox-trigger" src="ir_resource_collector.gif" alt="Resource collectors moving through the Iron Remnant battlefield" tabindex="0">
+                        <span class="media-label">In-game resource loop</span>
+                    </div>
+                </article>
+
+                <article class="system-feature">
+                    <div class="system-copy">
+                        <span class="system-number">System 02 — Player progression</span>
+                        <h3>Shape the soldier</h3>
+                        <p>Character stats, equipment, abilities and combat ratings turn progression into buildcraft. The same underlying data drives both the player-facing interfaces and the editor tools used to balance complete equipment sets.</p>
+                        <ul class="system-list">
+                            <li><i class="fa-solid fa-chevron-right"></i><span>Equipment slots, level allocation and derived combat statistics</span></li>
+                            <li><i class="fa-solid fa-chevron-right"></i><span>Airstrike, orbital and reinforcement abilities</span></li>
+                            <li><i class="fa-solid fa-chevron-right"></i><span>Inventory, party and loadout systems connected across missions</span></li>
+                        </ul>
+                    </div>
+                    <div class="system-media">
+                        <img class="lightbox-trigger" src="ir_stats_page.gif" alt="Iron Remnant character statistics and progression interface" tabindex="0">
+                        <span class="media-label">Character build and stat interface</span>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <section id="Settlers" class="scroll-target">
-            <h2>Settlers</h2>
-            <div class="content-card">
-                <p>The backbone of the player economy. Settler's can automatically gather, and also be microed to gather certain resources, as well as recalled back to the player base. The UI status allows the player to locate Settlers as well as notify them if a settler is idle.</p>
-                <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/eyR4IIAI8w8" title="Settlers" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <section class="ir-section" id="command">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">04 / Command fantasy</span>
+                        <h2>Lead from<br><span class="section-kicker">the front.</span></h2>
+                    </div>
+                    <p>The player is not a detached cursor. They move through the same space as their troops and buildings, switching between direct action and tactical intent without leaving the battlefield.</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="Barracks and Training Troops" class="scroll-target">
-            <h2>Barracks and Training Troops</h2>
-            <div class="content-card">
-                <p>Players can purchase various buildings such as barracks to construct them and train troops. Troops can be made to follow the player, advance on the enemy, or defend the player's base. The Kingdom UI allows buildings status to be seen, as well as upgrades and repairs to be completed easily.</p>
-                <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/WhGE3L0BWiA" title="Barracks and training troops" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="Battles" class="scroll-target">
-            <h2>Battles</h2>
-            <div class="content-card">
-                <p>Large scale combat featuring fully animated Spine2D units battling in real time with physics-based projectiles, impacts, and death effects occurring simultaneously on screen. To support large engagements efficiently, the entire combat system was designed around aggressive object pooling for enemies,
-                    player troops, projectiles, and visual effects. This significantly reduces runtime instantiation overhead and garbage collection spikes during heavy combat scenarios, allowing battles to remain responsive even with large numbers of active units. While no formation was assigned, the riflemen still form a single line when shooting rather than making a single clump</p>
-
-                <div class="video-wrapper" style="margin-top: 30px;">
-                    <iframe src="https://www.youtube.com/embed/VnOj3C8GILQ" title="Large Scale Battles" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="command-grid">
+                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_selecting_troops.png" alt="Selecting multiple troops in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Select &amp; organise</h3><p>Marquee selection and squad-aware commands make larger allied forces manageable during live combat.</p></div></article>
+                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_building.png" alt="Building placement interface in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Fortify the field</h3><p>Construction tools let the player turn captured ground into a defensible and productive position.</p></div></article>
+                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_orbitals.png" alt="Calling an orbital ability in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Escalate</h3><p>Orbital barrages, air support and reinforcements give the player high-impact answers to battlefield pressure.</p></div></article>
                 </div>
             </div>
         </section>
 
-
-        <!-- TERRAIN SHADER -->
-        <section id="terrain-shader" class="scroll-target">
-            <h2>Terrain Shader & Environment Rendering</h2>
-            <div class="content-card">
-
-                <div class="deep-dive">
-                    <div class="text-content">
-                        <h3>Procedural Terrain Blending Shader</h3>
-
-                        <p>
-                            Built a custom Shader Graph terrain material for Iron Remnant focused on creating RTS environments without visible hard texture seams or obvious texture repetition.
-                            Rather than using traditional painted terrain layers, the shader procedurally blends terrain types together using world-space gradients, layered detail textures and noise-driven edge breakup.
-                        </p>
-
-                        <p>
-                            The system was designed specifically for the game's camera height where large uninterrupted terrain surfaces are constantly visible.
-                            The goal was to achieve readable terrain transitions while still retaining enough fine detail to avoid flat colour fields at gameplay zoom levels.
-                        </p>
-
-                        <div class="feature-pills">
-                            <span class="pill">Shader Graph</span>
-                            <span class="pill">World-space blending</span>
-                            <span class="pill">Noise-driven transitions</span>
-                            <span class="pill">Detail texture layering</span>
-                            <span class="pill">UV tiling controls</span>
-                            <span class="pill">Edge breakup masking</span>
-                        </div>
+        <section class="ir-section" id="enemy">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">05 / Enemy simulation</span>
+                        <h2>An enemy that<br><span class="section-kicker">builds back.</span></h2>
                     </div>
-
-                    <div class="media-content">
-                        <div class="gif-slot">
-                            <img src="terrain_blend_showcase.png" alt="Sand to grass terrain blend created with a custom Shader Graph material">
-                            <div class="gif-caption">
-                                Procedural grass-to-sand transition with layered noise breakup and detail masking
-                            </div>
-                        </div>
-                    </div>
+                    <p>Opposition is driven by an economy and construction layer of its own. Enemy infrastructure can expand, route pressure, upgrade, rebuild and deploy heavier responses as its strategic position changes.</p>
                 </div>
-
-                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
-
-                <div class="deep-dive">
-                    <div class="text-content">
-                        <h3>Shader Graph Breakdown</h3>
-
-                        <p>
-                            The terrain blend begins with a world-space position gradient which determines the broad transition area between terrain types.
-                            This base mask is then distorted using a tiled edge-noise texture to break up the perfectly linear transition and create more organic terrain shapes.
-                        </p>
-
-                        <p>
-                            Additional high-frequency detail textures are layered separately from the large-scale blend mask.
-                            This allows terrain micro-detail to remain readable without affecting the overall transition shape.
-                            Exposed controls were added for detail scale, noise strength, edge contrast and blend softness so terrain can be tuned per-biome directly in the editor.
-                        </p>
-
-                        <table class="stat-table">
-                            <thead>
-                                <tr>
-                                    <th>Feature</th>
-                                    <th>Purpose</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="stat-name-cell">World Position Gradient</td>
-                                    <td>Creates directional terrain blending independent of mesh UVs.</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat-name-cell">Edge Noise Mask</td>
-                                    <td>Breaks up straight blend lines into more natural terrain shapes.</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat-name-cell">Smoothstep Blend</td>
-                                    <td>Controls transition softness between terrain materials.</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat-name-cell">Detail Texture Overlay</td>
-                                    <td>Adds fine-scale terrain variation at gameplay zoom levels.</td>
-                                </tr>
-                                <tr>
-                                    <td class="stat-name-cell">Exposed Shader Parameters</td>
-                                    <td>Allows real-time tuning of blend sharpness, tiling and contrast.</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="adversary-panel">
+                    <div class="adversary-copy">
+                        <span class="system-number">Adaptive construction AI</span>
+                        <h3>Not just waves.</h3>
+                        <p>The enemy evaluates threat, reserves resources, selects construction routes and rebuilds losses. That creates objectives the player can disrupt, not simply units they must out-damage.</p>
+                        <div class="threat-flow" aria-label="Enemy decision flow"><span class="threat-step">Assess threat</span><span class="threat-arrow"><i class="fa-solid fa-arrow-right"></i></span><span class="threat-step">Invest</span><span class="threat-arrow"><i class="fa-solid fa-arrow-right"></i></span><span class="threat-step">Expand</span><span class="threat-arrow"><i class="fa-solid fa-arrow-right"></i></span><span class="threat-step">Rebuild</span></div>
                     </div>
-
-                    <div class="media-content">
-                        <div class="gif-row">
-
-                            <div class="gif-slot">
-                                <img src="shadergraph_overview.png" alt="Overview of the terrain Shader Graph setup">
-                                <div class="gif-caption">
-                                    Terrain Shader Graph overview — world-space blend mask and layered detail system
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-
-                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
-
-                <div class="deep-dive">
-                    <div class="text-content">
-                        <h3>Visual Iteration & Terrain Readability</h3>
-
-                        <p>
-                            Multiple terrain passes were iterated on to balance realism with gameplay readability.
-                            Early versions relied too heavily on high-frequency noise which created visual speckling at gameplay distance.
-                            Later iterations reduced noise density, softened the blend mask and separated micro-detail from macro terrain shapes.
-                        </p>
-
-                        <p>
-                            Final terrain materials were tuned specifically for readability under the game's lighting model and top-down camera angle.
-                            This helped maintain clear silhouettes for units and buildings while still avoiding flat or repetitive ground surfaces.
-                        </p>
-
-                        <div class="feature-pills">
-                            <span class="pill">Gameplay readability</span>
-                            <span class="pill">Reduced texture repetition</span>
-                            <span class="pill">Biome blending</span>
-                            <span class="pill">Large-scale environment coverage</span>
-                            <span class="pill">Runtime parameter tuning</span>
-                        </div>
-                    </div>
-
-                    <div class="media-content">
-                        <div class="gif-row">
-
-                            <div class="gif-slot">
-                                <img src="terrain_iteration_01.png" alt="Early terrain blend iteration">
-                                <div class="gif-caption">
-                                    Earlier iteration — noisier terrain breakup with denser high-frequency detail
-                                </div>
-                            </div>
-
-                            <div class="gif-slot">
-                                <img src="terrain_iteration_02.png" alt="Refined terrain blend iteration">
-                                <div class="gif-caption">
-                                    Refined blend pass — softer transitions and more readable terrain composition
-                                </div>
-                            </div>
-
-                            <div class="gif-slot">
-                                <img src="terrain_ingame.png" alt="Terrain shader visible during gameplay">
-                                <div class="gif-caption">
-                                    Added procedural detailing of the grass
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ENEMY BASE SYSTEM -->
-        <section id="enemy-base" class="scroll-target">
-            <h2>Key Systems</h2>
-            <div class="content-card">
-
-                <div class="deep-dive">
-                    <div class="text-content">
-                        <h3>Enemy Base Economy &amp; Threat System</h3>
-                        <p>The enemy base runs on a <strong>Threat</strong> resource that generates passively from the Command Centre and is multiplied by Resource Collector buildings. Rather than scripted waves, the enemy base behaves like a living economy — constantly accumulating Threat and spending it according to a priority queue.</p>
-                        <p>Threat is consumed in order: spawn troops first, upgrade barracks to unlock new unit tiers second, and rebuild destroyed buildings third. This means destroying a Resource Collector directly starves the enemy's ability to escalate — a meaningful strategic decision, not just clearing a health bar.</p>
-                        <div class="feature-pills">
-                            <span class="pill">Passive Threat generation</span>
-                            <span class="pill">Resource Collectors multiply rate</span>
-                            <span class="pill">Priority spend queue</span>
-                            <span class="pill">Reactive rebuilding</span>
-                            <span class="pill">Barracks tier upgrades</span>
-                        </div>
-                    </div>
-                    <div class="media-content">
-                        <div class="gif-slot">
-                            <img src="ir_resource_collector.gif" alt="Enemy base placing a Resource Collector building and generating Threat income">
-                            <div class="gif-caption">Enemy base placing a Resource Collector — increases Threat generation rate</div>
-                        </div>
-                    </div>
-                </div>
-
-
-                 <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
-
-                <!-- STAT OVERHAUL -->
-                <div class="deep-dive">
-                    <div class="text-content">
-                        <h3>Full Stat System Overhaul</h3>
-                        <p>Iron Remnant introduces a comprehensive stat architecture applied universally to the player party, all enemy types, and structures. Stats are split into three categories: offence, defence and utility. Every value is driven by equipment, level and ScriptableObject-defined base profiles — no hardcoded numbers.</p>
-
-                    </div>
-                    <div class="media-content">
-                        <div class="gif-slot">
-                            <img src="ir_stats_page.gif" alt="Stats page showing the full stat overhaul with offence, defence and utility categories">
-                            <div class="gif-caption">Stats page — full stat overhaul applied to all entities including enemies and structures</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="equip-grid">
-                    <div class="equip-slot">
-                        <i class="fa-solid fa-sword"></i>
-                        <div>
-                            <h4>Weapon Slot</h4>
-                            <p>Any weapon type equippable by any character. Stat profile guides role — no hard class locks.</p>
-                        </div>
-                    </div>
-                    <div class="equip-slot">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <div>
-                            <h4>Armour Slot</h4>
-                            <p>Four armour types across four rarity tiers. Tactical, Combat, Heavy Plate and Tech Suit profiles.</p>
-                        </div>
-                    </div>
-                    <div class="equip-slot">
-                        <i class="fa-solid fa-gem"></i>
-                        <div>
-                            <h4>Accessory Slot</h4>
-                            <p>Rings, relics and amulets providing passive stat bonuses — crit chance, elemental resist, gold gain.</p>
-                        </div>
-                    </div>
-                    <div class="equip-slot">
-                        <i class="fa-solid fa-wrench"></i>
-                        <div>
-                            <h4>Tool Slot</h4>
-                            <p>Gathering tools auto-assigned party members near resource nodes. No manual item-giving required.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <table class="stat-table">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Stat</th>
-                            <th>Description</th>
-                            <th>Applies To</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="tag tag-offence">Offence</span></td>
-                            <td class="stat-name-cell">Attack Damage</td>
-                            <td>Base physical damage per hit before mitigation.</td>
-                            <td>All entities</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-offence">Offence</span></td>
-                            <td class="stat-name-cell">Crit Chance</td>
-                            <td>Probability of landing a critical hit. Multiplicative with Crit Damage.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-offence">Offence</span></td>
-                            <td class="stat-name-cell">Crit Damage</td>
-                            <td>Damage multiplier applied on a critical hit. Base 150%.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-offence">Offence</span></td>
-                            <td class="stat-name-cell">Hit Chance</td>
-                            <td>Accuracy rating. Checked against target Evasion to determine if attack connects.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-offence">Offence</span></td>
-                            <td class="stat-name-cell">Attack Speed</td>
-                            <td>Rate of attacks or fire. Scales with weapon type base values.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-offence">Offence</span></td>
-                            <td class="stat-name-cell">Penetration</td>
-                            <td>Reduces target's effective Defence by a flat or percentage amount.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-defence">Defence</span></td>
-                            <td class="stat-name-cell">Max HP</td>
-                            <td>Total health pool. Scaled by armour type and level.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-defence">Defence</span></td>
-                            <td class="stat-name-cell">Max MP</td>
-                            <td>Total MP pool. Scaled by armour type and level.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-defence">Defence</span></td>
-                            <td class="stat-name-cell">Health regen</td>
-                            <td>Rate of Health Regeneration</td>
-                        </tr>
-                                                <tr>
-                            <td><span class="tag tag-defence">Defence</span></td>
-                            <td class="stat-name-cell">Mana regen</td>
-                            <td>Rate of Mana Regeneration</td>
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-defence">Defence</span></td>
-                            <td class="stat-name-cell">Defence</td>
-                            <td>Reduces incoming damage.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-defence">Defence</span></td>
-                            <td class="stat-name-cell">Evasion</td>
-                            <td>Chance to completely dodge an incoming attack. Checked against attacker Hit Chance.</td>
-
-                        </tr>
-                        <tr>
-                            <td><span class="tag tag-defence">Defence</span></td>
-                            <td class="stat-name-cell">Endurance</td>
-                            <td>Reduces probability of an incoming attack landing a critical hit.</td>
-
-                        </tr>
-
-                        <tr>
-                            <td><span class="tag tag-shared">Shared</span></td>
-                            <td class="stat-name-cell">Level</td>
-                            <td>Scales base stat profiles. Party members level from XP; enemy buildings tier from Threat.</td>
-                            <td>All entities</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </section>
-
-        <!-- CONNECTION TO ALS -->
-        <section id="prequel" class="scroll-target">
-            <h2>Connection to Annie's Last Stand</h2>
-            <div class="content-card">
-                <div class="deep-dive">
-                    <div class="text-content">
-                        <h3>A Shared Universe &amp; Codebase</h3>
-                        <p>Iron Remnant is built as a direct prequel to Annie's Last Stand. Annie appears as a playable character, the mech enemy roster is reused in full, and the combat feel — 360-degree free-aim, bullet pooling, continuous enemy pressure — is inherited and extended rather than rebuilt.</p>
-                        <p>The inventory, equipment, and stat systems are architected as a shared engine intended to power both Iron Remnant and a third project, Eldoria, a fantasy RPG kingdom builder currently in design. One codebase, three games — demonstrating architecture that scales beyond a single project.</p>
-                    </div>
-                    <div class="media-content">
-                        <img src="LastStand.jpg" alt="Annie's Last Stand — the sequel that Iron Remnant leads into" loading="lazy">
-                    </div>
-                </div>
-                <div class="feature-pills" style="margin-top: 20px;">
-                    <span class="pill">Shared mech enemy roster</span>
-                    <span class="pill">Inherited 360° free-aim combat</span>
-                    <span class="pill">Bullet pooling reused</span>
-                    <span class="pill">Shared inventory engine</span>
-                    <span class="pill">Shared stat architecture</span>
-                    <span class="pill">Narrative continuity</span>
+                    <div class="adversary-art"><img src="M3_IntoTheCaves.png" alt="A large mechanical enemy looming over an Iron Remnant operation"></div>
                 </div>
             </div>
         </section>
 
-
-        <!-- CONTACT -->
-        <section id="contact" class="scroll-target">
-            <h2>Get In Touch</h2>
-            <div class="content-card" style="text-align: center;">
-                <p>Thanks for checking out Iron Remnant. If you'd like to talk about the systems, the design decisions, or my broader portfolio, feel free to reach out.</p>
-                <div class="contact-links">
-                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+        <section class="ir-section" id="campaign">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">06 / Campaign layer</span>
+                        <h2>Return to<br><span class="section-kicker">Asgard.</span></h2>
+                    </div>
+                    <p>Between operations, the Asgard acts as a home base for mission selection, quests, party management, inventory, equipment and simulation. The campaign map ties individual missions into a larger territorial war.</p>
+                </div>
+                <div class="asgard-layout">
+                    <div class="asgard-image"><img class="lightbox-trigger" src="ir_asgard.png" alt="Asgard home base environment from Iron Remnant" tabindex="0"></div>
+                    <div class="asgard-sidebar">
+                        <article class="asgard-card"><i class="fa-solid fa-map-location-dot"></i><h3>Campaign map</h3><p>Select territories, track their state and launch operations across a connected war.</p></article>
+                        <article class="asgard-card"><i class="fa-solid fa-list-check"></i><h3>Quest network</h3><p>Mission chains and narrative links carry progression between the base and battlefield.</p></article>
+                        <article class="asgard-card"><i class="fa-solid fa-user-group"></i><h3>Preparation</h3><p>Manage the party, abilities, inventory and equipment before committing to the next operation.</p></article>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <section class="ir-section" id="operations">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">07 / Mission case studies</span>
+                        <h2>The game in<br><span class="section-kicker">operation.</span></h2>
+                    </div>
+                    <p>These focused pages document specific missions and update milestones. They are the close-up evidence; this page remains the complete picture of Iron Remnant.</p>
+                </div>
+                <div class="operations-grid">
+                    <a class="operation-card" href="Project11.html"><img src="M2_Breakout_RR.png" alt="Iron Remnant Breakout mission"><div class="operation-copy"><span class="operation-code">Operation 02 / Mission case study</span><h3>Breakout</h3><p>A fort-defence operation that brings troop roles, defensive construction, enemy mechs, warships, orbital support and large-battle optimisation together.</p><span class="operation-link">Read the Breakout case study <i class="fa-solid fa-arrow-right"></i></span></div></a>
+                    <a class="operation-card" href="iron_remnant_counter_attack_mission.html"><img src="M3_IntoTheCaves.png" alt="Iron Remnant Counter Attack mission"><div class="operation-copy"><span class="operation-code">Operation 03 / Mission case study</span><h3>Counter Attack</h3><p>A focused look at turning defence into a combined-arms push through an enemy-controlled battlefield.</p><span class="operation-link">Read the Counter Attack case study <i class="fa-solid fa-arrow-right"></i></span></div></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="ir-section" id="tools">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">08 / Production engineering</span>
+                        <h2>Tools built<br><span class="section-kicker">to ship.</span></h2>
+                    </div>
+                    <p>A project of this scale needs more than runtime code. I built purpose-made Unity editor tools to inspect game state, validate content and balance interconnected progression systems safely.</p>
+                </div>
+                <div class="tool-grid">
+                    <article class="tool-card">
+                        <div class="tool-placeholder" aria-label="Placeholder for a future Game Data Lab screenshot">
+                            <div class="placeholder-bar"><span>Last Stand / Game Data Lab</span><i class="fa-solid fa-database"></i></div>
+                            <div class="placeholder-body"><div class="placeholder-nav"><div class="placeholder-line active"></div><div class="placeholder-line"></div><div class="placeholder-line"></div><div class="placeholder-line"></div><div class="placeholder-line"></div></div><div class="placeholder-main"><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span></div></div>
+                            <span class="capture-badge"><i class="fa-solid fa-camera"></i> Screenshot placeholder</span>
+                        </div>
+                        <div class="tool-copy"><h3>Game Data Lab</h3><p>A central interface for inspecting profiles, inventory, quests, scene flags and runtime state, with validation and guarded data-application workflows.</p><div class="tag-list"><span>State inspection</span><span>Validation</span><span>Safe apply</span><span>Backups</span></div></div>
+                    </article>
+                    <article class="tool-card">
+                        <div class="tool-placeholder" aria-label="Placeholder for a future Equipment Set Stat Visualizer screenshot">
+                            <div class="placeholder-bar"><span>Equipment Set Stat Visualizer</span><i class="fa-solid fa-chart-line"></i></div>
+                            <div class="placeholder-body"><div class="placeholder-nav"><div class="placeholder-line"></div><div class="placeholder-line active"></div><div class="placeholder-line"></div><div class="placeholder-line"></div><div class="placeholder-line"></div></div><div class="placeholder-main"><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span></div></div>
+                            <span class="capture-badge"><i class="fa-solid fa-camera"></i> Screenshot placeholder</span>
+                        </div>
+                        <div class="tool-copy"><h3>Equipment Set Visualizer</h3><p>A balancing workspace for complete gear sets, level allocations, direct and derived statistics, combat score and copyable breakdowns.</p><div class="tag-list"><span>Buildcraft</span><span>Derived stats</span><span>Combat rating</span><span>Balance analysis</span></div></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="ir-section" id="status">
+            <div class="page-shell">
+                <div class="status-panel">
+                    <div class="status-title">
+                        <span class="status-pill"><span class="status-dot wip"></span> In development</span>
+                        <h3>Next Fest demo in final integration.</h3>
+                        <p>The core game is playable and its major systems are functional. The current focus is completing the connective content that turns the existing missions into a cohesive public demo.</p>
+                    </div>
+                    <div class="status-list">
+                        <div class="status-row"><strong><span class="status-dot"></span>Core systems</strong><span>Combat, troops, construction, economy, abilities, progression and enemy systems are working.</span></div>
+                        <div class="status-row"><strong><span class="status-dot"></span>Demo missions</strong><span>The demo's missions are mostly complete and already exercise the major gameplay layers.</span></div>
+                        <div class="status-row"><strong><span class="status-dot wip"></span>Final integration</strong><span>Dialogue and linking quests are being completed to connect the mission flow.</span></div>
+                        <div class="status-row"><strong><span class="status-dot wip"></span>Wider game</strong><span>Additional missions and further rooms within the Asgard remain in production beyond the demo scope.</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Nicholas Morris</p>
+    <section class="final-cta" id="demo">
+        <div class="final-content">
+            <p class="eyebrow" style="justify-content:center;">The next operation</p>
+            <h2>Prepare for<br>deployment.</h2>
+            <p>Iron Remnant is being prepared for a Steam Next Fest demo. The final public link will be added here as soon as the store page is ready.</p>
+            <div class="final-actions">
+                <span class="button disabled" aria-disabled="true"><i class="fa-brands fa-steam"></i> Next Fest demo coming soon</span>
+                <a class="button secondary" href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i> Contact Nicholas</a>
+            </div>
+            <div class="placeholder-note">Steam destination intentionally left as a placeholder</div>
+        </div>
+    </section>
+
+    <footer class="ir-footer">
+        <p>&copy; 2026 Nicholas Morris. Iron Remnant is an independent project.</p>
+        <p><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Return to portfolio</a></p>
     </footer>
 
-    <div class="lightbox" id="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
+    <div class="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image viewer">
+        <button type="button" aria-label="Close image viewer"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="">
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const targets = document.querySelectorAll('.scroll-target');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                }), { threshold: 0.1 };
-            });
-            targets.forEach(target => observer.observe(target));
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImage = lightbox.querySelector('img');
+            const closeButton = lightbox.querySelector('button');
+            let lastTrigger = null;
 
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxClose = document.querySelector('.lightbox-close');
+            function openLightbox(trigger) {
+                lastTrigger = trigger;
+                lightboxImage.src = trigger.src;
+                lightboxImage.alt = trigger.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                closeButton.focus();
+            }
 
-            document.querySelectorAll('.gallery-grid img').forEach(img => {
-                img.addEventListener('click', (e) => {
-                    lightbox.classList.add('active');
-                    lightboxImg.src = e.target.src;
-                    lightboxImg.alt = e.target.alt;
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                lightboxImage.src = '';
+                if (lastTrigger) lastTrigger.focus();
+            }
+
+            document.querySelectorAll('.lightbox-trigger').forEach(function (trigger) {
+                trigger.addEventListener('click', function () { openLightbox(trigger); });
+                trigger.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openLightbox(trigger);
+                    }
                 });
             });
 
-            lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
-            lightbox.addEventListener('click', (e) => {
-                if (e.target !== lightboxImg) lightbox.classList.remove('active');
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') lightbox.classList.remove('active');
-            });
+            closeButton.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function (event) { if (event.target === lightbox) closeLightbox(); });
+            document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox(); });
         });
     </script>
 </body>

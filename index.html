@@ -3,491 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nicholas Morris is a solo game developer specialising in gameplay systems and technical design. Explore Iron Remnant and selected Unity projects.">
     <meta name="robots" content="noindex">
-
-    <title>Nicholas Morris | Game Developer Portfolio</title>
+    <title>Nicholas Morris | Gameplay Systems &amp; Technical Design</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="styles.css">
 
     <style>
         :root {
-            --container-width: 1200px;
-            --transition-speed: 0.4s;
-            --transition-timing: ease;
+            --home-ink: #070a0d;
+            --home-panel: #11171c;
+            --home-panel-soft: #151e23;
+            --home-line: rgba(157, 193, 198, .19);
+            --home-cyan: #67d5df;
+            --home-cyan-bright: #a9f8ff;
+            --home-rust: #e4713e;
+            --home-cream: #e8e3d6;
+            --home-muted: #a4b2b5;
+            --home-heading: "Barlow Condensed", sans-serif;
+            --home-body: "Inter", sans-serif;
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-top: -10px;
-            margin-bottom: 50px;
-            font-size: 1rem;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 14% 8%, rgba(103, 213, 223, .06), transparent 27rem),
+                var(--home-ink);
+            color: var(--home-cream);
+            font-family: var(--home-body);
+            font-size: 17px;
+            line-height: 1.65;
+            overflow-x: hidden;
         }
 
-        .hero-background {
-            background: url('LastStand.jpg') no-repeat center center/cover;
-            filter: blur(4px);
-            transform: scale(1.05);
-        }
+        section { opacity: 1; transform: none; }
+        a { color: inherit; }
+        img { max-width: 100%; }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
+        .skip-link {
+            position: fixed;
+            top: 8px;
+            left: 8px;
+            z-index: 100;
+            padding: 10px 14px;
+            background: var(--home-cyan-bright);
+            color: var(--home-ink);
+            transform: translateY(-150%);
         }
+        .skip-link:focus { transform: none; }
 
-        .project-card {
+        .home-nav {
+            position: absolute;
+            inset: 0 0 auto;
+            z-index: 20;
+            height: 76px;
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            height: 550px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(20px, 4vw, 64px);
+            border-bottom: 1px solid rgba(255,255,255,.12);
+            background: linear-gradient(to bottom, rgba(3,6,8,.88), transparent);
+        }
+        .home-nav a { text-decoration: none; }
+        .nameplate {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            font: 700 .9rem var(--home-heading);
+            letter-spacing: .11em;
+            text-transform: uppercase;
+        }
+        .name-mark {
+            width: 31px;
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--home-cyan);
+            color: var(--home-cyan-bright);
+            transform: rotate(45deg);
+        }
+        .name-mark i { transform: rotate(-45deg); font-size: .85rem; }
+        .nav-links { display: flex; gap: 27px; align-items: center; }
+        .nav-links a {
+            color: rgba(255,255,255,.72);
+            font-size: .73rem;
+            font-weight: 700;
+            letter-spacing: .11em;
+            text-transform: uppercase;
+        }
+        .nav-links a:hover, .nav-links a:focus-visible { color: var(--home-cyan-bright); }
+
+        .flagship-hero {
+            min-height: min(980px, 100svh);
             position: relative;
-            border-radius: 12px;
+            display: grid;
+            align-items: end;
+            isolation: isolate;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            text-decoration: none;
-            color: var(--text-color);
-            transition: transform var(--transition-speed) var(--transition-timing), box-shadow var(--transition-speed) var(--transition-timing);
+            padding: 130px clamp(20px, 7vw, 120px) clamp(70px, 10vh, 115px);
         }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 191, 255, 0.2);
-        }
-
-        .card-bg {
+        .hero-image {
             position: absolute;
             inset: 0;
+            z-index: -3;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 1;
-            transition: transform var(--transition-speed) var(--transition-timing);
+            object-position: center;
+            filter: saturate(.72) contrast(1.08);
         }
-
-        .project-card:hover .card-bg {
-            transform: scale(1.05);
-        }
-
-        .card-overlay {
+        .flagship-hero::before {
+            content: "";
             position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(18, 18, 18, 0.95) 20%, rgba(18, 18, 18, 0) 60%);
-            z-index: 2;
+            z-index: -2;
+            background:
+                linear-gradient(90deg, rgba(4,7,9,.98) 0%, rgba(4,7,9,.76) 43%, rgba(4,7,9,.12) 78%),
+                linear-gradient(0deg, var(--home-ink) 0%, transparent 42%, rgba(0,0,0,.23) 100%);
         }
+        .flagship-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: .22;
+            background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(to right, #000, transparent 82%);
+        }
+        .hero-copy { max-width: 860px; }
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin: 0 0 18px;
+            color: var(--home-cyan-bright);
+            font-size: .74rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        .eyebrow::before { content: ""; width: 38px; height: 2px; background: var(--home-rust); }
+        .flagship-hero h1 {
+            margin: 0;
+            color: #fff;
+            font: 800 clamp(4.9rem, 12vw, 10.6rem)/.76 var(--home-heading);
+            letter-spacing: -.035em;
+            text-transform: uppercase;
+            text-shadow: 0 15px 50px rgba(0,0,0,.55);
+        }
+        .hero-description {
+            max-width: 720px;
+            margin: 27px 0 0;
+            color: #d5dfe0;
+            font-size: clamp(1.04rem, 1.65vw, 1.35rem);
+            line-height: 1.55;
+        }
+        .hero-description strong { color: #fff; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 34px; }
+        .button {
+            min-height: 52px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+            padding: 13px 22px;
+            border: 1px solid var(--home-cyan);
+            background: var(--home-cyan);
+            color: #071013;
+            text-decoration: none;
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+        .button:hover, .button:focus-visible { background: var(--home-cyan-bright); transform: translateY(-2px); }
+        .button.secondary { background: rgba(7,10,13,.62); color: #fff; border-color: rgba(255,255,255,.4); }
+        .button.secondary:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 28px; color: rgba(255,255,255,.65); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+        .hero-meta span { display: flex; gap: 8px; align-items: center; }
+        .hero-meta i { color: var(--home-rust); }
 
-        .card-content {
-            padding: 30px;
+        .flagship-proof {
             position: relative;
             z-index: 3;
+            max-width: 1180px;
+            margin: -32px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: rgba(17,23,28,.97);
+            border: 1px solid var(--home-line);
+            box-shadow: 0 24px 80px rgba(0,0,0,.36);
         }
+        .proof-item { min-height: 104px; padding: 23px 27px; border-right: 1px solid var(--home-line); }
+        .proof-item:last-child { border-right: 0; }
+        .proof-label { display: block; color: var(--home-muted); font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+        .proof-value { display: block; margin-top: 5px; color: #fff; font: 700 1.35rem/1.15 var(--home-heading); text-transform: uppercase; }
 
-        .card-content h3 {
-            font-size: 2.1rem;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .card-content p {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            color: var(--text-muted);
-        }
-
-        .card-tags {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .page-shell { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+        .home-section { padding: 112px 0; }
+        .home-section + .home-section { border-top: 1px solid var(--home-line); }
+        .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 500px); gap: 70px; align-items: end; margin-bottom: 44px; }
+        .section-index { color: var(--home-rust); font: 700 .78rem var(--home-heading); letter-spacing: .17em; text-transform: uppercase; }
+        .home-section h2 {
+            margin: 8px 0 0;
             padding: 0;
-        }
-
-        .card-tags li {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .card-action {
-            margin-top: 20px;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            color: var(--accent-color);
-            transition: letter-spacing var(--transition-speed);
-        }
-
-        .project-card:hover .card-action {
-            letter-spacing: 1px;
-        }
-
-        .card-action i {
-            margin-left: 8px;
-            transition: transform var(--transition-speed);
-        }
-
-        .project-card:hover .card-action i {
-            transform: translateX(5px);
-        }
-
-        /* WIP badge */
-        .wip-badge {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            z-index: 4;
-            background: rgba(220, 80, 40, 0.85);
+            border: 0;
             color: #fff;
-            font-family: var(--font-heading);
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+            font: 700 clamp(2.8rem, 5.7vw, 5.25rem)/.9 var(--home-heading);
+            letter-spacing: -.02em;
             text-transform: uppercase;
-            padding: 5px 12px;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
+        }
+        .section-accent { color: var(--home-cyan-bright); }
+        .section-head p { margin: 0; color: var(--home-muted); font-size: 1rem; }
+        .section-head p strong { color: var(--home-cream); }
+
+        .identity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .identity-card {
+            min-height: 295px;
+            padding: 29px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, var(--home-panel-soft), #0c1114);
+            border: 1px solid var(--home-line);
+        }
+        .identity-icon { width: 46px; height: 46px; display: grid; place-items: center; color: var(--home-cyan-bright); border: 1px solid rgba(103,213,223,.4); }
+        .identity-card h3 { margin: 55px 0 11px; color: #fff; font: 700 1.7rem var(--home-heading); text-transform: uppercase; }
+        .identity-card p { margin: 0; color: var(--home-muted); font-size: .9rem; }
+        .identity-card::after { content: ""; position: absolute; right: -40px; bottom: -40px; width: 120px; height: 120px; border: 1px solid rgba(103,213,223,.09); transform: rotate(45deg); }
+
+        .operations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .operation-card { min-height: 540px; position: relative; display: flex; align-items: end; overflow: hidden; border: 1px solid var(--home-line); text-decoration: none; }
+        .operation-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+        .operation-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,7,9,.98), rgba(4,7,9,.18) 72%); }
+        .operation-card:hover img { transform: scale(1.03); }
+        .operation-copy { position: relative; z-index: 2; padding: 35px; }
+        .operation-code { color: var(--home-cyan-bright); font-size: .66rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+        .operation-copy h3 { margin: 8px 0 11px; color: #fff; font: 700 clamp(2.3rem, 4vw, 3.7rem)/.9 var(--home-heading); text-transform: uppercase; }
+        .operation-copy p { max-width: 500px; margin: 0 0 20px; color: #b7c1c3; font-size: .87rem; }
+        .operation-link { color: var(--home-rust); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+
+        .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .work-card {
+            min-height: 380px;
+            position: relative;
+            display: flex;
+            align-items: end;
+            overflow: hidden;
+            border: 1px solid var(--home-line);
+            text-decoration: none;
+        }
+        .work-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: transform .45s ease, filter .45s ease; }
+        .work-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,9,11,.98), rgba(6,9,11,.15) 76%); }
+        .work-card:hover img { transform: scale(1.035); filter: saturate(1); }
+        .work-copy { position: relative; z-index: 2; padding: 29px; }
+        .work-type { color: var(--home-cyan-bright); font-size: .62rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+        .work-copy h3 { margin: 7px 0 8px; color: #fff; font: 700 2.2rem/.95 var(--home-heading); text-transform: uppercase; }
+        .work-copy p { max-width: 520px; margin: 0; color: #aebabc; font-size: .84rem; }
+
+        .archive-panel { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; }
+        .archive-list { border-top: 1px solid var(--home-line); }
+        .archive-link {
+            display: grid;
+            grid-template-columns: 54px 1fr auto;
+            gap: 18px;
+            align-items: center;
+            min-height: 82px;
+            padding: 14px 8px;
+            border-bottom: 1px solid var(--home-line);
+            text-decoration: none;
+            transition: padding .2s ease, background .2s ease;
+        }
+        .archive-link:hover { padding-left: 16px; background: rgba(103,213,223,.035); }
+        .archive-number { color: var(--home-rust); font: 700 .72rem var(--home-heading); letter-spacing: .1em; }
+        .archive-name { color: #fff; font: 700 1.15rem var(--home-heading); letter-spacing: .03em; text-transform: uppercase; }
+        .archive-type { color: #78878a; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; text-align: right; }
+        .archive-feature { min-height: 100%; position: relative; display: flex; align-items: end; overflow: hidden; border: 1px solid var(--home-line); text-decoration: none; }
+        .archive-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .archive-feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,7,9,.96), transparent 72%); }
+        .archive-feature-copy { position: relative; z-index: 2; padding: 30px; }
+        .archive-feature h3 { margin: 8px 0; color: #fff; font: 700 2.4rem/.95 var(--home-heading); text-transform: uppercase; }
+        .archive-feature p { margin: 0; color: #aeb9bb; font-size: .84rem; }
+
+        .contact-section { position: relative; overflow: hidden; padding: 125px 28px; text-align: center; border-top: 1px solid var(--home-line); background: #090d10; }
+        .contact-section::before { content: ""; position: absolute; inset: 0; opacity: .16; background: url('IronRemnantBG2.png') center/cover; filter: grayscale(1); }
+        .contact-section::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(7,10,13,.55), #070a0d 76%); }
+        .contact-copy { position: relative; z-index: 2; max-width: 830px; margin: 0 auto; }
+        .contact-section h2 { margin: 10px 0 18px; padding: 0; border: 0; color: #fff; font: 800 clamp(3.6rem, 8vw, 7.5rem)/.82 var(--home-heading); text-transform: uppercase; }
+        .contact-section p { max-width: 620px; margin: 0 auto 28px; color: #b7c3c5; }
+        .contact-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+        .home-footer { display: flex; justify-content: space-between; gap: 25px; padding: 35px clamp(20px, 5vw, 70px); border-top: 1px solid var(--home-line); color: #778689; font-size: .74rem; }
+        .home-footer p { margin: 0; }
+        .home-footer a { color: #a9b8ba; text-decoration: none; }
+
+        @media (max-width: 980px) {
+            .flagship-proof { margin: 0; grid-template-columns: repeat(2, 1fr); }
+            .proof-item:nth-child(2) { border-right: 0; }
+            .proof-item:nth-child(-n+2) { border-bottom: 1px solid var(--home-line); }
+            .section-head { grid-template-columns: 1fr; gap: 22px; }
+            .archive-panel { grid-template-columns: 1fr; }
+            .archive-feature { min-height: 430px; }
         }
 
-        @media (min-width: 768px) {
-            .project-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        @media (max-width: 760px) {
+            body { font-size: 16px; }
+            .home-nav { height: 66px; padding: 0 18px; }
+            .nameplate span:last-child { display: none; }
+            .nav-links a:not(:last-child) { display: none; }
+            .flagship-hero { min-height: 820px; padding: 120px 20px 70px; }
+            .flagship-hero::before { background: linear-gradient(0deg, var(--home-ink), rgba(4,7,9,.64) 76%, rgba(4,7,9,.48)); }
+            .flagship-hero h1 { font-size: clamp(4.5rem, 25vw, 7rem); }
+            .flagship-proof, .identity-grid, .operations-grid, .work-grid { grid-template-columns: 1fr; }
+            .proof-item, .proof-item:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--home-line); }
+            .proof-item:last-child { border-bottom: 0; }
+            .page-shell { padding: 0 18px; }
+            .home-section { padding: 78px 0; }
+            .operation-card { min-height: 450px; }
+            .work-card { min-height: 350px; }
+            .archive-link { grid-template-columns: 42px 1fr; }
+            .archive-type { display: none; }
+            .home-footer { flex-direction: column; }
         }
 
-        @media (max-width: 1024px) {
-            .project-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 767px) {
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-card {
-                height: 450px;
-            }
-
-            .card-content h3 {
-                font-size: 1.8rem;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
         }
     </style>
 </head>
 <body>
-    <header class="hero" id="home">
-        <div class="hero-background"></div>
-        <div class="hero-content">
-            <h1>Nicholas Morris</h1>
-            <p>Ambitious game developer building gameplay systems, combat loops, progression, and polished playable builds covering all aspects of game development.</p>
-            <a href="#shipped" class="hero-button">View My Work</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav class="home-nav" aria-label="Primary navigation">
+        <a class="nameplate" href="#home" aria-label="Nicholas Morris, home">
+            <span class="name-mark"><i class="fa-solid fa-n"></i></span>
+            <span>Nicholas Morris</span>
+        </a>
+        <div class="nav-links">
+            <a href="#approach">Expertise</a>
+            <a href="#operations">Iron Remnant</a>
+            <a href="#selected-work">Selected work</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="flagship-hero" id="home">
+        <img class="hero-image" src="IronRemnantBG2.png" alt="Iron Remnant soldiers and machinery on a hostile science-fiction battlefield">
+        <div class="hero-copy">
+            <p class="eyebrow">Flagship solo project / Steam Next Fest demo</p>
+            <h1>Iron<br>Remnant</h1>
+            <p class="hero-description"><strong>I’m Nicholas Morris, a solo developer specialising in gameplay systems and technical design.</strong> Iron Remnant is my large-scale Unity action strategy game, combining third-person combat, troop command, base construction and a reactive enemy on one battlefield.</p>
+            <div class="hero-actions">
+                <a class="button" href="Project10.html"><i class="fa-solid fa-arrow-right"></i> Explore the full project</a>
+                <a class="button secondary" href="#operations"><i class="fa-solid fa-crosshairs"></i> View mission case studies</a>
+            </div>
+            <div class="hero-meta">
+                <span><i class="fa-solid fa-user-gear"></i> Solo design, programming &amp; production</span>
+                <span><i class="fa-solid fa-flask"></i> Demo in final integration</span>
+            </div>
         </div>
     </header>
 
-    <main class="main-container">
+    <div class="flagship-proof" aria-label="Iron Remnant project facts">
+        <div class="proof-item"><span class="proof-label">Role</span><span class="proof-value">Solo Developer</span></div>
+        <div class="proof-item"><span class="proof-label">Engine</span><span class="proof-value">Unity / C#</span></div>
+        <div class="proof-item"><span class="proof-label">Focus</span><span class="proof-value">Gameplay Systems</span></div>
+        <div class="proof-item"><span class="proof-label">Current Goal</span><span class="proof-value">Steam Next Fest</span></div>
+    </div>
 
-        <!-- FEATURED PROJECTS -->
-        <section id="shipped" class="scroll-target">
-            <h2>Featured Projects</h2>
-            <p class="section-subtitle">Playable work and case studies that show systems thinking, implementation depth, and creative range.</p>
-            <div class="project-grid">
-
-                <a href="Project8.html" class="project-card">
-                    <img src="LastStand.jpg" class="card-bg" alt="Annie's Last Stand key art showing the game's defensive last-stand atmosphere" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Annie's Last Stand</h3>
-                        <p>Solo-built top-down shooter blending base defence, upgrade routing, and layered enemy pressure into a fast-paced survival loop.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>SHMUP</li>
-                            <li>Base Defence</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
+    <main id="main">
+        <section class="home-section" id="approach">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">01 / What I build</span>
+                        <h2>Games as<br><span class="section-accent">connected systems.</span></h2>
                     </div>
-                </a>
-
-                <a href="Project9.html" class="project-card">
-                    <img src="WarOnWaterGameplay.png" class="card-bg" alt="War On Water gameplay screenshot showing the top-down survival combat loop" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>War On Water</h3>
-                        <p>Team-built survivor-like where I led gameplay systems, upgrades, UI flow, and technical integration across the full combat loop.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>Team Project</li>
-                            <li>Survivor-like</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
-                <a href="Project2.html" class="project-card">
-                    <img src="GOUCover.png" class="card-bg" alt="Ghost Of Us cover art for the narrative adventure project" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Ghost Of Us</h3>
-                        <p>Narrative adventure built around party control, quests, inventory, and reactive world-state systems across hand-crafted 2D spaces.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>Narrative Systems</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
-                <a href="Project3.html" class="project-card">
-                    <img src="Project3Cover.jpg" class="card-bg" alt="Lost Kingdoms demo cover art" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Lost Kingdoms (Demo)</h3>
-                        <p>Prototype-heavy RPG focused on exploration, crafting, combat support systems, and long-form progression design.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>RPG Systems</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
-                <a href="Project5.html" class="project-card">
-                    <img src="Project5G1.png" class="card-bg" alt="Annie's Quest gameplay screenshot showing the platformer environment" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Annie's Quest</h3>
-                        <p>2D platformer centered on responsive movement, combat feel, spellcasting, and a light base-building layer.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>Platformer Feel</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
-                <a href="Project1.html" class="project-card">
-                    <img src="TTTDCover.png" class="card-bg" alt="Trash Through The Dimensions cover art" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Trash Through The Dimensions</h3>
-                        <p>Hybrid narrative adventure mixing dialogue, top-down exploration, and combat-driven interaction systems.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
-                <a href="Project6.html" class="project-card">
-                    <img src="FruitMergeThumb.png" class="card-bg" alt="Fruit Merge thumbnail showing the physics puzzle game" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Fruit Merge</h3>
-                        <p>WebGL puzzle project built around readable physics interactions, satisfying merges, and short-session replayability.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>WebGL</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
-                <a href="Project7.html" class="project-card">
-                    <img src="IdleGame.png" class="card-bg" alt="Idle Combat Demo screenshot with combat and progression UI" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Idle Combat Demo</h3>
-                        <p>Browser-based incremental RPG with scalable combat, missions, prestige loops, and progression tuning built in JavaScript.</p>
-                        <ul class="card-tags">
-                            <li>JavaScript</li>
-                            <li>HTML/CSS</li>
-                            <li>Game Systems</li>
-                        </ul>
-                        <div class="card-action">View Case Study <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
+                    <p>My work sits where design and engineering meet. I build the playable layer, the data underneath it and the production tools needed to keep a large project understandable. <strong>Iron Remnant is the clearest expression of that approach.</strong></p>
+                </div>
+                <div class="identity-grid">
+                    <article class="identity-card"><div class="identity-icon"><i class="fa-solid fa-gamepad"></i></div><h3>Player-facing systems</h3><p>Combat, abilities, progression, equipment, troop control and interfaces designed as one readable experience.</p></article>
+                    <article class="identity-card"><div class="identity-icon"><i class="fa-solid fa-gears"></i></div><h3>Simulation &amp; AI</h3><p>Economies, construction, settlements and adaptive opposition that create objectives instead of scripted spectacle alone.</p></article>
+                    <article class="identity-card"><div class="identity-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div><h3>Production tooling</h3><p>Custom Unity tools for inspecting state, validating content and balancing interconnected data safely at scale.</p></article>
+                </div>
             </div>
         </section>
 
-        <!-- IN DEVELOPMENT -->
-        <section id="wip" class="scroll-target">
-            <h2>In Development</h2>
-            <p class="section-subtitle">Current experiments and longer-horizon ideas still taking shape.</p>
-            <div class="project-grid">
-
-                <a href="Project10.html" class="project-card">
-                    <img src="IronRemnantBG2.png" class="card-bg" alt="Iron Remnant — isometric action RTS prequel to Annie's Last Stand" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <span class="wip-badge">WIP</span>
-                    <div class="card-content">
-                        <h3>Iron Remnant</h3>
-                        <p>Isometric action RTS with enemy base AI, troop economy, shared party inventory, equipment system and full stat overhaul. Prequel to Annie's Last Stand.</p>
-                        <ul class="card-tags">
-                            <li>Unity</li>
-                            <li>C#</li>
-                            <li>RTS</li>
-                            <li>Base Building</li>
-                            <li>Systems Design</li>
-                        </ul>
-                        <div class="card-action">View Project <i class="fa-solid fa-arrow-right"></i></div>
+        <section class="home-section" id="operations">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">02 / Iron Remnant operations</span>
+                        <h2>The flagship<br><span class="section-accent">in detail.</span></h2>
                     </div>
-                </a>
-
-                <!-- PROJECT 11 -->
-                <a href="Project11.html" class="project-card">
-                    <img src="M2_Breakout_RR.png" class="card-bg" alt="Iron Remnant: Breakout Mission Update" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <span class="wip-badge">NEW</span>
-
-                    <div class="card-content">
-                        <h3>Iron Remnant: Breakout</h3>
-                        <p>
-                            Major mission expansion featuring fort defence gameplay,
-                            sharpshooters, medics, hospitals, mills, stratagems,
-                            enemy warships, new mech enemies, reloading mechanics
-                            and extensive performance optimisation.
-                        </p>
-
-                        <ul class="card-tags">
-                            <li>Mission Update</li>
-                            <li>RTS Defence</li>
-                            <li>Stratagems</li>
-                            <li>AI Optimisation</li>
-                            <li>Unity</li>
-                        </ul>
-
-                        <div class="card-action">
-                            View Project <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- PROJECT 12 -->
-                <a href="iron_remnant_counter_attack_mission.html" class="project-card">
-                    <img src="M3_IntoTheCaves.png" class="card-bg" alt="Iron Remnant: Counter Attack Mission Update" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <span class="wip-badge">NEW</span>
-
-                    <div class="card-content">
-                        <h3>Iron Remnant: Counter Attack</h3>
-                        <p>
-                            Major offensive mission expansion featuring subobjectives,
-                            Mobile Artillery, Tanks, Artillery Foundries, enemy Mech Barracks,
-                            transports, mech lasers, machine gunners, revamped gunships,
-                            new orbital and airstrike stratagems, unit leveling
-                            and smarter enemy AI.
-                        </p>
-
-                        <ul class="card-tags">
-                            <li>Mission Update</li>
-                            <li>RTS Offense</li>
-                            <li>Vehicle Troops</li>
-                            <li>Airstrikes</li>
-                            <li>Unity</li>
-                        </ul>
-
-                        <div class="card-action">
-                            View Project <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-                    </div>
-                </a>
+                    <p>The full-game page explains the complete project. These operation reports provide closer evidence of specific missions, systems and production milestones without duplicating the flagship story.</p>
+                </div>
+                <div class="operations-grid">
+                    <a class="operation-card" href="Project11.html">
+                        <img src="M2_Breakout_RR.png" alt="Iron Remnant Breakout mission">
+                        <div class="operation-copy"><span class="operation-code">Operation 02 / Mission case study</span><h3>Breakout</h3><p>Fort defence, expanded troop roles, player construction, enemy mechs, warships, orbital support and a large-battle optimisation pass.</p><span class="operation-link">Read the Breakout case study <i class="fa-solid fa-arrow-right"></i></span></div>
+                    </a>
+                    <a class="operation-card" href="iron_remnant_counter_attack_mission.html">
+                        <img src="M3_IntoTheCaves.png" alt="Iron Remnant Counter Attack mission">
+                        <div class="operation-copy"><span class="operation-code">Operation 03 / Mission case study</span><h3>Counter Attack</h3><p>Combined-arms offence, mobile artillery, tanks, air support, unit progression and smarter enemy responses across an advancing front.</p><span class="operation-link">Read the Counter Attack case study <i class="fa-solid fa-arrow-right"></i></span></div>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- ART & OTHER -->
-        <section id="other" class="scroll-target">
-            <h2>Art &amp; Other Work</h2>
-            <p class="section-subtitle">Supporting art, 3D work, and adjacent technical projects that broaden the portfolio.</p>
-            <div class="project-grid">
-
-                <a href="illustrations.html" class="project-card">
-                    <img src="rr1.jpg" class="card-bg" alt="Illustration portfolio cover image" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Illustration Portfolio</h3>
-                        <p>Character-driven illustration work, concept pieces, and supporting visuals created for games and original worlds.</p>
-                        <ul class="card-tags">
-                            <li>Character Art</li>
-                            <li>Environment Design</li>
-                            <li>Photoshop</li>
-                        </ul>
-                        <div class="card-action">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
+        <section class="home-section" id="selected-work">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">03 / Selected work</span>
+                        <h2>Earlier games.<br><span class="section-accent">Broader range.</span></h2>
                     </div>
-                </a>
-
-                <a href="OtherProjects.html" class="project-card">
-                    <img src="Other.png" class="card-bg" alt="Other projects cover image for Maya and Unreal work" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Other Projects</h3>
-                        <p>Selected modelling, rigging, and environment work across Maya, Substance Painter, and Unreal Engine.</p>
-                        <ul class="card-tags">
-                            <li>Maya</li>
-                            <li>Substance Painter</li>
-                            <li>Unreal Engine</li>
-                        </ul>
-                        <div class="card-action">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
-                <a href="Project4.html" class="project-card">
-                    <img src="GPCover.png" class="card-bg" alt="Ghost Protocol concept image" loading="lazy">
-                    <div class="card-overlay"></div>
-                    <div class="card-content">
-                        <h3>Ghost Protocol</h3>
-                        <p>Spy-themed work exploring character presentation, combat direction, and visual identity.</p>
-                        <ul class="card-tags">
-                            <li>Character Art</li>
-                            <li>Unity</li>
-                            <li>C#</li>
-                        </ul>
-                        <div class="card-action">View Gallery <i class="fa-solid fa-arrow-right"></i></div>
-                    </div>
-                </a>
-
+                    <p>Selected projects that show the path into Iron Remnant: solo production, team integration, narrative state, combat loops and long-form progression.</p>
+                </div>
+                <div class="work-grid">
+                    <a class="work-card" href="Project8.html"><img src="LastStand.jpg" alt="Annie's Last Stand key art"><div class="work-copy"><span class="work-type">Solo Unity project / Base defence shooter</span><h3>Annie’s Last Stand</h3><p>Fast-paced survival combat, defence building and upgrade routing—the direct precursor to Iron Remnant’s world.</p></div></a>
+                    <a class="work-card" href="Project9.html"><img src="WarOnWaterGameplay.png" alt="War On Water gameplay"><div class="work-copy"><span class="work-type">Team Unity project / Gameplay systems</span><h3>War On Water</h3><p>A survivor-like where I led gameplay systems, upgrades, interface flow and technical integration across the combat loop.</p></div></a>
+                    <a class="work-card" href="Project2.html"><img src="GOUCover.png" alt="Ghost Of Us cover art"><div class="work-copy"><span class="work-type">Narrative adventure / Systems design</span><h3>Ghost Of Us</h3><p>Party control, quests, inventory and reactive world-state systems across hand-crafted spaces.</p></div></a>
+                    <a class="work-card" href="Project3.html"><img src="Project3CoverFull.jpg" alt="Lost Kingdoms RPG environment"><div class="work-copy"><span class="work-type">Solo Unity project / Systems-heavy RPG</span><h3>Lost Kingdoms</h3><p>An ambitious RPG prototype connecting kingdom building, procedural expeditions, party progression, resource loops and long-form combat systems.</p></div></a>
+                </div>
             </div>
         </section>
 
-        <!-- CONTACT -->
-        <section id="contact" class="scroll-target">
-            <h2>Get In Touch</h2>
-            <p class="section-subtitle">Best contact for portfolio, freelance, and full-time opportunities.</p>
-            <div class="contact-links">
-                <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email Nicholas</a>
+        <section class="home-section" id="archive">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">04 / Project archive</span>
+                        <h2>More work &amp;<br><span class="section-accent">visual development.</span></h2>
+                    </div>
+                    <p>Smaller games, prototypes, illustration and 3D work remain available without competing with the flagship narrative.</p>
+                </div>
+                <div class="archive-panel">
+                    <div class="archive-list">
+                        <a class="archive-link" href="Project7.html"><span class="archive-number">01</span><span class="archive-name">Idle Combat Demo</span><span class="archive-type">Browser progression game</span></a>
+                        <a class="archive-link" href="Project5.html"><span class="archive-number">02</span><span class="archive-name">Annie’s Quest</span><span class="archive-type">2D action platformer</span></a>
+                        <a class="archive-link" href="Project1.html"><span class="archive-number">03</span><span class="archive-name">Trash Through The Dimensions</span><span class="archive-type">Narrative adventure</span></a>
+                        <a class="archive-link" href="Project6.html"><span class="archive-number">04</span><span class="archive-name">Fruit Merge</span><span class="archive-type">WebGL puzzle game</span></a>
+                        <a class="archive-link" href="Project4.html"><span class="archive-number">05</span><span class="archive-name">Ghost Protocol</span><span class="archive-type">Character &amp; combat study</span></a>
+                        <a class="archive-link" href="OtherProjects.html"><span class="archive-number">06</span><span class="archive-name">3D &amp; Other Projects</span><span class="archive-type">Maya / Substance / Unreal</span></a>
+                    </div>
+                    <a class="archive-feature" href="illustrations.html">
+                        <img src="rr1.jpg" alt="Illustration portfolio artwork">
+                        <div class="archive-feature-copy"><span class="work-type">Illustration portfolio</span><h3>Character &amp; world art</h3><p>Concept pieces, character-focused illustration and supporting visuals created for games and original worlds.</p></div>
+                    </a>
+                </div>
             </div>
         </section>
-
     </main>
 
-    <footer>
-        <p>&copy; 2026 Nicholas Morris</p>
-    </footer>
+    <section class="contact-section" id="contact">
+        <div class="contact-copy">
+            <p class="eyebrow" style="justify-content:center;">Nicholas Morris / Game developer</p>
+            <h2>Let’s build<br>something playable.</h2>
+            <p>For game development roles, collaboration, freelance work or questions about Iron Remnant, email is the best way to reach me.</p>
+            <div class="contact-actions">
+                <a class="button" href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i> Email Nicholas</a>
+                <a class="button secondary" href="Project10.html"><i class="fa-solid fa-arrow-right"></i> Explore Iron Remnant</a>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const targets = document.querySelectorAll('.scroll-target');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                });
-            }, { threshold: 0.1 });
-            targets.forEach(target => observer.observe(target));
-        });
-    </script>
+    <footer class="home-footer">
+        <p>&copy; 2026 Nicholas Morris</p>
+        <p>Gameplay systems &amp; technical design / Unity &amp; C#</p>
+    </footer>
 </body>
 </html>

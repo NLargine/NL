@@ -248,6 +248,9 @@
         }
         .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .media-note { display: flex; justify-content: space-between; gap: 25px; margin-top: 15px; color: #77888c; font-size: .73rem; letter-spacing: .06em; text-transform: uppercase; }
+        #overview .media-note span { font-size: 0; }
+        #overview .media-note span:first-child::after { content: "Tutorial and controls testing"; font-size: .73rem; }
+        #overview .media-note span:last-child::after { content: "Earlier development footage \2014 the current build has expanded significantly"; font-size: .73rem; }
 
         .loop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; counter-reset: loop; }
         .loop-card {
@@ -310,6 +313,9 @@
 
         .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
         .tool-card { background: var(--ir-panel); border: 1px solid var(--ir-line); overflow: hidden; }
+        .tool-image { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--ir-line); background: #0b1013; }
+        .tool-image img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; cursor: zoom-in; filter: saturate(.82); transition: filter .3s ease, transform .3s ease; }
+        .tool-image:hover img { filter: saturate(1); transform: scale(1.015); }
         .tool-placeholder { min-height: 300px; position: relative; padding: 24px; background: #0b1013; border-bottom: 1px solid var(--ir-line); }
         .placeholder-bar { height: 31px; display: flex; align-items: center; justify-content: space-between; padding: 0 11px; border: 1px solid #344249; color: #87999d; font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; }
         .placeholder-body { display: grid; grid-template-columns: 108px 1fr; gap: 10px; margin-top: 10px; height: 180px; }
@@ -336,6 +342,13 @@
         .operation-copy h3 { margin: 8px 0 11px; color: #fff; font: 700 clamp(2.2rem, 4vw, 3.6rem)/.9 var(--ir-heading); text-transform: uppercase; }
         .operation-copy p { max-width: 500px; margin: 0 0 20px; color: #b7c1c3; font-size: .88rem; }
         .operation-link { color: var(--ir-rust); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+
+        .development-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .development-card { padding: 0; background: var(--ir-panel); border: 1px solid var(--ir-line); overflow: hidden; }
+        .development-card .video-frame { border: 0; box-shadow: none; }
+        .development-copy { padding: 24px 27px 27px; }
+        .development-copy h3 { margin: 0 0 8px; color: #fff; font: 700 1.5rem var(--ir-heading); text-transform: uppercase; }
+        .development-copy p { margin: 0; color: var(--ir-muted); font-size: .88rem; }
 
         .status-panel { display: grid; grid-template-columns: .8fr 1.2fr; border: 1px solid var(--ir-line); background: var(--ir-panel); }
         .status-title { padding: clamp(38px, 5vw, 65px); background: linear-gradient(145deg, rgba(103,213,223,.09), transparent); }
@@ -391,7 +404,7 @@
             .ir-hero { min-height: 820px; padding: 120px 20px 70px; }
             .ir-hero::before { background: linear-gradient(0deg, var(--ir-ink), rgba(4,7,9,.65) 76%, rgba(4,7,9,.5)); }
             .ir-hero h1 { font-size: clamp(4.5rem, 25vw, 7rem); }
-            .proof-strip, .loop-grid, .tool-grid, .operations-grid { grid-template-columns: 1fr; }
+            .proof-strip, .loop-grid, .tool-grid, .operations-grid, .development-grid { grid-template-columns: 1fr; }
             .proof-item, .proof-item:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--ir-line); }
             .proof-item:last-child { border-bottom: 0; }
             .page-shell { padding: 0 18px; }
@@ -466,7 +479,7 @@
                     <p>Iron Remnant asks the player to operate at two scales at once: survive as a capable third-person combatant, then step back just far enough to shape the army, economy and fortifications around them. <strong>Every layer feeds the next fight.</strong></p>
                 </div>
                 <div class="video-frame">
-                    <iframe src="https://www.youtube.com/embed/QjHI7TN7y6U" title="Iron Remnant gameplay overview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/QjHI7TN7y6U" title="Iron Remnant tutorial and controls testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div class="media-note"><span>Gameplay overview</span><span>Earlier development footage — current build has expanded significantly</span></div>
             </div>
@@ -621,19 +634,11 @@
                 </div>
                 <div class="tool-grid">
                     <article class="tool-card">
-                        <div class="tool-placeholder" aria-label="Placeholder for a future Game Data Lab screenshot">
-                            <div class="placeholder-bar"><span>Last Stand / Game Data Lab</span><i class="fa-solid fa-database"></i></div>
-                            <div class="placeholder-body"><div class="placeholder-nav"><div class="placeholder-line active"></div><div class="placeholder-line"></div><div class="placeholder-line"></div><div class="placeholder-line"></div><div class="placeholder-line"></div></div><div class="placeholder-main"><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span></div></div>
-                            <span class="capture-badge"><i class="fa-solid fa-camera"></i> Screenshot placeholder</span>
-                        </div>
+                        <figure class="tool-image"><img class="lightbox-trigger" src="GameLab.png" alt="Iron Remnant Game Data Lab editor tool showing save data and inventory state" tabindex="0"></figure>
                         <div class="tool-copy"><h3>Game Data Lab</h3><p>A central interface for inspecting profiles, inventory, quests, scene flags and runtime state, with validation and guarded data-application workflows.</p><div class="tag-list"><span>State inspection</span><span>Validation</span><span>Safe apply</span><span>Backups</span></div></div>
                     </article>
                     <article class="tool-card">
-                        <div class="tool-placeholder" aria-label="Placeholder for a future Equipment Set Stat Visualizer screenshot">
-                            <div class="placeholder-bar"><span>Equipment Set Stat Visualizer</span><i class="fa-solid fa-chart-line"></i></div>
-                            <div class="placeholder-body"><div class="placeholder-nav"><div class="placeholder-line"></div><div class="placeholder-line active"></div><div class="placeholder-line"></div><div class="placeholder-line"></div><div class="placeholder-line"></div></div><div class="placeholder-main"><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span><span class="placeholder-cell"></span></div></div>
-                            <span class="capture-badge"><i class="fa-solid fa-camera"></i> Screenshot placeholder</span>
-                        </div>
+                        <figure class="tool-image"><img class="lightbox-trigger" src="EquipmentStatVisualiser.png" alt="Iron Remnant Equipment Set Stat Visualizer editor tool showing derived stat breakdowns" tabindex="0"></figure>
                         <div class="tool-copy"><h3>Equipment Set Visualizer</h3><p>A balancing workspace for complete gear sets, level allocations, direct and derived statistics, combat score and copyable breakdowns.</p><div class="tag-list"><span>Buildcraft</span><span>Derived stats</span><span>Combat rating</span><span>Balance analysis</span></div></div>
                     </article>
                 </div>
@@ -654,6 +659,31 @@
                         <div class="status-row"><strong><span class="status-dot wip"></span>Final integration</strong><span>Dialogue and linking quests are being completed to connect the mission flow.</span></div>
                         <div class="status-row"><strong><span class="status-dot wip"></span>Wider game</strong><span>Additional missions and further rooms within the Asgard remain in production beyond the demo scope.</span></div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section class="ir-section" id="development">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">09 / Development testing</span>
+                        <h2>Built, tested<br><span class="section-kicker">and iterated.</span></h2>
+                    </div>
+                    <p>These short captures show work-in-progress testing environments used to validate player controls, combat interactions and mission systems before they become finished campaign content.</p>
+                </div>
+                <div class="development-grid">
+                    <article class="development-card">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/SPuM5kSatUg" title="Iron Remnant Sicily Campaign mission testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="development-copy"><h3>Sicily Campaign</h3><p>Initial mission testing focused on encounter flow, combat and campaign progression.</p></div>
+                    </article>
+                    <article class="development-card">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/rd7FG625t9c" title="Iron Remnant simulation room and slingshot course testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="development-copy"><h3>Simulation room &amp; slingshot course</h3><p>Editor-testing footage of a simulation-room course used to validate movement, interactions and the slingshot sequence.</p></div>
+                    </article>
+                    <article class="development-card">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/5Q_DDNXOc_U" title="Iron Remnant Augusta Port Sicily Campaign testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="development-copy"><h3>Augusta Port</h3><p>Sicily Campaign testing at Augusta Port, checking the mission space, encounter flow and surrounding systems.</p></div>
+                    </article>
                 </div>
             </div>
         </section>

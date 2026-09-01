@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Iron Remnant is a large-scale sci-fi action strategy game developed solo by Nicholas Morris in Unity.">
     <meta name="robots" content="noindex">
+    <meta property="og:title" content="Iron Remnant | Nicholas Morris">
+    <meta property="og:description" content="A solo-developed action strategy RPG about fighting on the front line and building the war machine behind it.">
+    <meta property="og:image" content="IronRemnant-MainCapsuleUpdated.png">
     <title>Iron Remnant | Nicholas Morris</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -364,9 +367,10 @@
         .status-dot.wip { background: var(--ir-rust); box-shadow: 0 0 12px rgba(228,113,62,.45); }
 
         .final-cta { position: relative; overflow: hidden; padding: 120px 30px; text-align: center; border-top: 1px solid var(--ir-line); background: #090d10; }
-        .final-cta::before { content: ""; position: absolute; inset: 0; opacity: .18; background: url('IronRemnantBG2.png') center/cover; filter: grayscale(1); }
+        .final-cta::before { content: ""; position: absolute; inset: 0; opacity: .2; background: url('HeaderCapsule.png') center/cover; filter: grayscale(1); }
         .final-cta::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(7,10,13,.55), #070a0d 75%); }
         .final-content { position: relative; z-index: 2; max-width: 830px; margin: 0 auto; }
+        .steam-capsule { display: block; width: min(462px, 100%); margin: 0 auto 30px; border: 1px solid rgba(157,193,198,.3); box-shadow: 0 20px 55px rgba(0,0,0,.35); }
         .final-cta h2 { margin: 10px 0 18px; padding: 0; border: 0; color: #fff; font: 800 clamp(3.5rem, 8vw, 7.6rem)/.82 var(--ir-heading); text-transform: uppercase; }
         .final-cta p { max-width: 650px; margin: 0 auto 28px; color: #b7c3c5; }
         .final-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
@@ -445,14 +449,14 @@
     </nav>
 
     <header class="ir-hero">
-        <img class="hero-image" src="IronRemnantBG2.png" alt="Iron Remnant soldiers and machinery on a hostile science-fiction battlefield">
+        <img class="hero-image" src="IronRemnant-Annie_LessGrid2kp.png" alt="Annie firing twin pistols in the Iron Remnant battlefield">
         <div class="hero-content">
             <p class="eyebrow">Solo-developed in Unity</p>
             <h1>Iron<br>Remnant</h1>
-            <p class="hero-deck"><strong>Fight on the front line. Build the war machine behind it.</strong> A top down action strategy game where direct combat, troop command, base construction and a reactive enemy operate on the same battlefield.</p>
+            <p class="hero-deck"><strong>Fight on the front line. Build the war machine behind it.</strong> A third-person action strategy game where direct combat, troop command, base construction and a reactive enemy operate on the same battlefield.</p>
             <div class="hero-actions">
                 <a class="button" href="#overview"><i class="fa-solid fa-play"></i> Watch gameplay</a>
-                <span class="button secondary disabled" aria-disabled="true" title="Steam page link will be added when available"><i class="fa-brands fa-steam"></i> Steam page coming soon</span>
+                <a class="button secondary" href="https://store.steampowered.com/app/5180570/Iron_Remnant/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Wishlist on Steam</a>
             </div>
             <div class="hero-status" aria-label="Project summary">
                 <span><i class="fa-solid fa-user-gear"></i> Design, programming &amp; production</span>
@@ -479,9 +483,9 @@
                     <p>Iron Remnant asks the player to operate at two scales at once: survive as a capable third-person combatant, then step back just far enough to shape the army, economy and fortifications around them. <strong>Every layer feeds the next fight.</strong></p>
                 </div>
                 <div class="video-frame">
-                    <iframe src="https://www.youtube.com/embed/QjHI7TN7y6U" title="Iron Remnant tutorial and controls testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/SPuM5kSatUg" title="Iron Remnant Sicily Campaign mission testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <div class="media-note"><span>Gameplay overview</span><span>Earlier development footage — current build has expanded significantly</span></div>
+                <div class="media-note"><span>Sicily Campaign mission testing</span><span>Initial mission implementation and encounter flow</span></div>
             </div>
         </section>
 
@@ -559,9 +563,9 @@
                     <p>The player is not a detached cursor. They move through the same space as their troops and buildings, switching between direct action and tactical intent without leaving the battlefield.</p>
                 </div>
                 <div class="command-grid">
-                    <article class="command-card"><img  src="ir_tutorial_selecting_troops.png" alt="Selecting multiple troops in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Select &amp; organise</h3><p>Marquee selection and squad-aware commands make larger allied forces manageable during live combat.</p></div></article>
-                    <article class="command-card"><img  src="ir_tutorial_building.png" alt="Building placement interface in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Fortify the field</h3><p>Construction tools let the player turn captured ground into a defensible and productive position.</p></div></article>
-                    <article class="command-card"><img  src="ir_tutorial_orbitals.png" alt="Calling an orbital ability in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Escalate</h3><p>Orbital barrages, air support and reinforcements give the player high-impact answers to battlefield pressure.</p></div></article>
+                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_selecting_troops.png" alt="Selecting multiple troops in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Select &amp; organise</h3><p>Marquee selection and squad-aware commands make larger allied forces manageable during live combat.</p></div></article>
+                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_building.png" alt="Building placement interface in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Fortify the field</h3><p>Construction tools let the player turn captured ground into a defensible and productive position.</p></div></article>
+                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_orbitals.png" alt="Calling an orbital ability in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Escalate</h3><p>Orbital barrages, air support and reinforcements give the player high-impact answers to battlefield pressure.</p></div></article>
                 </div>
             </div>
         </section>
@@ -597,7 +601,7 @@
                     <p>Between operations, the Asgard acts as a home base for mission selection, quests, party management, inventory, equipment and simulation. The campaign map ties individual missions into a larger territorial war.</p>
                 </div>
                 <div class="asgard-layout">
-                    <div class="asgard-image"><img src="ir_asgard.png" alt="Asgard home base environment from Iron Remnant" tabindex="0"></div>
+                    <div class="asgard-image"><img class="lightbox-trigger" src="ir_asgard.png" alt="Asgard home base environment from Iron Remnant" tabindex="0"></div>
                     <div class="asgard-sidebar">
                         <article class="asgard-card"><i class="fa-solid fa-map-location-dot"></i><h3>Campaign map</h3><p>Select territories, track their state and launch operations across a connected war.</p></article>
                         <article class="asgard-card"><i class="fa-solid fa-list-check"></i><h3>Quest network</h3><p>Mission chains and narrative links carry progression between the base and battlefield.</p></article>
@@ -673,8 +677,8 @@
                 </div>
                 <div class="development-grid">
                     <article class="development-card">
-                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/SPuM5kSatUg" title="Iron Remnant Sicily Campaign mission testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-                        <div class="development-copy"><h3>Sicily Campaign</h3><p>Initial mission testing focused on encounter flow, combat and campaign progression.</p></div>
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/QjHI7TN7y6U" title="Iron Remnant tutorial and controls testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="development-copy"><h3>Tutorial testing</h3><p>Earlier tutorial and controls testing showing the onboarding flow and interaction foundations.</p></div>
                     </article>
                     <article class="development-card">
                         <div class="video-frame"><iframe src="https://www.youtube.com/embed/rd7FG625t9c" title="Iron Remnant simulation room and slingshot course testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
@@ -692,13 +696,14 @@
     <section class="final-cta" id="demo">
         <div class="final-content">
             <p class="eyebrow" style="justify-content:center;">The next operation</p>
+            <img class="steam-capsule" src="SmallCapsule.png" alt="Iron Remnant Steam capsule artwork" loading="lazy">
             <h2>Prepare for<br>deployment.</h2>
-            <p>Iron Remnant is being prepared for a Steam Next Fest demo. The final public link will be added here as soon as the store page is ready.</p>
+            <p>Iron Remnant is being prepared for a Steam Next Fest demo. Wishlist the game now and follow the store page for the public build.</p>
             <div class="final-actions">
-                <span class="button disabled" aria-disabled="true"><i class="fa-brands fa-steam"></i> Next Fest demo coming soon</span>
+                <a class="button" href="https://store.steampowered.com/app/5180570/Iron_Remnant/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Wishlist on Steam</a>
                 <a class="button secondary" href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i> Contact Nicholas</a>
             </div>
-            <div class="placeholder-note">Steam destination intentionally left as a placeholder</div>
+            <div class="placeholder-note">Steam page live · Next Fest demo in preparation</div>
         </div>
     </section>
 

@@ -1,3 +1,4 @@
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -251,6 +252,60 @@
         }
         .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
         .media-note { display: flex; justify-content: space-between; gap: 25px; margin-top: 15px; color: #77888c; font-size: .73rem; letter-spacing: .06em; text-transform: uppercase; }
+        .showcase-panel {
+            overflow: hidden;
+            border: 1px solid var(--ir-line);
+            background:
+                linear-gradient(145deg, rgba(23,33,39,.98), rgba(8,12,15,.98));
+            box-shadow: 0 30px 90px rgba(0,0,0,.32);
+        }
+        .showcase-panel .video-frame { border: 0; box-shadow: none; }
+        .showcase-copy {
+            display: grid;
+            grid-template-columns: minmax(0, .72fr) minmax(340px, 1.28fr);
+            gap: clamp(28px, 5vw, 72px);
+            align-items: start;
+            padding: clamp(32px, 5vw, 58px);
+            border-top: 1px solid var(--ir-line);
+        }
+        .showcase-copy h3 {
+            margin: 8px 0 0;
+            color: #fff;
+            font: 700 clamp(2.15rem, 4.6vw, 4rem)/.9 var(--ir-heading);
+            text-transform: uppercase;
+        }
+        .showcase-copy p { margin: 0; color: var(--ir-muted); }
+        .showcase-copy strong { color: var(--ir-cream); }
+        .showcase-eyebrow {
+            color: var(--ir-rust);
+            font: 700 .72rem var(--ir-heading);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+        .showcase-points {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            margin-top: 22px;
+            background: var(--ir-line);
+            border: 1px solid var(--ir-line);
+        }
+        .showcase-point {
+            padding: 18px;
+            background: #0c1216;
+        }
+        .showcase-point strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--ir-cyan-bright);
+            font: 700 1.05rem var(--ir-heading);
+            text-transform: uppercase;
+        }
+        .showcase-point span {
+            color: #89999c;
+            font-size: .78rem;
+            line-height: 1.45;
+        }
         #overview .media-note span { font-size: 0; }
         #overview .media-note span:first-child::after { content: "Tutorial and controls testing"; font-size: .73rem; }
         #overview .media-note span:last-child::after { content: "Earlier development footage \2014 the current build has expanded significantly"; font-size: .73rem; }
@@ -392,6 +447,7 @@
             .proof-item:nth-child(2) { border-right: 0; }
             .proof-item:nth-child(-n+2) { border-bottom: 1px solid var(--ir-line); }
             .section-head { grid-template-columns: 1fr; gap: 22px; }
+            .showcase-copy { grid-template-columns: 1fr; gap: 22px; }
             .loop-grid { grid-template-columns: repeat(2, 1fr); }
             .command-grid { grid-template-columns: 1fr; }
             .command-card { min-height: auto; display: grid; grid-template-columns: .85fr 1.15fr; }
@@ -408,7 +464,7 @@
             .ir-hero { min-height: 820px; padding: 120px 20px 70px; }
             .ir-hero::before { background: linear-gradient(0deg, var(--ir-ink), rgba(4,7,9,.65) 76%, rgba(4,7,9,.5)); }
             .ir-hero h1 { font-size: clamp(4.5rem, 25vw, 7rem); }
-            .proof-strip, .loop-grid, .tool-grid, .operations-grid, .development-grid { grid-template-columns: 1fr; }
+            .proof-strip, .loop-grid, .tool-grid, .operations-grid, .development-grid, .showcase-points { grid-template-columns: 1fr; }
             .proof-item, .proof-item:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--ir-line); }
             .proof-item:last-child { border-bottom: 0; }
             .page-shell { padding: 0 18px; }
@@ -570,11 +626,75 @@
             </div>
         </section>
 
+        <section class="ir-section" id="crowd-navigation">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">05 / Crowd navigation</span>
+                        <h2>One command.<br><span class="section-kicker">One hundred agents.</span></h2>
+                    </div>
+                    <p>A large RTS army should not fall apart the moment terrain becomes difficult. This stress test sends <strong>100 independently animated Spine 2D troops</strong> through dense obstacles and a severe bottleneck from a single move command.</p>
+                </div>
+
+                <article class="showcase-panel">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/tZK6k0MLXq8" title="Iron Remnant 100-agent crowd navigation stress test" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="showcase-copy">
+                        <div>
+                            <span class="showcase-eyebrow">Navigation engineering showcase</span>
+                            <h3>Built for the ugly cases.</h3>
+                        </div>
+                        <div>
+                            <p>The movement system combines global pathfinding with local crowd behaviour so a dense force can split around obstacles, negotiate narrow passages, queue when space disappears and spread out again on the far side. The goal is not simply to find a valid path, but to maintain forward progress when many large agents all want the same constrained route.</p>
+                            <div class="showcase-points">
+                                <div class="showcase-point"><strong>100+ agents</strong><span>Simultaneous troop movement under heavy crowd density.</span></div>
+                                <div class="showcase-point"><strong>Bottlenecks</strong><span>Congestion, queuing and local avoidance through narrow gaps.</span></div>
+                                <div class="showcase-point"><strong>Single order</strong><span>The formation resolves the obstacle field without scripted routes or manual shepherding.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="ir-section" id="ares">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">06 / ARES boss encounter</span>
+                        <h2>Boss mechanics<br><span class="section-kicker">from the ground up.</span></h2>
+                    </div>
+                    <p><strong>ARES is a work-in-progress boss encounter</strong> built as a complete gameplay, AI, animation, audio and VFX showcase. The fight combines bespoke attacks with party members that recognise danger and attempt to evade it with deliberately imperfect reaction timing.</p>
+                </div>
+
+                <article class="showcase-panel">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/2AfxOVql8Rc" title="Iron Remnant ARES boss fight showcase" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="showcase-copy">
+                        <div>
+                            <span class="showcase-eyebrow">Solo-developed encounter</span>
+                            <h3>ARES — WIP boss fight.</h3>
+                        </div>
+                        <div>
+                            <p>I created and animated ARES, programmed his unique attacks and encounter mechanics, upgraded the party AI so companions recognise and evade incoming attacks with realistic delayed responses, and produced the boss audio, ability shaders and party VFX. <strong>All implementation shown in this encounter was completed by me.</strong></p>
+                            <div class="showcase-points">
+                                <div class="showcase-point"><strong>Boss AI</strong><span>Multiple bespoke attacks, mechanics and encounter behaviours.</span></div>
+                                <div class="showcase-point"><strong>Party AI</strong><span>Threat-aware dodging with intentionally delayed, human-like responses.</span></div>
+                                <div class="showcase-point"><strong>Full pipeline</strong><span>Programming, animation, audio, shaders, effects and integration.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <section class="ir-section" id="enemy">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">05 / Enemy simulation</span>
+                        <span class="section-index">07 / Enemy simulation</span>
                         <h2>An enemy that<br><span class="section-kicker">builds back.</span></h2>
                     </div>
                     <p>Opposition is driven by an economy and construction layer of its own. Enemy infrastructure can expand, route pressure, upgrade, rebuild and deploy heavier responses as its strategic position changes.</p>
@@ -595,7 +715,7 @@
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">06 / Campaign layer</span>
+                        <span class="section-index">08 / Campaign layer</span>
                         <h2>Return to<br><span class="section-kicker">Asgard.</span></h2>
                     </div>
                     <p>Between operations, the Asgard acts as a home base for mission selection, quests, party management, inventory, equipment and simulation. The campaign map ties individual missions into a larger territorial war.</p>
@@ -615,7 +735,7 @@
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">07 / Mission case studies</span>
+                        <span class="section-index">09 / Mission case studies</span>
                         <h2>The game in<br><span class="section-kicker">operation.</span></h2>
                     </div>
                     <p>These focused pages document specific missions and update milestones. They are the close-up evidence; this page remains the complete picture of Iron Remnant.</p>
@@ -631,7 +751,7 @@
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">08 / Production engineering</span>
+                        <span class="section-index">10 / Production engineering</span>
                         <h2>Tools built<br><span class="section-kicker">to ship.</span></h2>
                     </div>
                     <p>A project of this scale needs more than runtime code. I built purpose-made Unity editor tools to inspect game state, validate content and balance interconnected progression systems safely.</p>
@@ -670,7 +790,7 @@
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">09 / Development testing</span>
+                        <span class="section-index">11 / Development testing</span>
                         <h2>Built, tested<br><span class="section-kicker">and iterated.</span></h2>
                     </div>
                     <p>These short captures show work-in-progress testing environments used to validate player controls, combat interactions and mission systems before they become finished campaign content.</p>
@@ -757,3 +877,5 @@
     </script>
 </body>
 </html>
+
+```

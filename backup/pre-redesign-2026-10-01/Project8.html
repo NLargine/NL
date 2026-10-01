@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Annie's Last Stand | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url('LastStand.jpg') no-repeat center center/cover;
+        }
+
+        .pdf-viewer {
+            display: none;
+            margin-top: 30px;
+            width: 100%;
+            height: 800px;
+        }
+
+        .pdf-viewer embed {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #2a2a2a;
+            border-radius: 8px;
+        }
+
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .enemy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .enemy-table th {
+            text-align: left;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            padding: 10px 12px;
+            border-bottom: 2px solid rgba(0, 191, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .enemy-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #2a2a2a;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        .enemy-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .enemy-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .enemy-name-cell {
+            font-family: var(--font-heading);
+            color: var(--text-color) !important;
+            font-size: 0.95rem !important;
+            white-space: nowrap;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-ground {
+            background: rgba(220, 80, 60, 0.15);
+            color: #e07060;
+            border: 1px solid rgba(220, 80, 60, 0.3);
+        }
+
+        .tag-air {
+            background: rgba(0, 191, 255, 0.12);
+            color: var(--accent-color);
+            border: 1px solid rgba(0, 191, 255, 0.25);
+        }
+
+        .tag-supp {
+            background: rgba(160, 160, 160, 0.1);
+            color: #888;
+            border: 1px solid rgba(160, 160, 160, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .enemy-table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Annie's Last Stand</h1>
+            <h2>Top-down shooter and base defence hybrid built solo in Unity</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/G3MxWsafqdk" title="Annie's Last Stand gameplay trailer" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p>Annie's Last Stand is a top-down shoot 'em up fused with real-time base defence, built solo in Unity in just under three weeks as a first-cycle university project (IGB100, QUT). Players take control of Annie, a lone elite operative defending the world's last nuclear silo against relentless waves of autonomous mechs.</p>
+                <p>Defeated enemies drop Scrap, which can be spent at an in-world shop on weapon upgrades, deployable turrets, and wall repairs, creating a constant tension between immediate survival and long-term investment. Enemies never stop coming, so the player is always balancing positioning, target priority, and base maintenance.</p>
+                <p>The project aimed to merge SHMUP intensity with a more strategic defensive loop. It pushed well beyond the original assignment scope and received a High Distinction.</p>
+                <div class="project-links">
+                    <a href="https://nikolargine.itch.io/annies-last-stand" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                    </a>
+                    <button class="btn-view-pdf" data-pdf-src="IGB100_Cycle1DesignDocumentation.pdf" type="button">
+                        <i class="fa-solid fa-file-pdf"></i> View PDF
+                    </button>
+                </div>
+                <div class="pdf-viewer"></div>
+            </div>
+        </section>
+
+        <section id="role" class="scroll-target">
+            <h2>My Role: Solo Developer</h2>
+            <div class="content-card">
+                <p>I designed and implemented the game end to end across a three-week development cycle, taking it from concept through polish, balancing, and final submission.</p>
+                <ul class="role-list">
+                    <li>Gameplay Programming &amp; Systems Design (C#)</li>
+                    <li>SHMUP combat system with 360-degree free-aim mouse targeting</li>
+                    <li>Enemy AI across 8 distinct enemy types with different roles and behaviours</li>
+                    <li>Scrap economy, shop system, and upgrade progression</li>
+                    <li>Deployable turret and trap placement system</li>
+                    <li>Multi-objective generator defence with launch progress meter</li>
+                    <li>UI/UX Design &amp; HUD Implementation</li>
+                    <li>Game &amp; Level Design</li>
+                    <li>Character and narrative design</li>
+                    <li>Asset creation and animation</li>
+                    <li>Shader graphs and particle systems</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tech" class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C#</span></div>
+                    <div class="tech-item"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-gamepad"></i><span>Physics2D</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-layer-group"></i><span>Tilemaps</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-image"></i><span>Photoshop</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="deep-dive" class="scroll-target">
+            <h2>Key Systems</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Combat &amp; Projectile System</h3>
+                        <p>The player uses 360-degree free-aim combat with mouse tracking to control aim direction. A bullet pooling manager supports high projectile counts without costly runtime instantiation, while multiple weapons expose different fire rates, damage profiles, and spread patterns that can all be upgraded through the scrap economy.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="combat_screenshot.png" alt="Combat screenshot showing projectile-heavy gameplay and mouse-aimed firing" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Enemy AI &amp; Spawning</h3>
+                        <p>Rather than rely on discrete rounds, enemies spawn continuously from drop ships at the edges of the map to maintain pressure. Each enemy type has a different tactical role: ground units pathfind toward objectives, aerial units ignore wall layouts entirely, and heavier units focus on structural damage.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="enemy_screenshot.png" alt="Enemy spawning and battlefield pressure screenshot" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Scrap Economy &amp; Shop System</h3>
+                        <p>Enemies drop Scrap on death, which is collected by proximity and spent at an in-world shop near the generators. Players use it on turrets, ammo, healing, and weapon upgrades, creating a real risk-reward loop between pushing forward for resources and falling back to reinforce the defence line.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Multi-Point Generator Defence</h3>
+                        <p>Four generators simultaneously contribute passive progress toward launch. Each one can be independently damaged or destroyed, so the player is constantly choosing where to stand, where to spend scrap, and how to place walls and turrets when no single defensive position can protect every objective at once.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="generators_screenshot.png" alt="Generator defence layout showing multiple defendable objectives" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="enemies" class="scroll-target">
+            <h2>Enemy Roster</h2>
+            <div class="content-card">
+                <p>Seven enemy types plus a support unit create layered threat management across both ground and aerial dimensions.</p>
+                <table class="enemy-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Enemy</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag tag-ground">Ground</span></td>
+                            <td class="enemy-name-cell">Basic Mechs</td>
+                            <td>Backbone of every assault. Slow, bullet-heavy pressure units.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-ground">Ground</span></td>
+                            <td class="enemy-name-cell">Laser Mechs</td>
+                            <td>Faster, harder-hitting units that quickly become priority targets.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-ground">Ground</span></td>
+                            <td class="enemy-name-cell">Tanks</td>
+                            <td>High-durability siege units that punish weak defensive lines.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-ground">Ground</span></td>
+                            <td class="enemy-name-cell">Transport Units</td>
+                            <td>Front-line reinforcements that expand the active threat count.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-air">Aerial</span></td>
+                            <td class="enemy-name-cell">Basic Drones</td>
+                            <td>Fast aerial units that bypass walls and force repositioning.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-air">Aerial</span></td>
+                            <td class="enemy-name-cell">Heavy Drones</td>
+                            <td>Tougher flying enemies that absorb more punishment before going down.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-air">Aerial</span></td>
+                            <td class="enemy-name-cell">Gunships</td>
+                            <td>High-threat aerial attackers with strong range, durability, and generator pressure.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-supp">Support</span></td>
+                            <td class="enemy-name-cell">Drop Ships</td>
+                            <td>Spawn support that keeps the battlefield under constant pressure.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="design" class="scroll-target">
+            <h2>Design Decisions</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Player Experience Goals</h3>
+                        <p>Three core goals shaped the project: urgency, tension, and strategic mastery. The game needed to feel hectic and pressuring in the moment, but still reward deliberate upgrades, movement decisions, and defensive planning.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Key Revisions</h3>
+                        <p>The initial concept proposed a squad-based system with AI-controlled allies. Feedback showed that managing multiple agents would dilute the core SHMUP emphasis on precise movement and dodging, so the design pivoted to a single-player lone-operative structure with strategic depth coming from deployable walls and turrets.</p>
+                        <p>A second revision replaced the original wave-based spawning structure with continuous pressure after feedback showed that downtime between waves reduced urgency and undermined the intended last-stand fantasy.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="revision_screenshot.png" alt="Design revision notes and iteration materials" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="scroll-target">
+            <h2>Screenshots</h2>
+            <div class="gallery-grid">
+                <img src="combat_screenshot.png" alt="Annie firing into a dense combat encounter" loading="lazy">
+                <img src="enemy_screenshot.png" alt="Enemy formation and battlefield pressure in Annie's Last Stand" loading="lazy">
+                <img src="generators_screenshot.png" alt="Generator defence lane and base layout" loading="lazy">
+                <img src="revision_screenshot.png" alt="Iteration and revision materials from development" loading="lazy">
+                <img src="LastStandSS5.png" alt="Moment-to-moment gameplay near the defensive perimeter" loading="lazy">
+                <img src="LastStandSS6.png" alt="Late-stage battle showing the game's defensive systems in action" loading="lazy">
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for taking a look. If you'd like to talk about the project or my broader portfolio, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nicholas Morris</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-grid img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+
+            galleryImages.forEach(img => img.addEventListener('click', (e) => {
+                lightbox.classList.add('active');
+                lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
+            }));
+
+            lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target !== lightboxImg) {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            const viewButtons = document.querySelectorAll('.btn-view-pdf');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const contentCard = button.closest('.content-card');
+                    const pdfViewer = contentCard.querySelector('.pdf-viewer');
+                    const pdfSrc = button.getAttribute('data-pdf-src');
+
+                    if (pdfViewer.innerHTML !== '') {
+                        pdfViewer.innerHTML = '';
+                        pdfViewer.style.display = 'none';
+                        button.innerHTML = '<i class="fa-solid fa-file-pdf"></i> View PDF';
+                        return;
+                    }
+
+                    pdfViewer.innerHTML = `
+                        <embed
+                            src="${pdfSrc}"
+                            type="application/pdf"
+                            width="100%"
+                            height="100%"
+                        >
+                    `;
+                    pdfViewer.style.display = 'block';
+                    button.innerHTML = '<i class="fa-solid fa-xmark"></i> Close PDF';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

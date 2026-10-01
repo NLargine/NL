@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Nicholas Morris | Game Developer Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url('TTTDCover.png') no-repeat center center/cover;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Trash Through the Dimensions</h1>
+            <h2>Game jam narrative adventure with Live2D characters and fast-turnaround systems work</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <div class="video-wrapper">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/L5GFKvOxC2A" title="Trash Through the Dimensions gameplay trailer" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p>Trash Through the Dimensions is a narrative adventure created for the Ubisoft 2024 Game Jam. It combines inter-dimensional exploration, dialogue-driven storytelling, top-down gameplay, and a distinctive “trash-zapping” combat hook into a compact but feature-rich prototype.</p>
+                <p>What makes it stand out as a portfolio piece is the speed of its delivery: the project had to balance high-quality character presentation with a very compressed implementation window for the rest of the game.</p>
+                <div class="project-links">
+                    <a href="https://nikolargine.itch.io/trashthroughthedimensions" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="role" class="scroll-target">
+            <h2>My Role: Solo Developer</h2>
+            <div class="content-card">
+                <p>I built the project solo for the Ubisoft 2024 Game Jam over 14 days. A major part of that schedule went into the Live2D pipeline, which meant the rest of the game's systems, level content, and integration work had to be delivered under extreme time pressure.</p>
+                <ul class="role-list">
+                    <li>Gameplay Programming &amp; Systems Design (C#)</li>
+                    <li>UI/UX Design &amp; Implementation</li>
+                    <li>Spine2D animated characters</li>
+                    <li>Live2D animated characters</li>
+                    <li>Story and dialogue implementation</li>
+                    <li>Sound design &amp; integration</li>
+                    <li>Game and level design</li>
+                    <li>Project management &amp; version control (Git)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tech" class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C#</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-palette"></i><span>Live2D</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cube"></i><span>Spine2D</span></div>
+                    <div class="tech-item"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-image"></i><span>Photoshop</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="deep-dive" class="scroll-target">
+            <h2>Key Systems</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Core Progression Systems</h3>
+                        <p>To support a story-driven adventure across multiple scenes, the project needed a quest system tied to save/load state. That foundation lets the player move through narrative content without the game feeling like a sequence of isolated jam scenes.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="TrashThroughTheDimensionsGIF1.gif" alt="Quest and progression systems from Trash Through the Dimensions" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Character Asset Pipeline</h3>
+                        <p>I created the Live2D and Spine2D playable characters that define much of the project's identity. In a jam context, that asset pipeline was both a creative opportunity and a scheduling challenge, because visual quality had to coexist with fast gameplay implementation.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="TrashThroughTheDimensionsGIF2.gif" alt="Live2D and Spine2D character presentation from the game" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="design" class="scroll-target">
+            <h2>Design Decisions</h2>
+            <div class="content-card">
+                <p>This project is a good example of prioritization under constraint. High-quality character art was a key part of the vision, which meant dedicating the first nine days to illustrating and rigging four full-body Live2D characters.</p>
+                <p>That left only the final five days for core gameplay systems, story implementation, level work, audio integration, and the Spine2D playable character setup. The result is less about raw feature count and more about the ability to make fast, targeted decisions under jam pressure.</p>
+            </div>
+        </section>
+
+        <section id="showcase" class="scroll-target">
+            <h2>Gameplay Showcase</h2>
+            <div class="content-card">
+                <p>The four-part showcase below reflects that compressed production schedule: a full playable game built around narrative pacing, exploration, combat, and presentation-heavy character work within a jam timeframe.</p>
+                <div class="video-grid">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/pkB-eifmIas" title="Trash Through the Dimensions playthrough part 1" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/oxgf-YsKEtA" title="Trash Through the Dimensions playthrough part 2" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/wWPWz_zUGeo" title="Trash Through the Dimensions playthrough part 3" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/hyY52um1RsA" title="Trash Through the Dimensions playthrough part 4" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="scroll-target">
+            <h2>In-Game Gallery</h2>
+            <div class="content-card">
+                <div class="gallery-grid">
+                    <img src="Project1G1.png" alt="Trash Through the Dimensions screenshot showing exploration and dialogue" loading="lazy">
+                    <img src="Project1G2.png" alt="Trash Through the Dimensions screenshot showing world traversal or interaction" loading="lazy">
+                    <img src="Project1G3.png" alt="Trash Through the Dimensions screenshot showing visual presentation and scene composition" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for checking out Trash Through the Dimensions. Feel free to reach out if you'd like to talk through the game jam process or the systems behind the build.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nicholas Morris</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            targets.forEach(target => {
+                observer.observe(target);
+            });
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-grid img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+
+            const openLightbox = (e) => {
+                lightbox.classList.add('active');
+                lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
+            };
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+            };
+
+            galleryImages.forEach(img => {
+                img.addEventListener('click', openLightbox);
+            });
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target !== lightboxImg) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

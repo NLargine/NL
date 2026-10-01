@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Fruit Merge | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url("FruitMergeThumb.png") center/cover no-repeat;
+            filter: brightness(0.4);
+        }
+
+        .gif-wrapper img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-background"></div>
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+        </a>
+        <div class="hero-content">
+            <h1>Fruit Merge</h1>
+            <h2>Casual physics puzzle game built for clean browser play</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <div class="gif-wrapper">
+                    <img src="FruitMergeGameplay.gif" alt="Fruit Merge gameplay showing the merge and stack loop" loading="lazy">
+                </div>
+
+                <p>Fruit Merge is a casual physics-based puzzle game where players drop fruit into a container, merge matching pieces into larger ones, and manage risk as the pile grows toward a lose state.</p>
+                <p>The project was built as a small but complete solo game with a focus on readable mechanics, satisfying feedback, and WebGL-friendly browser performance.</p>
+
+                <div class="project-links">
+                    <a href="https://nikolargine.itch.io/fruit-merge" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="scroll-target">
+            <h2>My Role</h2>
+            <div class="content-card">
+                <p>I developed Fruit Merge solo from prototype to release, using it as a focused exercise in gameplay readability, physics tuning, and browser deployment.</p>
+                <ul class="role-list">
+                    <li>Solo development from prototype to release</li>
+                    <li>Gameplay and physics programming (Unity / C#)</li>
+                    <li>Merge systems and scoring logic</li>
+                    <li>UI, audio feedback, and polish</li>
+                    <li>WebGL optimization and deployment</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="scroll-target">
+            <h2>Key Features</h2>
+            <div class="content-card">
+                <ul class="feature-list">
+                    <li>Physics-based merge mechanics with combo scoring</li>
+                    <li>Clear danger feedback tied to lose conditions</li>
+                    <li>Object pooling for browser performance</li>
+                    <li>Fully playable in-browser</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C#</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cubes"></i><span>2D Physics</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-globe"></i><span>WebGL</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-music"></i><span>Audio</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for checking out Fruit Merge. Feel free to reach out if you'd like to talk about the puzzle design or browser deployment side of the build.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nicholas Morris</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll(".scroll-target");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(s => observer.observe(s));
+        });
+    </script>
+</body>
+</html>

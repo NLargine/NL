@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Starfall Legacy | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url('media/sf/hub_camp.webp') no-repeat center center/cover;
+        }
+
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .deep-dive .media-content video {
+            display: block;
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            box-shadow: 0 18px 46px rgba(0, 0, 0, .5);
+        }
+
+        .wip-note {
+            margin-top: 20px;
+            padding: 14px 16px;
+            border-left: 3px solid var(--rust);
+            background: rgba(255, 255, 255, 0.03);
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Starfall Legacy</h1>
+            <h2>A co-op anime action roguelite in Unreal Engine 5, C++ and the Gameplay Ability System. Work in progress.</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <p>Starfall Legacy is a solo project I'm building in Unreal Engine 5. You play Annie, a witch who casts with her hands, alongside Alice, a support mage. A second player can take Alice in online co-op; otherwise she fights beside you as an AI companion. Runs move through rooms of enemy waves, elites and a boss, and the cards you pick between rooms build your spells. Between runs you return to a camp hub to upgrade, change your loadout and talk to the party.</p>
+                <p>All my earlier projects are Unity and C#. Starfall Legacy is my move to Unreal and C++: networked gameplay built on GAS from the start, a toon look, and editor tooling that generates the AI trees and animation graphs from code.</p>
+                <p class="wip-note"><strong>Status:</strong> playable prototype. The full run loop works end to end in co-op (hub → rooms → elite → boss → back to camp). Most art is placeholder or marketplace content, and animation is still being replaced.</p>
+            </div>
+        </section>
+
+        <section id="systems" class="scroll-target">
+            <h2>What's Built So Far</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Combat on GAS</h3>
+                        <p>Light and heavy attacks, a tap-to-dash and hold-to-Blink dodge, and four equipped skills on two swappable bars, all as Gameplay Abilities with client prediction so they feel responsive in co-op. Hits run through one damage path with local hit-stop, knockback via root motion and poise breaks.</p>
+                        <p>Fire, ice and lightning stack statuses that trigger reactions such as Overload, Shatter and Spread. Elite enemies carry an element shield that only its weakness breaks quickly.</p>
+                    </div>
+                    <div class="media-content">
+                        <video src="media/sf/elite_room.mp4" poster="media/sf/elite_room.webp" autoplay muted loop playsinline preload="metadata" aria-label="Annie and Alice fighting an elite wave, ending on the card reward screen"></video>
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Hub Camp</h3>
+                        <p>The camp between runs has a portal with a co-op ready check, a shrine for permanent upgrades, a loadout board, a training dummy with a DPS readout and a campfire for visual-novel style conversations written in Ink.</p>
+                    </div>
+                    <div class="media-content">
+                        <video src="media/sf/hub_camp.mp4" poster="media/sf/hub_camp.webp" autoplay muted loop playsinline preload="metadata" aria-label="Annie walking through the hub camp past the campfire and training dummy"></video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="scroll-target">
+            <h2>Systems Overview</h2>
+            <div class="content-card">
+                <ul class="role-list">
+                    <li>Roguelite run director: rooms, waves, elites, rewards, door votes, XP and run summary</li>
+                    <li>Card rewards: blessings that hook into damage, statuses and mana, plus skill rank-ups</li>
+                    <li>Party of two with swapping, and a StateTree companion AI that heals, wards and follows orders</li>
+                    <li>Enemy roster with telegraphed attacks, and a two-phase golem boss with breakable armour</li>
+                    <li>Lock-on camera, soft aim and strafing locomotion driven by motion matching</li>
+                    <li>Data-table balance that writes every tuning number into class defaults at startup</li>
+                    <li>Substrate toon shading and an outline post-process for the anime look</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tech" class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-solid fa-gamepad"></i><span>Unreal Engine 5</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C++</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-wand-sparkles"></i><span>Gameplay Ability System</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-network-wired"></i><span>Replication &amp; Prediction</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-diagram-project"></i><span>StateTree AI</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-person-running"></i><span>Motion Matching</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-fire"></i><span>Niagara</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cube"></i><span>Blender &amp; VRoid</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Starfall Legacy is still early. If you'd like to hear more about how it's built, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nicholas Morris</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
+        });
+    </script>
+</body>
+</html>

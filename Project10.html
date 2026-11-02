@@ -485,6 +485,9 @@
             html { scroll-behavior: auto; }
             *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
         }
+        .mission-notes { max-width: 1180px; margin: 0 auto; padding: 0 28px 48px; }
+        .mission-notes p { margin: 0; color: var(--muted); font-size: .88rem; }
+        .mission-notes a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
     </style>
 </head>
 <body>
@@ -497,7 +500,6 @@
         </a>
         <div class="nav-links">
             <a href="#systems">Systems</a>
-            <a href="#operations">Operations</a>
             <a href="#tools">Tools</a>
             <a href="#demo">Demo</a>
         </div>
@@ -730,27 +732,11 @@
             </div>
         </section>
 
-        <section class="ir-section" id="operations">
-            <div class="page-shell">
-                <div class="section-head">
-                    <div>
-                        <span class="section-index">09 / Mission case studies</span>
-                        <h2>The game in<br><span class="section-kicker">operation.</span></h2>
-                    </div>
-                    <p>These focused pages document specific missions and update milestones. They are the close-up evidence; this page remains the complete picture of Iron Remnant.</p>
-                </div>
-                <div class="operations-grid">
-                    <a class="operation-card" href="Project11.html"><img src="M2_Breakout_RR.png" alt="Iron Remnant Breakout mission"><div class="operation-copy"><span class="operation-code">Operation 02 / Mission case study</span><h3>Breakout</h3><p>A fort-defence operation that brings troop roles, defensive construction, enemy mechs, warships, orbital support and large-battle optimisation together.</p><span class="operation-link">Read the Breakout case study <i class="fa-solid fa-arrow-right"></i></span></div></a>
-                    <a class="operation-card" href="iron_remnant_counter_attack_mission.html"><img src="M3_IntoTheCaves.png" alt="Iron Remnant Counter Attack mission"><div class="operation-copy"><span class="operation-code">Operation 03 / Mission case study</span><h3>Counter Attack</h3><p>A focused look at turning defence into a combined-arms push through an enemy-controlled battlefield.</p><span class="operation-link">Read the Counter Attack case study <i class="fa-solid fa-arrow-right"></i></span></div></a>
-                </div>
-            </div>
-        </section>
-
         <section class="ir-section" id="tools">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">10 / Production engineering</span>
+                        <span class="section-index">09 / Production engineering</span>
                         <h2>Tools built<br><span class="section-kicker">to ship.</span></h2>
                     </div>
                     <p>A project of this scale needs more than runtime code. I built purpose-made Unity editor tools to inspect game state, validate content and balance interconnected progression systems safely.</p>
@@ -789,7 +775,7 @@
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">11 / Development testing</span>
+                        <span class="section-index">10 / Development testing</span>
                         <h2>Built, tested<br><span class="section-kicker">and iterated.</span></h2>
                     </div>
                     <p>These short captures show work-in-progress testing environments used to validate player controls, combat interactions and mission systems before they become finished campaign content.</p>
@@ -810,6 +796,9 @@
                 </div>
             </div>
         </section>
+        <aside class="mission-notes" aria-label="Earlier mission write-ups">
+            <p>Earlier mission write-ups (may be out of date): <a href="Project11.html">Breakout</a> · <a href="iron_remnant_counter_attack_mission.html">Counter Attack</a></p>
+        </aside>
     </main>
 
     <section class="final-cta" id="demo">

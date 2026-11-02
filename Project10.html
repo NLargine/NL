@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Iron Remnant is a large-scale sci-fi action strategy game developed solo by Nicholas Morris in Unity.">
+    <meta name="description" content="Iron Remnant is a solo-developed action-RTS made in Unity by Nicholas Morris. The free demo is out now on Steam.">
     <meta name="robots" content="noindex">
     <meta property="og:title" content="Iron Remnant | Nicholas Morris">
-    <meta property="og:description" content="A solo-developed action strategy RPG about fighting on the front line and building the war machine behind it.">
+    <meta property="og:description" content="A solo-developed action-RTS: fight on the front line, build the war machine behind it. Free demo out now on Steam.">
     <meta property="og:image" content="IronRemnant-MainCapsuleUpdated.png">
     <title>Iron Remnant | Nicholas Morris</title>
 
@@ -20,474 +20,313 @@
         :root {
             --ir-ink: #070a0d;
             --ir-panel: #11171c;
-            --ir-panel-2: #172127;
+            --ir-panel-2: #0c1216;
             --ir-line: rgba(157, 193, 198, 0.19);
             --ir-cyan: #67d5df;
             --ir-cyan-bright: #a9f8ff;
             --ir-rust: #e4713e;
+            --ir-green: #7acb9b;
             --ir-cream: #e8e3d6;
             --ir-muted: #a4b2b5;
+            --ir-dim: #77888c;
             --ir-heading: "Barlow Condensed", sans-serif;
             --ir-body: "Inter", sans-serif;
+            --nav-h: 64px;
         }
 
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
         body {
             margin: 0;
-            background:
-                radial-gradient(circle at 12% 12%, rgba(103, 213, 223, 0.06), transparent 28rem),
-                var(--ir-ink);
+            background: radial-gradient(circle at 12% 12%, rgba(103, 213, 223, 0.06), transparent 28rem), var(--ir-ink);
             color: var(--ir-cream);
             font-family: var(--ir-body);
             font-size: 17px;
             line-height: 1.68;
             overflow-x: hidden;
         }
-
         a { color: inherit; }
         img { max-width: 100%; }
-        button, a { -webkit-tap-highlight-color: transparent; }
+        p { margin: 0; }
 
-        .skip-link {
-            position: fixed;
-            top: 8px;
-            left: 8px;
-            padding: 10px 15px;
-            background: var(--ir-cyan-bright);
-            color: var(--ir-ink);
-            transform: translateY(-150%);
-            z-index: 1001;
-        }
+        .skip-link { position: fixed; top: 8px; left: 8px; padding: 10px 15px; background: var(--ir-cyan-bright); color: var(--ir-ink); transform: translateY(-150%); z-index: 1001; }
         .skip-link:focus { transform: none; }
 
+        /* ---------- Navigation: transparent over the hero, solid once scrolled ---------- */
         .site-nav {
-            position: absolute;
+            position: fixed;
             inset: 0 0 auto 0;
-            height: 76px;
+            height: var(--nav-h);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 clamp(20px, 4vw, 62px);
-            z-index: 20;
-            border-bottom: 1px solid rgba(255,255,255,.12);
-            background: linear-gradient(to bottom, rgba(3,6,8,.84), transparent);
+            gap: 24px;
+            padding: 0 clamp(18px, 4vw, 56px);
+            z-index: 50;
+            border-bottom: 1px solid transparent;
+            background: linear-gradient(to bottom, rgba(3,6,8,.8), transparent);
+            transition: background .25s ease, border-color .25s ease;
         }
+        .site-nav.scrolled { background: rgba(7,10,13,.94); border-color: var(--ir-line); backdrop-filter: blur(8px); }
         .site-nav a { text-decoration: none; }
-        .brand-lockup {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #fff;
-            font-family: var(--ir-heading);
-            font-weight: 700;
-            letter-spacing: .09em;
-            text-transform: uppercase;
-        }
-        .brand-mark {
-            width: 31px;
-            aspect-ratio: 1;
-            display: grid;
-            place-items: center;
-            border: 1px solid var(--ir-cyan);
-            color: var(--ir-cyan-bright);
-            transform: rotate(45deg);
-        }
-        .brand-mark i { transform: rotate(-45deg); font-size: .85rem; }
-        .nav-links { display: flex; align-items: center; gap: 26px; }
-        .nav-links a {
-            color: rgba(255,255,255,.72);
-            font-size: .78rem;
-            font-weight: 700;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-        }
-        .nav-links a:hover, .nav-links a:focus-visible { color: var(--ir-cyan-bright); }
+        .brand-lockup { display: flex; align-items: center; gap: 12px; color: #fff; font-family: var(--ir-heading); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; white-space: nowrap; }
+        .brand-mark { width: 29px; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--ir-cyan); color: var(--ir-cyan-bright); transform: rotate(45deg); }
+        .brand-mark i { transform: rotate(-45deg); font-size: .8rem; }
+        .nav-links { display: flex; align-items: center; gap: 22px; }
+        .nav-links a { color: rgba(255,255,255,.72); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+        .nav-links a:hover, .nav-links a:focus-visible, .nav-links a.active { color: var(--ir-cyan-bright); }
+        .nav-links .nav-cta { padding: 8px 13px; border: 1px solid var(--ir-cyan); color: var(--ir-cyan-bright); }
 
+        /* ---------- Hero ---------- */
         .ir-hero {
-            min-height: min(960px, 100svh);
+            min-height: min(900px, 100svh);
             position: relative;
             display: grid;
             align-items: end;
             overflow: hidden;
             isolation: isolate;
-            padding: 130px clamp(20px, 7vw, 120px) clamp(70px, 9vh, 110px);
+            padding: 120px clamp(20px, 7vw, 120px) clamp(80px, 10vh, 120px);
         }
-        .hero-image {
-            position: absolute;
-            inset: 0;
-            z-index: -3;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            filter: saturate(.72) contrast(1.08);
-        }
+        .hero-image { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; filter: saturate(.75) contrast(1.08); }
         .ir-hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: -2;
-            background:
-                linear-gradient(90deg, rgba(4,7,9,.97) 0%, rgba(4,7,9,.72) 43%, rgba(4,7,9,.18) 74%),
-                linear-gradient(0deg, var(--ir-ink) 0%, transparent 39%, rgba(0,0,0,.2) 100%);
+            content: ""; position: absolute; inset: 0; z-index: -2;
+            background: linear-gradient(90deg, rgba(4,7,9,.97) 0%, rgba(4,7,9,.72) 43%, rgba(4,7,9,.15) 76%), linear-gradient(0deg, var(--ir-ink) 0%, transparent 38%);
         }
-        .ir-hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            opacity: .22;
-            background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-            background-size: 48px 48px;
-            mask-image: linear-gradient(to right, black, transparent 80%);
-        }
-        .hero-content { max-width: 850px; }
-        .eyebrow {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            margin: 0 0 18px;
-            color: var(--ir-cyan-bright);
-            font-size: .75rem;
-            font-weight: 700;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-        }
-        .eyebrow::before { content: ""; width: 38px; height: 2px; background: var(--ir-rust); }
-        .ir-hero h1 {
-            margin: 0;
-            max-width: 780px;
-            color: #fff;
-            font: 800 clamp(4.8rem, 12vw, 10.5rem)/.76 var(--ir-heading);
-            letter-spacing: -.035em;
-            text-transform: uppercase;
-            text-shadow: 0 12px 44px rgba(0,0,0,.6);
-        }
-        .hero-deck {
-            max-width: 720px;
-            margin: 26px 0 0;
-            color: #d6dee0;
-            font-size: clamp(1.05rem, 1.65vw, 1.35rem);
-            line-height: 1.55;
-        }
+        .hero-content { max-width: 820px; }
+        .release-badge { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; padding: 8px 13px; border: 1px solid rgba(122,203,155,.5); background: rgba(10,22,16,.7); color: #bdf0cf; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ir-green); box-shadow: 0 0 0 0 rgba(122,203,155,.6); animation: pulse 2s infinite; }
+        @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(122,203,155,0); } 100% { box-shadow: 0 0 0 0 rgba(122,203,155,0); } }
+        .ir-hero h1 { margin: 0; color: #fff; font: 800 clamp(4.4rem, 11vw, 9.5rem)/.78 var(--ir-heading); letter-spacing: -.035em; text-transform: uppercase; text-shadow: 0 12px 44px rgba(0,0,0,.6); }
+        .hero-deck { max-width: 680px; margin-top: 24px; color: #d6dee0; font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.55; }
         .hero-deck strong { color: #fff; }
-        .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 34px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
         .button {
-            min-height: 52px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 11px;
-            padding: 13px 22px;
-            border: 1px solid var(--ir-cyan);
-            background: var(--ir-cyan);
-            color: #071013;
-            text-decoration: none;
-            font-size: .78rem;
-            font-weight: 800;
-            letter-spacing: .09em;
-            text-transform: uppercase;
-            transition: transform .2s ease, background .2s ease, color .2s ease;
+            min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 12px 22px; border: 1px solid var(--ir-cyan); background: var(--ir-cyan); color: #071013;
+            text-decoration: none; font-size: .78rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease;
         }
         .button:hover, .button:focus-visible { background: var(--ir-cyan-bright); transform: translateY(-2px); }
         .button.secondary { background: rgba(7,10,13,.62); color: #fff; border-color: rgba(255,255,255,.4); }
-        .button.secondary:hover { border-color: #fff; background: rgba(255,255,255,.1); }
-        .button.disabled { cursor: not-allowed; opacity: .62; }
-        .hero-status {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 24px;
-            margin-top: 28px;
-            color: rgba(255,255,255,.66);
-            font-size: .77rem;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-        }
-        .hero-status span { display: flex; align-items: center; gap: 8px; }
-        .hero-status i { color: var(--ir-rust); }
+        .button.secondary:hover, .button.secondary:focus-visible { border-color: #fff; background: rgba(255,255,255,.1); }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px; color: rgba(255,255,255,.66); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+        .hero-meta span { display: flex; align-items: center; gap: 8px; }
+        .hero-meta i { color: var(--ir-rust); }
 
-        .proof-strip {
-            position: relative;
-            z-index: 3;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            max-width: 1180px;
-            margin: -32px auto 0;
-            background: rgba(17,23,28,.96);
-            border: 1px solid var(--ir-line);
-            box-shadow: 0 24px 80px rgba(0,0,0,.35);
-        }
-        .proof-item { min-height: 104px; padding: 23px 27px; border-right: 1px solid var(--ir-line); }
+        .proof-strip { position: relative; z-index: 3; display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1180px; margin: -34px auto 0; background: rgba(17,23,28,.97); border: 1px solid var(--ir-line); box-shadow: 0 24px 80px rgba(0,0,0,.35); }
+        .proof-item { padding: 20px 26px; border-right: 1px solid var(--ir-line); }
         .proof-item:last-child { border-right: 0; }
-        .proof-label { display: block; color: var(--ir-muted); font-size: .67rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-        .proof-value { display: block; margin-top: 5px; color: #fff; font: 700 1.38rem/1.15 var(--ir-heading); text-transform: uppercase; }
+        .proof-label { display: block; color: var(--ir-muted); font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+        .proof-value { display: block; margin-top: 4px; color: #fff; font: 700 1.3rem/1.15 var(--ir-heading); text-transform: uppercase; }
+        .proof-value.live { color: #bdf0cf; }
 
+        /* ---------- Section scaffolding ---------- */
         .page-shell { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
-        .ir-section { padding: 112px 0; opacity: 1; transform: none; }
+        .ir-section { padding: 96px 0; }
         .ir-section + .ir-section { border-top: 1px solid var(--ir-line); }
-        .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 500px); gap: 70px; align-items: end; margin-bottom: 44px; }
-        .section-index { color: var(--ir-rust); font: 700 .8rem var(--ir-heading); letter-spacing: .17em; text-transform: uppercase; }
-        .ir-section h2 {
-            margin: 8px 0 0;
-            padding: 0;
-            border: 0;
-            color: #fff;
-            font: 700 clamp(2.7rem, 5.5vw, 5.15rem)/.92 var(--ir-heading);
-            letter-spacing: -.02em;
-            text-transform: uppercase;
-        }
-        .section-head p { margin: 0; color: var(--ir-muted); font-size: 1.04rem; }
-        .section-head p strong { color: var(--ir-cream); }
+        .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 520px); gap: 60px; align-items: end; margin-bottom: 40px; }
+        .section-index { color: var(--ir-rust); font: 700 .78rem var(--ir-heading); letter-spacing: .17em; text-transform: uppercase; }
+        .ir-section h2 { margin: 8px 0 0; padding: 0; border: 0; color: #fff; font: 700 clamp(2.4rem, 4.6vw, 4.1rem)/.94 var(--ir-heading); letter-spacing: -.015em; text-transform: uppercase; }
         .section-kicker { color: var(--ir-cyan-bright); }
+        .section-head p { color: var(--ir-muted); font-size: 1.02rem; }
+        .section-head p strong { color: var(--ir-cream); }
+        .subhead { margin: 56px 0 18px; color: #fff; font: 700 1.5rem var(--ir-heading); letter-spacing: .02em; text-transform: uppercase; }
 
-        .video-frame {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            border: 1px solid var(--ir-line);
-            background: #000;
-            overflow: hidden;
-            box-shadow: 0 28px 70px rgba(0,0,0,.33);
-        }
+        .card { background: var(--ir-panel); border: 1px solid var(--ir-line); }
+        .card h3 { margin: 0 0 8px; color: #fff; font: 700 1.4rem/1.05 var(--ir-heading); text-transform: uppercase; }
+        .card p { color: var(--ir-muted); font-size: .9rem; }
+        .card-icon { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 20px; color: var(--ir-cyan-bright); border: 1px solid rgba(103,213,223,.45); }
+
+        .bullet-list { display: grid; gap: 9px; list-style: none; padding: 0; margin: 20px 0 0; }
+        .bullet-list li { display: flex; gap: 11px; color: #c5ced0; font-size: .9rem; }
+        .bullet-list li::before { content: "\f054"; font: 900 .62rem "Font Awesome 6 Free"; color: var(--ir-cyan); margin-top: 7px; }
+        .bullet-list strong { color: #fff; font-weight: 600; }
+
+        .video-frame { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--ir-line); background: #000; overflow: hidden; box-shadow: 0 28px 70px rgba(0,0,0,.33); }
         .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-        .media-note { display: flex; justify-content: space-between; gap: 25px; margin-top: 15px; color: #77888c; font-size: .73rem; letter-spacing: .06em; text-transform: uppercase; }
-        .showcase-panel {
-            overflow: hidden;
-            border: 1px solid var(--ir-line);
-            background:
-                linear-gradient(145deg, rgba(23,33,39,.98), rgba(8,12,15,.98));
-            box-shadow: 0 30px 90px rgba(0,0,0,.32);
-        }
-        .showcase-panel .video-frame { border: 0; box-shadow: none; }
-        .showcase-copy {
-            display: grid;
-            grid-template-columns: minmax(0, .72fr) minmax(340px, 1.28fr);
-            gap: clamp(28px, 5vw, 72px);
-            align-items: start;
-            padding: clamp(32px, 5vw, 58px);
-            border-top: 1px solid var(--ir-line);
-        }
-        .showcase-copy h3 {
-            margin: 8px 0 0;
-            color: #fff;
-            font: 700 clamp(2.15rem, 4.6vw, 4rem)/.9 var(--ir-heading);
-            text-transform: uppercase;
-        }
-        .showcase-copy p { margin: 0; color: var(--ir-muted); }
-        .showcase-copy strong { color: var(--ir-cream); }
-        .showcase-eyebrow {
-            color: var(--ir-rust);
-            font: 700 .72rem var(--ir-heading);
-            letter-spacing: .16em;
-            text-transform: uppercase;
-        }
-        .showcase-points {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            margin-top: 22px;
-            background: var(--ir-line);
-            border: 1px solid var(--ir-line);
-        }
-        .showcase-point {
-            padding: 18px;
-            background: #0c1216;
-        }
-        .showcase-point strong {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--ir-cyan-bright);
-            font: 700 1.05rem var(--ir-heading);
-            text-transform: uppercase;
-        }
-        .showcase-point span {
-            color: #89999c;
-            font-size: .78rem;
-            line-height: 1.45;
-        }
-        #overview .media-note span { font-size: 0; }
-        #overview .media-note span:first-child::after { content: "Tutorial and controls testing"; font-size: .73rem; }
-        #overview .media-note span:last-child::after { content: "Earlier development footage \2014 the current build has expanded significantly"; font-size: .73rem; }
+        .media-note { margin-top: 13px; color: var(--ir-dim); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
 
+        .lightbox-trigger { cursor: zoom-in; }
+
+        /* ---------- At a glance ---------- */
+        .stat-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 28px; background: var(--ir-line); border: 1px solid var(--ir-line); }
+        .stat { padding: 22px 20px; background: var(--ir-panel-2); }
+        .stat strong { display: block; color: var(--ir-cyan-bright); font: 700 2.2rem/1 var(--ir-heading); }
+        .stat span { display: block; margin-top: 8px; color: var(--ir-muted); font-size: .78rem; line-height: 1.4; }
+
+        /* ---------- Role / disciplines ---------- */
+        .role-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; }
+        .role-copy { padding: clamp(28px, 4vw, 48px); }
+        .role-copy p + p { margin-top: 14px; }
+        .role-copy p { color: var(--ir-muted); }
+        .role-copy p strong { color: var(--ir-cream); }
+        .chip-panel { padding: clamp(28px, 4vw, 40px); }
+        .chip-panel h3 { margin-bottom: 18px; }
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chips span { padding: 7px 11px; border: 1px solid var(--ir-line); background: rgba(103,213,223,.04); color: #cdd8da; font-size: .74rem; font-weight: 600; letter-spacing: .04em; }
+
+        /* ---------- Core loop ---------- */
         .loop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; counter-reset: loop; }
-        .loop-card {
-            min-height: 260px;
-            padding: 27px;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(145deg, rgba(23,33,39,.96), rgba(11,15,18,.96));
-            border: 1px solid var(--ir-line);
-            counter-increment: loop;
-        }
-        .loop-card::after { content: "0" counter(loop); position: absolute; right: 14px; bottom: -24px; color: rgba(255,255,255,.035); font: 800 7rem var(--ir-heading); }
-        .loop-icon { width: 44px; height: 44px; display: grid; place-items: center; color: var(--ir-cyan-bright); border: 1px solid rgba(103,213,223,.45); }
-        .loop-card h3 { margin: 45px 0 10px; color: #fff; font: 700 1.6rem var(--ir-heading); text-transform: uppercase; }
-        .loop-card p { margin: 0; color: var(--ir-muted); font-size: .91rem; }
+        .loop-card { position: relative; overflow: hidden; padding: 26px; background: linear-gradient(145deg, rgba(23,33,39,.96), rgba(11,15,18,.96)); counter-increment: loop; }
+        .loop-card::after { content: "0" counter(loop); position: absolute; right: 14px; bottom: -22px; color: rgba(255,255,255,.04); font: 800 6.5rem var(--ir-heading); }
 
-        .system-feature { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 500px; background: var(--ir-panel); border: 1px solid var(--ir-line); }
-        .system-feature + .system-feature { margin-top: 24px; }
-        .system-feature:nth-child(even) .system-copy { order: 2; }
-        .system-feature:nth-child(even) .system-media { order: 1; }
-        .system-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(34px, 5vw, 66px); }
-        .system-number { color: var(--ir-rust); font: 700 .72rem var(--ir-heading); letter-spacing: .16em; text-transform: uppercase; }
-        .system-copy h3 { margin: 12px 0 15px; color: #fff; font: 700 clamp(2rem, 4vw, 3.3rem)/.95 var(--ir-heading); text-transform: uppercase; }
-        .system-copy p { margin: 0; color: var(--ir-muted); }
-        .system-list { display: grid; gap: 10px; list-style: none; padding: 0; margin: 25px 0 0; }
-        .system-list li { display: flex; gap: 11px; color: #c5ced0; font-size: .88rem; }
-        .system-list i { color: var(--ir-cyan); margin-top: 6px; font-size: .68rem; }
-        .system-media { position: relative; min-height: 360px; overflow: hidden; background: #080b0d; }
-        .system-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .system-media::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 70px rgba(0,0,0,.35); pointer-events: none; }
-        .media-label { position: absolute; left: 18px; bottom: 18px; z-index: 2; padding: 7px 11px; background: rgba(4,7,9,.84); color: #d7e2e3; font-size: .67rem; letter-spacing: .1em; text-transform: uppercase; }
+        /* ---------- Feature rows (copy + media) ---------- */
+        .feature-row { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+        .feature-row + .feature-row { margin-top: 22px; }
+        .feature-row.flip .feature-copy { order: 2; }
+        .feature-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(30px, 4.5vw, 58px); }
+        .feature-copy .eyebrow-small { color: var(--ir-rust); font: 700 .72rem var(--ir-heading); letter-spacing: .16em; text-transform: uppercase; }
+        .feature-copy h3 { margin: 10px 0 14px; font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: .95; }
+        .feature-copy > p { font-size: .96rem; }
+        .feature-media { position: relative; min-height: 380px; overflow: hidden; background: #080b0d; }
+        .feature-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+        .feature-media .video-frame { position: absolute; inset: 0; aspect-ratio: auto; border: 0; box-shadow: none; }
+        .media-label { position: absolute; left: 16px; bottom: 16px; z-index: 2; padding: 6px 10px; background: rgba(4,7,9,.85); color: #d7e2e3; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; }
 
-        .command-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .command-card { position: relative; min-height: 420px; overflow: hidden; border: 1px solid var(--ir-line); background: var(--ir-panel); }
-        .command-card img { width: 100%; height: 240px; object-fit: cover; display: block; filter: saturate(.75); transition: transform .4s ease, filter .4s ease; }
-        .command-card:hover img { transform: scale(1.025); filter: saturate(1); }
-        .command-copy { padding: 25px; }
-        .command-copy h3 { margin: 0 0 9px; color: #fff; font: 700 1.55rem var(--ir-heading); text-transform: uppercase; }
-        .command-copy p { margin: 0; color: var(--ir-muted); font-size: .88rem; }
+        /* Looping gameplay clips (Steam store GIFs re-encoded as muted MP4s) */
+        .clip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 22px; }
+        .clip-card { overflow: hidden; }
+        .clip { display: block; width: 100%; aspect-ratio: 1232 / 410; object-fit: cover; background: #000; border-bottom: 1px solid var(--ir-line); }
+        .clip-card .card-body { padding: 20px 22px 22px; }
+        .feature-media.contain { display: flex; align-items: center; min-height: 0; background: #05080a; }
+        .feature-media.contain .clip { border-bottom: 0; }
+        .feature-media.contain .clip.wide { aspect-ratio: 1232 / 694; }
 
-        .adversary-panel { display: grid; grid-template-columns: .9fr 1.1fr; background: linear-gradient(130deg, #15191b, #0b1013); border: 1px solid var(--ir-line); overflow: hidden; }
-        .adversary-copy { padding: clamp(38px, 5vw, 68px); }
-        .adversary-copy h3 { margin: 12px 0 16px; color: #fff; font: 700 clamp(2.4rem, 5vw, 4.5rem)/.91 var(--ir-heading); text-transform: uppercase; }
-        .adversary-copy p { color: var(--ir-muted); }
-        .threat-flow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-        .threat-step { padding: 9px 11px; border: 1px solid rgba(228,113,62,.38); color: #f0b093; font-size: .68rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
-        .threat-arrow { display: grid; place-items: center; color: #6b7779; }
-        .adversary-art { min-height: 500px; position: relative; }
-        .adversary-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .adversary-art::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #111618, transparent 45%), linear-gradient(0deg, rgba(0,0,0,.55), transparent 50%); z-index: 1; }
+        /* Store screenshot gallery */
+        .shot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 28px; }
+        .shot-grid img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--ir-line); filter: saturate(.88); transition: filter .25s ease, transform .25s ease; }
+        .shot-grid img:hover, .shot-grid img:focus-visible { filter: saturate(1); transform: translateY(-2px); }
 
-        .asgard-layout { display: grid; grid-template-columns: 1.35fr .65fr; gap: 24px; }
-        .asgard-image { min-height: 580px; border: 1px solid var(--ir-line); overflow: hidden; }
-        .asgard-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .asgard-sidebar { display: grid; gap: 14px; }
-        .asgard-card { padding: 25px; background: var(--ir-panel); border: 1px solid var(--ir-line); }
-        .asgard-card i { color: var(--ir-cyan); }
-        .asgard-card h3 { margin: 18px 0 8px; color: #fff; font: 700 1.35rem var(--ir-heading); text-transform: uppercase; }
-        .asgard-card p { margin: 0; color: var(--ir-muted); font-size: .85rem; }
+        /* ---------- Showcase (wide video + copy) ---------- */
+        .showcase-panel { overflow: hidden; background: linear-gradient(145deg, rgba(23,33,39,.98), rgba(8,12,15,.98)); }
+        .showcase-panel .video-frame { border: 0; box-shadow: none; }
+        .showcase-copy { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(26px, 5vw, 64px); padding: clamp(28px, 4.5vw, 52px); border-top: 1px solid var(--ir-line); }
+        .showcase-copy h3 { font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: .95; margin-top: 8px; }
+        .showcase-copy p strong { color: var(--ir-cream); }
+        .point-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 22px; background: var(--ir-line); border: 1px solid var(--ir-line); }
+        .point { padding: 16px; background: var(--ir-panel-2); }
+        .point strong { display: block; margin-bottom: 4px; color: var(--ir-cyan-bright); font: 700 1.02rem var(--ir-heading); text-transform: uppercase; }
+        .point span { color: #8d9da0; font-size: .78rem; line-height: 1.45; }
 
-        .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-        .tool-card { background: var(--ir-panel); border: 1px solid var(--ir-line); overflow: hidden; }
+        /* ---------- Enemy AI ---------- */
+        .adversary-panel { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; background: linear-gradient(130deg, #15191b, #0b1013); }
+        .adversary-art { position: relative; min-height: 460px; }
+        .adversary-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .adversary-art::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #121719, transparent 45%); }
+        .threat-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 26px; }
+        .threat-step { padding: 8px 11px; border: 1px solid rgba(228,113,62,.4); color: #f0b093; font-size: .67rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+        .threat-flow i { color: #6b7779; font-size: .7rem; }
+
+        .card-grid { display: grid; gap: 16px; }
+        .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .card-grid .card { padding: 26px; }
+
+        /* ---------- Data section ---------- */
+        .data-hero { overflow: hidden; }
+        .data-hero img { display: block; width: 100%; }
+        .data-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+        .data-pair figure { margin: 0; overflow: hidden; }
+        .data-pair img { display: block; width: 100%; aspect-ratio: 16 / 11; object-fit: cover; object-position: top left; }
+        figcaption { padding: 13px 18px; border-top: 1px solid var(--ir-line); color: var(--ir-dim); font-size: .74rem; letter-spacing: .04em; }
+        .data-copy { margin-top: 22px; }
+
+        /* ---------- Tools ---------- */
+        .tool-card { overflow: hidden; }
         .tool-image { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--ir-line); background: #0b1013; }
-        .tool-image img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; cursor: zoom-in; filter: saturate(.82); transition: filter .3s ease, transform .3s ease; }
+        .tool-image img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; filter: saturate(.85); transition: filter .3s ease, transform .3s ease; }
         .tool-image:hover img { filter: saturate(1); transform: scale(1.015); }
-        .tool-placeholder { min-height: 300px; position: relative; padding: 24px; background: #0b1013; border-bottom: 1px solid var(--ir-line); }
-        .placeholder-bar { height: 31px; display: flex; align-items: center; justify-content: space-between; padding: 0 11px; border: 1px solid #344249; color: #87999d; font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; }
-        .placeholder-body { display: grid; grid-template-columns: 108px 1fr; gap: 10px; margin-top: 10px; height: 180px; }
-        .placeholder-nav, .placeholder-main { border: 1px solid #263239; background: linear-gradient(135deg, rgba(103,213,223,.035), transparent); }
-        .placeholder-nav { padding: 12px 9px; }
-        .placeholder-line { height: 7px; margin-bottom: 10px; background: #243137; }
-        .placeholder-line.active { background: rgba(103,213,223,.5); }
-        .placeholder-main { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; padding: 12px; }
-        .placeholder-cell { border: 1px solid #263239; background: #10171a; }
-        .capture-badge { position: absolute; right: 20px; bottom: 18px; color: #79888b; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; }
-        .tool-copy { padding: 29px; }
-        .tool-copy h3 { margin: 0 0 10px; color: #fff; font: 700 1.75rem var(--ir-heading); text-transform: uppercase; }
-        .tool-copy p { color: var(--ir-muted); font-size: .9rem; }
-        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-        .tag-list span { padding: 6px 9px; border: 1px solid var(--ir-line); color: #b8c5c7; font-size: .65rem; letter-spacing: .06em; text-transform: uppercase; }
+        .tool-card .card-body { padding: 26px; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+        .tag-list span { padding: 5px 9px; border: 1px solid var(--ir-line); color: #b8c5c7; font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; }
 
-        .operations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-        .operation-card { position: relative; min-height: 520px; display: flex; align-items: end; overflow: hidden; border: 1px solid var(--ir-line); text-decoration: none; }
-        .operation-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-        .operation-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(4,7,9,.98), rgba(4,7,9,.18) 72%); }
-        .operation-card:hover img { transform: scale(1.03); }
-        .operation-copy { position: relative; z-index: 2; padding: 35px; }
-        .operation-code { color: var(--ir-cyan-bright); font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-        .operation-copy h3 { margin: 8px 0 11px; color: #fff; font: 700 clamp(2.2rem, 4vw, 3.6rem)/.9 var(--ir-heading); text-transform: uppercase; }
-        .operation-copy p { max-width: 500px; margin: 0 0 20px; color: #b7c1c3; font-size: .88rem; }
-        .operation-link { color: var(--ir-rust); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+        /* ---------- Video gallery ---------- */
+        .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .video-card { overflow: hidden; }
+        .video-card .video-frame { border: 0; border-bottom: 1px solid var(--ir-line); box-shadow: none; }
+        .video-card .card-body { padding: 20px 24px 24px; }
+        .video-card h3 { font-size: 1.3rem; }
+        .coming-soon { display: grid; place-items: center; min-height: 240px; padding: 30px; text-align: center; border-style: dashed; background: transparent; }
+        .coming-soon i { font-size: 1.6rem; color: var(--ir-cyan); margin-bottom: 14px; }
 
-        .development-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-        .development-card { padding: 0; background: var(--ir-panel); border: 1px solid var(--ir-line); overflow: hidden; }
-        .development-card .video-frame { border: 0; box-shadow: none; }
-        .development-copy { padding: 24px 27px 27px; }
-        .development-copy h3 { margin: 0 0 8px; color: #fff; font: 700 1.5rem var(--ir-heading); text-transform: uppercase; }
-        .development-copy p { margin: 0; color: var(--ir-muted); font-size: .88rem; }
-
-        .status-panel { display: grid; grid-template-columns: .8fr 1.2fr; border: 1px solid var(--ir-line); background: var(--ir-panel); }
-        .status-title { padding: clamp(38px, 5vw, 65px); background: linear-gradient(145deg, rgba(103,213,223,.09), transparent); }
-        .status-title .status-pill { display: inline-flex; align-items: center; gap: 9px; padding: 7px 10px; color: #ffc19f; border: 1px solid rgba(228,113,62,.42); font-size: .65rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
-        .status-title h3 { margin: 25px 0 12px; color: #fff; font: 700 clamp(2.5rem, 5vw, 4.3rem)/.9 var(--ir-heading); text-transform: uppercase; }
-        .status-title p { color: var(--ir-muted); }
-        .status-list { display: grid; padding: 22px 35px; }
-        .status-row { display: grid; grid-template-columns: 150px 1fr; gap: 25px; align-items: center; padding: 21px 0; border-bottom: 1px solid var(--ir-line); }
+        /* ---------- Release timeline ---------- */
+        .status-panel { display: grid; grid-template-columns: .8fr 1.2fr; }
+        .status-title { padding: clamp(32px, 5vw, 58px); background: linear-gradient(145deg, rgba(122,203,155,.08), transparent); }
+        .status-pill { display: inline-flex; align-items: center; gap: 9px; padding: 7px 10px; color: #bdf0cf; border: 1px solid rgba(122,203,155,.45); font-size: .65rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+        .status-title h3 { margin: 22px 0 12px; font-size: clamp(2.2rem, 4.4vw, 3.6rem); line-height: .92; }
+        .status-list { padding: 18px 34px; }
+        .status-row { display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--ir-line); }
         .status-row:last-child { border-bottom: 0; }
         .status-row strong { color: #fff; font: 700 1rem var(--ir-heading); letter-spacing: .04em; text-transform: uppercase; }
-        .status-row span { color: var(--ir-muted); font-size: .86rem; }
-        .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: #7acb9b; box-shadow: 0 0 12px rgba(122,203,155,.45); }
+        .status-row span { color: var(--ir-muted); font-size: .88rem; }
+        .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--ir-green); box-shadow: 0 0 12px rgba(122,203,155,.45); }
         .status-dot.wip { background: var(--ir-rust); box-shadow: 0 0 12px rgba(228,113,62,.45); }
 
-        .final-cta { position: relative; overflow: hidden; padding: 120px 30px; text-align: center; border-top: 1px solid var(--ir-line); background: #090d10; }
+        .mission-notes { max-width: 1180px; margin: 0 auto; padding: 0 28px 56px; }
+        .mission-notes p { color: var(--ir-dim); font-size: .86rem; }
+        .mission-notes a { color: var(--ir-cyan); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* ---------- Final CTA / footer ---------- */
+        .final-cta { position: relative; overflow: hidden; padding: 110px 28px; text-align: center; border-top: 1px solid var(--ir-line); background: #090d10; }
         .final-cta::before { content: ""; position: absolute; inset: 0; opacity: .2; background: url('HeaderCapsule.png') center/cover; filter: grayscale(1); }
         .final-cta::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(7,10,13,.55), #070a0d 75%); }
-        .final-content { position: relative; z-index: 2; max-width: 830px; margin: 0 auto; }
-        .steam-capsule { display: block; width: min(462px, 100%); margin: 0 auto 30px; border: 1px solid rgba(157,193,198,.3); box-shadow: 0 20px 55px rgba(0,0,0,.35); }
-        .final-cta h2 { margin: 10px 0 18px; padding: 0; border: 0; color: #fff; font: 800 clamp(3.5rem, 8vw, 7.6rem)/.82 var(--ir-heading); text-transform: uppercase; }
-        .final-cta p { max-width: 650px; margin: 0 auto 28px; color: #b7c3c5; }
+        .final-content { position: relative; z-index: 2; max-width: 780px; margin: 0 auto; }
+        .steam-capsule { display: block; width: min(462px, 100%); margin: 0 auto 28px; border: 1px solid rgba(157,193,198,.3); box-shadow: 0 20px 55px rgba(0,0,0,.35); }
+        .final-cta h2 { margin: 0 0 16px; padding: 0; border: 0; color: #fff; font: 800 clamp(3rem, 7vw, 6.2rem)/.84 var(--ir-heading); text-transform: uppercase; }
+        .final-cta p { max-width: 600px; margin: 0 auto 26px; color: #b7c3c5; }
         .final-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
-        .placeholder-note { margin-top: 15px; color: #68777a; font-size: .67rem; letter-spacing: .08em; text-transform: uppercase; }
 
-        .ir-footer { display: flex; justify-content: space-between; gap: 25px; padding: 35px clamp(20px, 5vw, 70px); color: #778689; border-top: 1px solid var(--ir-line); font-size: .75rem; }
-        .ir-footer p { margin: 0; }
+        .ir-footer { display: flex; justify-content: space-between; gap: 24px; padding: 32px clamp(20px, 5vw, 70px); color: var(--ir-dim); border-top: 1px solid var(--ir-line); font-size: .75rem; }
         .ir-footer a { color: #a9b8ba; text-decoration: none; }
 
         .lightbox { position: fixed; inset: 0; z-index: 1000; display: none; place-items: center; padding: 30px; background: rgba(0,0,0,.94); }
         .lightbox.active { display: grid; }
         .lightbox img { max-width: min(1500px, 94vw); max-height: 90vh; object-fit: contain; }
         .lightbox button { position: absolute; right: 24px; top: 18px; width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.3); background: #0b1013; color: #fff; font-size: 1.3rem; cursor: pointer; }
-        .lightbox-trigger { cursor: zoom-in; }
 
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1080px) {
+            .nav-links a:not(.nav-cta) { display: none; }
+            .stat-grid { grid-template-columns: repeat(3, 1fr); }
+            .card-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 980px) {
-            .nav-links a:not(:last-child) { display: none; }
             .proof-strip { margin: 0; grid-template-columns: repeat(2, 1fr); }
             .proof-item:nth-child(2) { border-right: 0; }
             .proof-item:nth-child(-n+2) { border-bottom: 1px solid var(--ir-line); }
-            .section-head { grid-template-columns: 1fr; gap: 22px; }
-            .showcase-copy { grid-template-columns: 1fr; gap: 22px; }
+            .section-head, .showcase-copy, .role-layout, .status-panel, .adversary-panel { grid-template-columns: 1fr; gap: 22px; }
+            .section-head { gap: 18px; }
             .loop-grid { grid-template-columns: repeat(2, 1fr); }
-            .command-grid { grid-template-columns: 1fr; }
-            .command-card { min-height: auto; display: grid; grid-template-columns: .85fr 1.15fr; }
-            .command-card img { height: 100%; min-height: 260px; }
-            .adversary-panel, .asgard-layout, .status-panel { grid-template-columns: 1fr; }
-            .adversary-art { min-height: 420px; }
-            .asgard-sidebar { grid-template-columns: repeat(3, 1fr); }
+            .feature-row, .feature-row.flip { grid-template-columns: 1fr; }
+            .feature-row.flip .feature-copy { order: 0; }
+            .feature-media { min-height: 0; aspect-ratio: 16 / 10; }
+            .adversary-art { min-height: 340px; }
+            .adversary-art::before { background: linear-gradient(0deg, #121719, transparent 40%); }
+            .card-grid.cols-3 { grid-template-columns: 1fr 1fr; }
         }
-
         @media (max-width: 720px) {
             body { font-size: 16px; }
-            .site-nav { height: 66px; padding: 0 18px; }
+            :root { --nav-h: 58px; }
+            .site-nav { padding: 0 16px; }
             .brand-lockup span:last-child { display: none; }
-            .ir-hero { min-height: 820px; padding: 120px 20px 70px; }
-            .ir-hero::before { background: linear-gradient(0deg, var(--ir-ink), rgba(4,7,9,.65) 76%, rgba(4,7,9,.5)); }
-            .ir-hero h1 { font-size: clamp(4.5rem, 25vw, 7rem); }
-            .proof-strip, .loop-grid, .tool-grid, .operations-grid, .development-grid, .showcase-points { grid-template-columns: 1fr; }
+            .ir-hero { min-height: 760px; padding: 110px 16px 64px; }
+            .ir-hero::before { background: linear-gradient(0deg, var(--ir-ink), rgba(4,7,9,.68) 76%, rgba(4,7,9,.5)); }
+            .page-shell, .mission-notes { padding-left: 16px; padding-right: 16px; }
+            .ir-section { padding: 70px 0; }
+            .shot-grid { grid-template-columns: 1fr 1fr; }
+            .proof-strip, .loop-grid, .clip-grid, .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4, .video-grid, .data-pair, .point-grid { grid-template-columns: 1fr; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
             .proof-item, .proof-item:nth-child(2) { border-right: 0; border-bottom: 1px solid var(--ir-line); }
             .proof-item:last-child { border-bottom: 0; }
-            .page-shell { padding: 0 18px; }
-            .ir-section { padding: 78px 0; }
-            .system-feature, .system-feature:nth-child(even) { grid-template-columns: 1fr; }
-            .system-feature:nth-child(even) .system-copy, .system-feature:nth-child(even) .system-media { order: initial; }
-            .system-media { min-height: 290px; }
-            .command-card { grid-template-columns: 1fr; }
-            .command-card img { min-height: 220px; }
-            .asgard-image { min-height: 400px; }
-            .asgard-sidebar { grid-template-columns: 1fr; }
-            .operation-card { min-height: 440px; }
-            .status-list { padding: 15px 26px; }
-            .status-row { grid-template-columns: 1fr; gap: 7px; }
+            .status-list { padding: 12px 24px; }
+            .status-row { grid-template-columns: 1fr; gap: 4px; }
             .ir-footer { flex-direction: column; }
         }
-
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+            *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
         }
-        .mission-notes { max-width: 1180px; margin: 0 auto; padding: 0 28px 48px; }
-        .mission-notes p { margin: 0; color: var(--muted); font-size: .88rem; }
-        .mission-notes a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
     </style>
 </head>
 <body>
@@ -499,159 +338,174 @@
             <span>Nicholas Morris</span>
         </a>
         <div class="nav-links">
-            <a href="#systems">Systems</a>
+            <a href="#trailer">Trailer</a>
+            <a href="#rts">Gameplay</a>
+            <a href="#enemy">Enemy AI</a>
+            <a href="#story">Story</a>
+            <a href="#data">Data</a>
             <a href="#tools">Tools</a>
-            <a href="#demo">Demo</a>
+            <a href="#videos">Videos</a>
+            <a class="nav-cta" href="https://store.steampowered.com/app/5180570/Iron_Remnant/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Free demo</a>
         </div>
     </nav>
 
     <header class="ir-hero">
-        <img class="hero-image" src="IronRemnant-Annie_LessGrid2kp.png" alt="Annie firing twin pistols in the Iron Remnant battlefield">
+        <img class="hero-image" src="IronRemnant-Annie_LessGrid2kp.png" alt="Annie firing twin pistols on an Iron Remnant battlefield">
         <div class="hero-content">
-            <p class="eyebrow">Solo-developed in Unity</p>
+            <span class="release-badge"><span class="live-dot"></span> Free demo out now on Steam</span>
             <h1>Iron<br>Remnant</h1>
-            <p class="hero-deck"><strong>Fight on the front line. Build the war machine behind it.</strong> A third-person action strategy game where direct combat, troop command, base construction and a reactive enemy operate on the same battlefield.</p>
+            <p class="hero-deck"><strong>Fight on the front line. Build the war machine behind it.</strong> A solo-developed action-RTS where third-person combat, base building, a settler economy, hundreds of troops and an enemy that plans its own war all share one battlefield.</p>
             <div class="hero-actions">
-                <a class="button" href="#overview"><i class="fa-solid fa-play"></i> Watch gameplay</a>
-                <a class="button secondary" href="https://store.steampowered.com/app/5180570/Iron_Remnant/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Wishlist on Steam</a>
+                <a class="button" href="https://store.steampowered.com/app/5180570/Iron_Remnant/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Play the free demo</a>
+                <a class="button secondary" href="#trailer"><i class="fa-solid fa-play"></i> Watch the trailer</a>
             </div>
-            <div class="hero-status" aria-label="Project summary">
-                <span><i class="fa-solid fa-user-gear"></i> Design, programming &amp; production</span>
-                <span><i class="fa-solid fa-flask"></i> Next Fest demo in final integration</span>
+            <div class="hero-meta" aria-label="Release details">
+                <span><i class="fa-solid fa-flag-checkered"></i> Steam Next Fest · October 2026</span>
+                <span><i class="fa-solid fa-code-branch"></i> 22 demo builds shipped</span>
+                <span><i class="fa-solid fa-language"></i> English · 日本語 · 繁體中文 · 简体中文</span>
             </div>
         </div>
     </header>
 
     <div class="proof-strip" aria-label="Project facts">
         <div class="proof-item"><span class="proof-label">Role</span><span class="proof-value">Solo Developer</span></div>
-        <div class="proof-item"><span class="proof-label">Engine</span><span class="proof-value">Unity / C#</span></div>
-        <div class="proof-item"><span class="proof-label">Genre</span><span class="proof-value">Action Strategy</span></div>
-        <div class="proof-item"><span class="proof-label">Current Goal</span><span class="proof-value">Steam Next Fest</span></div>
+        <div class="proof-item"><span class="proof-label">Engine</span><span class="proof-value">Unity · C# · Spine 2D</span></div>
+        <div class="proof-item"><span class="proof-label">Genre</span><span class="proof-value">Action-RTS</span></div>
+        <div class="proof-item"><span class="proof-label">Status</span><span class="proof-value live">Demo live on Steam</span></div>
     </div>
 
     <main id="main">
-        <section class="ir-section" id="overview">
+        <!-- 01 Trailer + at a glance -->
+        <section class="ir-section" id="trailer">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">01 / The game</span>
+                        <span class="section-index">01 / Steam Next Fest trailer</span>
                         <h2>One soldier.<br><span class="section-kicker">An entire war.</span></h2>
                     </div>
-                    <p>Iron Remnant asks the player to operate at two scales at once: survive as a capable third-person combatant, then step back just far enough to shape the army, economy and fortifications around them. <strong>Every layer feeds the next fight.</strong></p>
+                    <p>You play Annie, fighting alongside your party and a trained army while building the base that keeps it supplied. Between missions you return to the Asgard, a starship hub where the story plays out as a visual novel.</p>
                 </div>
                 <div class="video-frame">
-                    <iframe src="https://www.youtube.com/embed/SPuM5kSatUg" title="Iron Remnant Sicily Campaign mission testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/ISoFJ5wGQDY" title="Iron Remnant Steam Next Fest trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <div class="media-note"><span>Sicily Campaign mission testing</span><span>Initial mission implementation and encounter flow</span></div>
+                <div class="stat-grid" aria-label="Project at a glance">
+                    <div class="stat"><strong>12+</strong><span>Unique campaign missions</span></div>
+                    <div class="stat"><strong>Dozens</strong><span>Simulation and challenge modes</span></div>
+                    <div class="stat"><strong>100s</strong><span>Troops pathfinding at once</span></div>
+                    <div class="stat"><strong>10,000s</strong><span>Lines of dialogue</span></div>
+                    <div class="stat"><strong>4</strong><span>Languages, including Japanese and Chinese</span></div>
+                    <div class="stat"><strong>22</strong><span>Public demo builds shipped</span></div>
+                </div>
+                <div class="shot-grid" aria-label="Steam store screenshots">
+                    <img class="lightbox-trigger" src="media/ir/02_orbital_lasers_beach.webp" alt="Orbital lasers striking an enemy beach assault" tabindex="0" loading="lazy">
+                    <img class="lightbox-trigger" src="media/ir/03_command_your_army.webp" alt="Commanding a large army with the troop order panel" tabindex="0" loading="lazy">
+                    <img class="lightbox-trigger" src="media/ir/05_super_mortar_assault.webp" alt="Troops selected for a super mortar assault on an enemy base" tabindex="0" loading="lazy">
+                    <img class="lightbox-trigger" src="media/ir/04_carpet_bomb_strafe.webp" alt="A carpet bombing strafe run across an enemy line" tabindex="0" loading="lazy">
+                    <img class="lightbox-trigger" src="media/ir/01_ares_dain_boss.webp" alt="Annie calling out incoming mortars in the ARES-DAIN boss fight" tabindex="0" loading="lazy">
+                    <img class="lightbox-trigger" src="media/ir/08_chain_lightning.webp" alt="Chain lightning arcing between enemies" tabindex="0" loading="lazy">
+                    <img class="lightbox-trigger" src="media/ir/06_swarm_sim.webp" alt="Swarm simulation mode with hundreds of enemies" tabindex="0" loading="lazy">
+                    <img class="lightbox-trigger" src="media/ir/07_ares_dain_defeated.webp" alt="ARES-DAIN defeated" tabindex="0" loading="lazy">
+                </div>
+                <p class="media-note">Steam store screenshots · click to enlarge</p>
             </div>
         </section>
 
+        <!-- 02 Role -->
+        <section class="ir-section" id="role">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">02 / My role</span>
+                        <h2>Every system.<br><span class="section-kicker">Every sprite.</span></h2>
+                    </div>
+                    <p>Iron Remnant is a solo project. I designed, programmed, drew, animated, wrote, localised, balanced, marketed and shipped it.</p>
+                </div>
+                <div class="role-layout">
+                    <div class="card role-copy">
+                        <p><strong>All code and all assets are mine.</strong> That covers the gameplay systems, AI and tools, plus the character sprites, CGs and the unit and enemy art, all animated in Spine 2D. I also did the shaders, level design, UI, audio and both Steam trailers.</p>
+                        <p>The demo shipped for <strong>Steam Next Fest in October 2026</strong>. Between builds, I used telemetry and Unity Analytics to find where players struggled and retune missions and onboarding. The game is localised into <strong>Japanese, Traditional Chinese and Simplified Chinese</strong>.</p>
+                    </div>
+                    <div class="card chip-panel">
+                        <h3>Disciplines</h3>
+                        <div class="chips">
+                            <span>Game design</span><span>C# / Unity</span><span>Gameplay AI</span><span>RTS pathfinding</span><span>2D art</span><span>Spine 2D animation</span><span>Character sprites &amp; CGs</span><span>Level design</span><span>Shaders &amp; VFX</span><span>UI / UX</span><span>Audio &amp; music systems</span><span>Narrative &amp; dialogue</span><span>Localisation</span><span>Telemetry &amp; analytics</span><span>Editor tooling</span><span>Trailers</span><span>Steam release</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 Core loop -->
         <section class="ir-section" id="loop">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">02 / Core loop</span>
+                        <span class="section-index">03 / Core loop</span>
                         <h2>Pressure creates<br><span class="section-kicker">decisions.</span></h2>
                     </div>
-                    <p>The game is structured as a reinforcing loop instead of a collection of disconnected features. Resources become infrastructure; infrastructure produces battlefield power; battlefield wins unlock the campaign.</p>
+                    <p>Each layer feeds the next. Resources become infrastructure, infrastructure becomes an army, and battlefield wins push the campaign map forward.</p>
                 </div>
                 <div class="loop-grid">
-                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-cubes-stacked"></i></div><h3>Secure</h3><p>Capture ground, gather resources and protect the logistics that keep the army moving.</p></article>
-                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-hammer"></i></div><h3>Build</h3><p>Place generators, production buildings, walls, gates and battlefield support structures.</p></article>
-                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-users-gear"></i></div><h3>Command</h3><p>Train troops, form a fighting force and redirect squads as the front line changes.</p></article>
-                    <article class="loop-card"><div class="loop-icon"><i class="fa-solid fa-crosshairs"></i></div><h3>Break through</h3><p>Fight alongside the army, call in support and dismantle an enemy that builds back.</p></article>
+                    <article class="card loop-card"><div class="card-icon"><i class="fa-solid fa-people-carry-box"></i></div><h3>Gather</h3><p>Assign settlers to resources and resource buildings to fund the war effort.</p></article>
+                    <article class="card loop-card"><div class="card-icon"><i class="fa-solid fa-hammer"></i></div><h3>Build</h3><p>Raise barracks, turrets, traps and production buildings under fire.</p></article>
+                    <article class="card loop-card"><div class="card-icon"><i class="fa-solid fa-users-gear"></i></div><h3>Command</h3><p>Train many troop types and direct squads in formation as the front line shifts.</p></article>
+                    <article class="card loop-card"><div class="card-icon"><i class="fa-solid fa-crosshairs"></i></div><h3>Break through</h3><p>Fight in person, call in airstrikes and orbitals, and dismantle an enemy that builds back.</p></article>
                 </div>
             </div>
         </section>
 
-        <section class="ir-section" id="systems">
+        <!-- 04 RTS -->
+        <section class="ir-section" id="rts">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">03 / Playable systems</span>
-                        <h2>Built to work<br><span class="section-kicker">together.</span></h2>
+                        <span class="section-index">04 / RTS &amp; base building</span>
+                        <h2>Build under<br><span class="section-kicker">fire.</span></h2>
                     </div>
-                    <p>The flagship page shows the connective tissue. Mission pages can then go deeper on particular encounters, additions and production challenges without repeating the whole game.</p>
+                    <p>Construction is part of the combat rhythm. Every investment is a choice between production, defence and immediate firepower, and the player makes it while standing on the battlefield.</p>
                 </div>
 
-                <article class="system-feature">
-                    <div class="system-copy">
-                        <span class="system-number">System 01 — Battlefield economy</span>
-                        <h3>Build under fire</h3>
-                        <p>Settlers collect resources and sustain a player-directed base. Construction is part of the combat rhythm: the player chooses whether the next investment becomes production, defence or immediate battlefield support.</p>
-                        <ul class="system-list">
-                            <li><i class="fa-solid fa-chevron-right"></i><span>Resource gathering, storage and production chains</span></li>
-                            <li><i class="fa-solid fa-chevron-right"></i><span>Player-built walls, gates, forts, generators and support buildings</span></li>
-                            <li><i class="fa-solid fa-chevron-right"></i><span>Repair, upgrade and placement flows designed for active missions</span></li>
+                <article class="card feature-row">
+                    <div class="feature-copy">
+                        <span class="eyebrow-small">Economy</span>
+                        <h3>Settlers &amp; resources</h3>
+                        <p>Settlers gather resources and can be assigned to resource buildings, keeping the base and the army supplied through the mission.</p>
+                        <ul class="bullet-list">
+                            <li><span><strong>Settler assignment</strong> to resource nodes and buildings</span></li>
+                            <li><span><strong>Barracks</strong> that train a range of unique troop types</span></li>
+                            <li><span><strong>Turrets, traps</strong>, walls, gates and generators placed by the player</span></li>
+                            <li><span><strong>Repair, upgrade and placement</strong> flows designed for live missions</span></li>
                         </ul>
                     </div>
-                    <div class="system-media">
-                        <img class="lightbox-trigger" src="ir_resource_collector.gif" alt="Resource collectors moving through the Iron Remnant battlefield" tabindex="0">
+                    <div class="feature-media">
+                        <img class="lightbox-trigger" src="ir_resource_collector.gif" alt="Resource collectors moving across the battlefield" tabindex="0">
                         <span class="media-label">In-game resource loop</span>
                     </div>
                 </article>
 
-                <article class="system-feature">
-                    <div class="system-copy">
-                        <span class="system-number">System 02 — Player progression</span>
-                        <h3>Shape the soldier</h3>
-                        <p>Character stats, equipment, abilities and combat ratings turn progression into buildcraft. The same underlying data drives both the player-facing interfaces and the editor tools used to balance complete equipment sets.</p>
-                        <ul class="system-list">
-                            <li><i class="fa-solid fa-chevron-right"></i><span>Equipment slots, level allocation and derived combat statistics</span></li>
-                            <li><i class="fa-solid fa-chevron-right"></i><span>Airstrike, orbital and reinforcement abilities</span></li>
-                            <li><i class="fa-solid fa-chevron-right"></i><span>Inventory, party and loadout systems connected across missions</span></li>
-                        </ul>
-                    </div>
-                    <div class="system-media">
-                        <img class="lightbox-trigger" src="ir_stats_page.gif" alt="Iron Remnant character statistics and progression interface" tabindex="0">
-                        <span class="media-label">Character build and stat interface</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="ir-section" id="command">
-            <div class="page-shell">
-                <div class="section-head">
-                    <div>
-                        <span class="section-index">04 / Command fantasy</span>
-                        <h2>Lead from<br><span class="section-kicker">the front.</span></h2>
-                    </div>
-                    <p>The player is not a detached cursor. They move through the same space as their troops and buildings, switching between direct action and tactical intent without leaving the battlefield.</p>
-                </div>
-                <div class="command-grid">
-                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_selecting_troops.png" alt="Selecting multiple troops in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Select &amp; organise</h3><p>Marquee selection and squad-aware commands make larger allied forces manageable during live combat.</p></div></article>
-                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_building.png" alt="Building placement interface in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Fortify the field</h3><p>Construction tools let the player turn captured ground into a defensible and productive position.</p></div></article>
-                    <article class="command-card"><img class="lightbox-trigger" src="ir_tutorial_orbitals.png" alt="Calling an orbital ability in Iron Remnant" tabindex="0"><div class="command-copy"><h3>Escalate</h3><p>Orbital barrages, air support and reinforcements give the player high-impact answers to battlefield pressure.</p></div></article>
-                </div>
-            </div>
-        </section>
-
-        <section class="ir-section" id="crowd-navigation">
-            <div class="page-shell">
-                <div class="section-head">
-                    <div>
-                        <span class="section-index">05 / Crowd navigation</span>
-                        <h2>One command.<br><span class="section-kicker">One hundred agents.</span></h2>
-                    </div>
-                    <p>A large RTS army should not fall apart the moment terrain becomes difficult. This stress test sends <strong>100 independently animated Spine 2D troops</strong> through dense obstacles and a severe bottleneck from a single move command.</p>
+                <div class="clip-grid">
+                    <article class="card clip-card"><video class="clip" src="media/ir/command_your_army.mp4" poster="media/ir/command_your_army.webp" muted loop playsinline preload="none" aria-label="Commanding an army of troops"></video><div class="card-body"><h3>Command your army</h3><p>Marquee selection, squad-aware orders and right-click attack orders against units and buildings.</p></div></article>
+                    <article class="card clip-card"><video class="clip" src="media/ir/build_your_base.mp4" poster="media/ir/build_your_base.webp" muted loop playsinline preload="none" aria-label="Constructing base buildings"></video><div class="card-body"><h3>Build your base</h3><p>Turn captured ground into a productive position with barracks, generators and resource buildings.</p></div></article>
+                    <article class="card clip-card"><video class="clip" src="media/ir/turret_defence.mp4" poster="media/ir/turret_defence.webp" muted loop playsinline preload="none" aria-label="Turrets defending against an enemy push"></video><div class="card-body"><h3>Hold the line</h3><p>Turrets and traps that you place and upgrade blunt enemy pushes while you fight elsewhere.</p></div></article>
+                    <article class="card clip-card"><video class="clip" src="media/ir/orbital_strikes.mp4" poster="media/ir/orbital_strikes.webp" muted loop playsinline preload="none" aria-label="Orbital strikes hitting an enemy base"></video><div class="card-body"><h3>Escalate</h3><p>Orbital barrages, airstrikes, dropships and buffs give the player high-impact answers to pressure.</p></div></article>
                 </div>
 
-                <article class="showcase-panel">
+                <h3 class="subhead">Crowd navigation</h3>
+                <article class="card showcase-panel">
                     <div class="video-frame">
                         <iframe src="https://www.youtube.com/embed/tZK6k0MLXq8" title="Iron Remnant 100-agent crowd navigation stress test" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                     <div class="showcase-copy">
                         <div>
-                            <span class="showcase-eyebrow">Navigation engineering showcase</span>
+                            <span class="section-index">Pathfinding showcase</span>
                             <h3>Built for the ugly cases.</h3>
                         </div>
                         <div>
-                            <p>The movement system combines global pathfinding with local crowd behaviour so a dense force can split around obstacles, negotiate narrow passages, queue when space disappears and spread out again on the far side. The goal is not simply to find a valid path, but to maintain forward progress when many large agents all want the same constrained route.</p>
-                            <div class="showcase-points">
-                                <div class="showcase-point"><strong>100+ agents</strong><span>Simultaneous troop movement under heavy crowd density.</span></div>
-                                <div class="showcase-point"><strong>Bottlenecks</strong><span>Congestion, queuing and local avoidance through narrow gaps.</span></div>
-                                <div class="showcase-point"><strong>Single order</strong><span>The formation resolves the obstacle field without scripted routes or manual shepherding.</span></div>
+                            <p>Global pathfinding combines with local crowd behaviour, so a dense force can split around obstacles, queue through narrow gaps and spread out again on the far side, all from a single move order. <strong>Hundreds of independently animated Spine 2D troops</strong> keep making progress when they all want the same route.</p>
+                            <div class="point-grid">
+                                <div class="point"><strong>Hundreds</strong><span>Simultaneous troop movement under heavy density.</span></div>
+                                <div class="point"><strong>Bottlenecks</strong><span>Congestion, queuing and local avoidance in tight gaps.</span></div>
+                                <div class="point"><strong>Formations</strong><span>Squads hold formation and reform after obstacles.</span></div>
                             </div>
                         </div>
                     </div>
@@ -659,31 +513,79 @@
             </div>
         </section>
 
-        <section class="ir-section" id="ares">
+        <!-- 05 Enemy AI -->
+        <section class="ir-section" id="enemy">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">06 / ARES boss encounter</span>
-                        <h2>Boss mechanics<br><span class="section-kicker">from the ground up.</span></h2>
+                        <span class="section-index">05 / Enemy AI</span>
+                        <h2>An enemy that<br><span class="section-kicker">plans its war.</span></h2>
                     </div>
-                    <p><strong>ARES is a work-in-progress boss encounter</strong> built as a complete gameplay, AI, animation, audio and VFX showcase. The fight combines bespoke attacks with party members that recognise danger and attempt to evade it with deliberately imperfect reaction timing.</p>
+                    <p>The opposition isn't a wave spawner. An <strong>enemy base manager</strong> grows its own base, reads the battlefield and decides how to spend its forces.</p>
+                </div>
+                <div class="card adversary-panel">
+                    <div class="feature-copy">
+                        <span class="eyebrow-small">Strategic layer</span>
+                        <h3>Not just waves.</h3>
+                        <ul class="bullet-list">
+                            <li><span><strong>Base growth:</strong> the enemy expands, upgrades and rebuilds its own infrastructure</span></li>
+                            <li><span><strong>Attack or defend:</strong> it weighs threat against opportunity before committing</span></li>
+                            <li><span><strong>Force allocation:</strong> it splits forces between offence, defence and reserves</span></li>
+                            <li><span><strong>Squads &amp; formations:</strong> a squad manager moves units as coordinated groups</span></li>
+                            <li><span><strong>Combat AI:</strong> line of sight, flanking around cover, and faction-aware damage rules</span></li>
+                        </ul>
+                        <div class="threat-flow" aria-label="Enemy decision flow">
+                            <span class="threat-step">Grow base</span><i class="fa-solid fa-arrow-right"></i>
+                            <span class="threat-step">Assess threat</span><i class="fa-solid fa-arrow-right"></i>
+                            <span class="threat-step">Attack / defend</span><i class="fa-solid fa-arrow-right"></i>
+                            <span class="threat-step">Allocate squads</span><i class="fa-solid fa-arrow-right"></i>
+                            <span class="threat-step">Rebuild</span>
+                        </div>
+                    </div>
+                    <div class="adversary-art"><img src="M3_IntoTheCaves.png" alt="A large mechanical enemy looming over an operation" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 Combat -->
+        <section class="ir-section" id="combat">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">06 / Combat &amp; abilities</span>
+                        <h2>Lead from<br><span class="section-kicker">the front.</span></h2>
+                    </div>
+                    <p>The player isn't a detached cursor. Annie moves through the same space as her troops and switches between direct action and tactical command without leaving the fight.</p>
+                </div>
+                <div class="card-grid cols-4">
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-gun"></i></div><h3>Weapons</h3><p>Many unique weapons, each with its own handling, plus weapon evolutions.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-satellite"></i></div><h3>Abilities</h3><p>Airstrikes, orbital barrages, dropship reinforcements, buffs and more, placed by category.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-user-shield"></i></div><h3>Party AI</h3><p>Companions with selectable stances, threat-aware dodging and revives.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-eye"></i></div><h3>Line of sight</h3><p>Shared ground-plane LOS, cover that blocks shots, and AI that flanks.</p></article>
+                </div>
+                <div class="clip-grid">
+                    <article class="card clip-card"><video class="clip" src="media/ir/carpet_bombing.mp4" poster="media/ir/carpet_bombing.webp" muted loop playsinline preload="none" aria-label="Carpet bombing airstrike"></video><div class="card-body"><h3>Airstrikes</h3><p>Carpet bombing and strafing runs that clear a lane through the enemy line.</p></div></article>
+                    <article class="card clip-card"><video class="clip" src="media/ir/party_combat.mp4" poster="media/ir/party_combat.webp" muted loop playsinline preload="none" aria-label="Party members fighting alongside the player"></video><div class="card-body"><h3>Party combat</h3><p>Companions with their own stances and weapons fight beside you and revive you.</p></div></article>
+                    <article class="card clip-card"><video class="clip" src="media/ir/tesla_coil.mp4" poster="media/ir/tesla_coil.webp" muted loop playsinline preload="none" aria-label="Tesla coil weapon chaining lightning"></video><div class="card-body"><h3>Unique weapons</h3><p>From pistols to tesla coils and plasma cannons, each with its own handling and evolutions.</p></div></article>
+                    <article class="card clip-card"><video class="clip" src="media/ir/slingshot_traversal.mp4" poster="media/ir/slingshot_traversal.webp" muted loop playsinline preload="none" aria-label="Slingshot traversal across a facility"></video><div class="card-body"><h3>Traversal</h3><p>Slingshot launch pads that move the player around the map mid-fight.</p></div></article>
                 </div>
 
-                <article class="showcase-panel">
+                <h3 class="subhead">ARES boss encounter</h3>
+                <article class="card showcase-panel">
                     <div class="video-frame">
                         <iframe src="https://www.youtube.com/embed/2AfxOVql8Rc" title="Iron Remnant ARES boss fight showcase" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                     <div class="showcase-copy">
                         <div>
-                            <span class="showcase-eyebrow">Solo-developed encounter</span>
-                            <h3>ARES — WIP boss fight.</h3>
+                            <span class="section-index">Work-in-progress boss</span>
+                            <h3>ARES, end to end.</h3>
                         </div>
                         <div>
-                            <p>I created and animated ARES, programmed his unique attacks and encounter mechanics, upgraded the party AI so companions recognise and evade incoming attacks with realistic delayed responses, and produced the boss audio, ability shaders and party VFX. <strong>All implementation shown in this encounter was completed by me.</strong></p>
-                            <div class="showcase-points">
-                                <div class="showcase-point"><strong>Boss AI</strong><span>Multiple bespoke attacks, mechanics and encounter behaviours.</span></div>
-                                <div class="showcase-point"><strong>Party AI</strong><span>Threat-aware dodging with intentionally delayed, human-like responses.</span></div>
-                                <div class="showcase-point"><strong>Full pipeline</strong><span>Programming, animation, audio, shaders, effects and integration.</span></div>
+                            <p>I created and animated ARES, programmed his attacks and encounter mechanics, and upgraded the party AI so companions recognise incoming attacks and dodge with deliberately human reaction delays. <strong>The boss audio, ability shaders and VFX are mine too.</strong></p>
+                            <div class="point-grid">
+                                <div class="point"><strong>Boss AI</strong><span>Multiple bespoke attacks and encounter behaviours.</span></div>
+                                <div class="point"><strong>Party AI</strong><span>Threat-aware dodging with delayed, human-like responses.</span></div>
+                                <div class="point"><strong>Full pipeline</strong><span>Code, animation, audio, shaders and effects.</span></div>
                             </div>
                         </div>
                     </div>
@@ -691,111 +593,230 @@
             </div>
         </section>
 
-        <section class="ir-section" id="enemy">
+        <!-- 07 Progression -->
+        <section class="ir-section" id="progression">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">07 / Enemy simulation</span>
-                        <h2>An enemy that<br><span class="section-kicker">builds back.</span></h2>
+                        <span class="section-index">07 / Progression</span>
+                        <h2>Shape the<br><span class="section-kicker">soldier.</span></h2>
                     </div>
-                    <p>Opposition is driven by an economy and construction layer of its own. Enemy infrastructure can expand, route pressure, upgrade, rebuild and deploy heavier responses as its strategic position changes.</p>
+                    <p>Stats, gear, crafting and the shop turn progression into buildcraft. The same data drives the player-facing menus and the editor tools I use to balance them.</p>
                 </div>
-                <div class="adversary-panel">
-                    <div class="adversary-copy">
-                        <span class="system-number">Adaptive construction AI</span>
-                        <h3>Not just waves.</h3>
-                        <p>The enemy evaluates threat, reserves resources, selects construction routes and rebuilds losses. That creates objectives the player can disrupt, not simply units they must out-damage.</p>
-                        <div class="threat-flow" aria-label="Enemy decision flow"><span class="threat-step">Assess threat</span><span class="threat-arrow"><i class="fa-solid fa-arrow-right"></i></span><span class="threat-step">Invest</span><span class="threat-arrow"><i class="fa-solid fa-arrow-right"></i></span><span class="threat-step">Expand</span><span class="threat-arrow"><i class="fa-solid fa-arrow-right"></i></span><span class="threat-step">Rebuild</span></div>
+                <article class="card feature-row flip">
+                    <div class="feature-copy">
+                        <span class="eyebrow-small">Buildcraft</span>
+                        <h3>Stats, gear &amp; research</h3>
+                        <ul class="bullet-list">
+                            <li><span><strong>Research specialisations</strong> that rank up abilities, such as the airstrike strafing run</span></li>
+                            <li><span><strong>Character stats</strong>, level allocation and derived combat ratings</span></li>
+                            <li><span><strong>Crafting</strong> from materials gathered in missions</span></li>
+                            <li><span><strong>Shop system</strong> for weapons, gear and consumables</span></li>
+                            <li><span><strong>Rebuilt menus</strong> (inventory, crafting, abilities, character, storage) on a controller/view architecture</span></li>
+                        </ul>
                     </div>
-                    <div class="adversary-art"><img src="M3_IntoTheCaves.png" alt="A large mechanical enemy looming over an Iron Remnant operation"></div>
+                    <div class="feature-media contain">
+                        <video class="clip" src="media/ir/upgrades.mp4" poster="media/ir/upgrades.webp" muted loop playsinline preload="none" aria-label="Research specialisation rank-up for an airstrike ability"></video>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 08 Story & hub -->
+        <section class="ir-section" id="story">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">08 / Story, hub &amp; campaign</span>
+                        <h2>Return to<br><span class="section-kicker">the Asgard.</span></h2>
+                    </div>
+                    <p>Between operations, the Asgard starship is home. Its rooms persist and can be upgraded, and its NPC residents go about their lives, interacting with the hub and with each other.</p>
+                </div>
+                <article class="card feature-row">
+                    <div class="feature-copy">
+                        <span class="eyebrow-small">Asgard hub</span>
+                        <h3>A ship that lives</h3>
+                        <ul class="bullet-list">
+                            <li><span><strong>Persistent rooms</strong> with upgrades that carry across the campaign</span></li>
+                            <li><span><strong>NPC residents</strong> who interact with the hub and each other</span></li>
+                            <li><span><strong>Mission prep:</strong> party, inventory, abilities and equipment</span></li>
+                        </ul>
+                    </div>
+                    <div class="feature-media">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/RU2wX1TaCr0" title="Iron Remnant Asgard hub" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                    </div>
+                </article>
+                <article class="card feature-row flip">
+                    <div class="feature-copy">
+                        <span class="eyebrow-small">Campaign map</span>
+                        <h3>Liberate Sicily</h3>
+                        <p>Pick which territory to attack next, from Syracuse Beachhead to Messina Fortress. Each one is a hand-built mission with its own objectives.</p>
+                        <ul class="bullet-list">
+                            <li><span><strong>Territory progression</strong> across 12+ unique missions</span></li>
+                            <li><span><strong>Varied objectives:</strong> HQ assaults, convoy raids, capture-and-hold and boss fights</span></li>
+                        </ul>
+                    </div>
+                    <div class="feature-media contain">
+                        <video class="clip wide" src="media/ir/liberate_sicily.mp4" poster="media/ir/liberate_sicily.webp" muted loop playsinline preload="none" aria-label="Sicily campaign map with territories being liberated"></video>
+                    </div>
+                </article>
+                <div class="card-grid cols-2" style="margin-top:22px;">
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-book-open"></i></div><h3>Visual novel system</h3><p>A custom VN system for character scenes and CGs, carrying tens of thousands of lines of dialogue.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-list-check"></i></div><h3>Quests &amp; quest log</h3><p>Multi-step quest framework, quest log, in-game Field Guide and journal linking the hub and battlefield.</p></article>
                 </div>
             </div>
         </section>
 
-        <section class="ir-section" id="campaign">
+        <!-- 09 Data -->
+        <section class="ir-section" id="data">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">08 / Campaign layer</span>
-                        <h2>Return to<br><span class="section-kicker">Asgard.</span></h2>
+                        <span class="section-index">09 / Data-driven balancing</span>
+                        <h2>Balanced with<br><span class="section-kicker">evidence.</span></h2>
                     </div>
-                    <p>Between operations, the Asgard acts as a home base for mission selection, quests, party management, inventory, equipment and simulation. The campaign map ties individual missions into a larger territorial war.</p>
+                    <p>I built a <strong>mission telemetry recorder and viewer</strong> to balance missions from real runs, and used <strong>Unity Analytics</strong> on the public demo to find where players struggle.</p>
                 </div>
-                <div class="asgard-layout">
-                    <div class="asgard-image"><img class="lightbox-trigger" src="ir_asgard.png" alt="Asgard home base environment from Iron Remnant" tabindex="0"></div>
-                    <div class="asgard-sidebar">
-                        <article class="asgard-card"><i class="fa-solid fa-map-location-dot"></i><h3>Campaign map</h3><p>Select territories, track their state and launch operations across a connected war.</p></article>
-                        <article class="asgard-card"><i class="fa-solid fa-list-check"></i><h3>Quest network</h3><p>Mission chains and narrative links carry progression between the base and battlefield.</p></article>
-                        <article class="asgard-card"><i class="fa-solid fa-user-group"></i><h3>Preparation</h3><p>Manage the party, abilities, inventory and equipment before committing to the next operation.</p></article>
+                <figure class="card data-hero" style="margin:0;">
+                    <img class="lightbox-trigger" src="ir_telemetry_overview.png" alt="Mission telemetry viewer summary for a 23-minute Catania run: 4,140 enemies spawned, peak 99 alive, charts of threat rate, health, buildings and scrap" tabindex="0" loading="lazy">
+                    <figcaption>Mission telemetry viewer: a 23-minute run of the Catania mission with 4,140 enemies spawned and up to 99 alive at once, holding an average of 88 FPS.</figcaption>
+                </figure>
+                <div class="data-pair">
+                    <figure class="card">
+                        <img class="lightbox-trigger" src="ir_telemetry_combat.png" alt="Telemetry: enemies by type, buildings placed, purchases, and damage and accuracy table" tabindex="0" loading="lazy">
+                        <figcaption>Enemy mix, buildings placed, purchases, and damage and accuracy by source and target.</figcaption>
+                    </figure>
+                    <figure class="card">
+                        <img class="lightbox-trigger" src="ir_telemetry_builds.png" alt="Telemetry: weapon efficiency, party AI state, character builds over time and balance settings" tabindex="0" loading="lazy">
+                        <figcaption>Weapon efficiency per scrap spent, party AI state breakdown, build snapshots, and balance settings for comparing runs.</figcaption>
+                    </figure>
+                </div>
+                <article class="card data-copy" style="padding:26px;"><div class="card-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Mission telemetry</h3><p>Every run records threat rate, enemies alive, player, party and building health, the scrap economy, purchases, weapon efficiency and party AI states. The settings each run was played with are stored alongside it, so runs can be compared side by side and differences are highlighted.</p></article>
+
+                <h3 class="subhead">Player analytics on the live demo</h3>
+                <article class="card feature-row">
+                    <div class="feature-copy">
+                        <span class="eyebrow-small">Unity Gaming Services</span>
+                        <h3>Where players struggle</h3>
+                        <p>Custom analytics events, with an opt-out toggle in Options, report how each mission attempt played out. I used that data between demo builds to retune the prologue, onboarding and difficult missions.</p>
+                        <ul class="bullet-list">
+                            <li><span><strong>Mission outcomes:</strong> victory, defeat or quit, with the quest step reached</span></li>
+                            <li><span><strong>Player behaviour:</strong> prep time, troops trained, scrap spent by category, shop opens, top ability</span></li>
+                            <li><span><strong>Struggle signals:</strong> player and party downs, time in dialogue and paused</span></li>
+                            <li><span><strong>Performance:</strong> worst frame time per session</span></li>
+                        </ul>
                     </div>
+                    <div class="feature-media">
+                        <img class="lightbox-trigger" src="ir_unity_analytics.png" alt="Unity Analytics event browser showing a mission event payload with outcome, quest step, scrap and performance fields" tabindex="0" loading="lazy" style="object-position: 60% center;">
+                        <span class="media-label">Unity Analytics event payload</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 10 Art, VFX, audio -->
+        <section class="ir-section" id="art">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">10 / Art, VFX &amp; audio</span>
+                        <h2>Made by<br><span class="section-kicker">hand.</span></h2>
+                    </div>
+                    <p>Every asset in the game is mine: characters, CGs, units, enemies, environments, effects and sound.</p>
+                </div>
+                <div class="card-grid cols-3">
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-person-running"></i></div><h3>Spine 2D animation</h3><p>Every troop, enemy and character is drawn and rigged by me, with many unique troop and enemy types.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-image"></i></div><h3>Sprites &amp; CGs</h3><p>Character sprites and illustrated CGs for the visual novel, plus key art and Steam capsules.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-mountain-sun"></i></div><h3>Level design</h3><p>Extensive map and level design, with the environment assets built for every mission.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3>Shaders &amp; VFX</h3><p>Custom shaders for ability effects, terrain blending, dissolves and other battlefield VFX.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-music"></i></div><h3>Dynamic music</h3><p>A music system that responds to gameplay intensity and mission state.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-volume-high"></i></div><h3>Sound design</h3><p>Arcade-style hits, crits, deaths and reward streaks, mixed with my own Python tooling.</p></article>
                 </div>
             </div>
         </section>
 
+        <!-- 11 Tools -->
         <section class="ir-section" id="tools">
             <div class="page-shell">
                 <div class="section-head">
                     <div>
-                        <span class="section-index">09 / Production engineering</span>
+                        <span class="section-index">11 / Production engineering</span>
                         <h2>Tools built<br><span class="section-kicker">to ship.</span></h2>
                     </div>
-                    <p>A project of this scale needs more than runtime code. I built purpose-made Unity editor tools to inspect game state, validate content and balance interconnected progression systems safely.</p>
+                    <p>A project this size needs more than runtime code. I built Unity editor tools and external pipelines to inspect state, balance progression, localise and market the game.</p>
                 </div>
-                <div class="tool-grid">
-                    <article class="tool-card">
-                        <figure class="tool-image"><img class="lightbox-trigger" src="GameLab.png" alt="Iron Remnant Game Data Lab editor tool showing save data and inventory state" tabindex="0"></figure>
-                        <div class="tool-copy"><h3>Game Data Lab</h3><p>A central interface for inspecting profiles, inventory, quests, scene flags and runtime state, with validation and guarded data-application workflows.</p><div class="tag-list"><span>State inspection</span><span>Validation</span><span>Safe apply</span><span>Backups</span></div></div>
+                <div class="card-grid cols-2">
+                    <article class="card tool-card" style="padding:0;">
+                        <figure class="tool-image"><img class="lightbox-trigger" src="GameLab.png" alt="Game Data Lab editor tool showing save data and inventory state" tabindex="0" loading="lazy"></figure>
+                        <div class="card-body"><h3>Game Data Lab</h3><p>A central window for inspecting profiles, inventory, quests, scene flags and runtime state, with validation and guarded apply workflows.</p><div class="tag-list"><span>State inspection</span><span>Validation</span><span>Safe apply</span><span>Backups</span></div></div>
                     </article>
-                    <article class="tool-card">
-                        <figure class="tool-image"><img class="lightbox-trigger" src="EquipmentStatVisualiser.png" alt="Iron Remnant Equipment Set Stat Visualizer editor tool showing derived stat breakdowns" tabindex="0"></figure>
-                        <div class="tool-copy"><h3>Equipment Set Visualizer</h3><p>A balancing workspace for complete gear sets, level allocations, direct and derived statistics, combat score and copyable breakdowns.</p><div class="tag-list"><span>Buildcraft</span><span>Derived stats</span><span>Combat rating</span><span>Balance analysis</span></div></div>
+                    <article class="card tool-card" style="padding:0;">
+                        <figure class="tool-image"><img class="lightbox-trigger" src="EquipmentStatVisualiser.png" alt="Equipment Set Stat Visualizer editor tool showing derived stat breakdowns" tabindex="0" loading="lazy"></figure>
+                        <div class="card-body"><h3>Equipment Set Visualizer</h3><p>A balancing workspace for full gear sets, level allocations, direct and derived stats, and combat score.</p><div class="tag-list"><span>Buildcraft</span><span>Derived stats</span><span>Combat rating</span></div></div>
+                    </article>
+                </div>
+                <div class="card-grid cols-4" style="margin-top:16px;">
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-language"></i></div><h3>Localisation</h3><p>Translation tooling and a CJK font atlas refill tool covering both TextMeshPro and UI Toolkit.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-film"></i></div><h3>Trailer pipeline</h3><p>Highlight extraction from recordings, a beat-mapped rough-cut assembler, and exports for shorts and GIFs.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-gauge-high"></i></div><h3>Perf harness</h3><p>A stress-test scene that showed the bottleneck was physics trigger crowding, not Spine animation.</p></article>
+                    <article class="card"><div class="card-icon"><i class="fa-solid fa-cubes"></i></div><h3>Content builders</h3><p>Editor builders that generate UI, the bestiary and fonts, so content is rebuilt by tools instead of hand-edited.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12 Videos -->
+        <section class="ir-section" id="videos">
+            <div class="page-shell">
+                <div class="section-head">
+                    <div>
+                        <span class="section-index">12 / More footage</span>
+                        <h2>Watch it<br><span class="section-kicker">play.</span></h2>
+                    </div>
+                    <p>The longer trailer, the opening of the demo, and full mission playthroughs.</p>
+                </div>
+                <div class="video-grid">
+                    <article class="card video-card">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/OPtKiT--XKQ" title="Iron Remnant story trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="card-body"><h3>Story trailer</h3><p>A longer look at the story, combat, base building and the Asgard.</p></div>
+                    </article>
+                    <article class="card video-card">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/e5p40Cfn5pM" title="Iron Remnant v0.1 prologue" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="card-body"><h3>Prologue (demo v0.1)</h3><p>The demo's opening: a taster mission and gate defence that set the stakes before the tutorial.</p></div>
+                    </article>
+                    <article class="card video-card">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/YhdptEfUmmc" title="Iron Remnant tutorial mission" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="card-body"><h3>Tutorial mission</h3><p>Onboarding for troops, building, settlers and abilities, refined using demo analytics.</p></div>
+                    </article>
+                    <article class="card video-card">
+                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/j_0Dv8sjenA" title="Iron Remnant Caltagirone Uplands mission" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                        <div class="card-body"><h3>Caltagirone Uplands</h3><p>A full campaign mission playthrough from the Sicily campaign.</p></div>
+                    </article>
+                    <article class="card video-card coming-soon">
+                        <div><i class="fa-solid fa-clapperboard"></i><h3>More missions coming</h3><p>Full playthroughs of the other campaign missions will be added here.</p></div>
                     </article>
                 </div>
             </div>
         </section>
 
+        <!-- 13 Release -->
         <section class="ir-section" id="status">
             <div class="page-shell">
-                <div class="status-panel">
+                <div class="card status-panel">
                     <div class="status-title">
-                        <span class="status-pill"><span class="status-dot wip"></span> In development</span>
-                        <h3>Next Fest demo in final integration.</h3>
-                        <p>The core game is playable and its major systems are functional. The current focus is completing the connective content that turns the existing missions into a cohesive public demo.</p>
+                        <span class="status-pill"><span class="status-dot"></span> Demo released</span>
+                        <h3>Out now for Steam Next Fest.</h3>
+                        <p>The free demo is live on Steam. I'm continuing development on the full game.</p>
                     </div>
                     <div class="status-list">
-                        <div class="status-row"><strong><span class="status-dot"></span>Core systems</strong><span>Combat, troops, construction, economy, abilities, progression and enemy systems are working.</span></div>
-                        <div class="status-row"><strong><span class="status-dot"></span>Demo missions</strong><span>The demo's missions are mostly complete and already exercise the major gameplay layers.</span></div>
-                        <div class="status-row"><strong><span class="status-dot wip"></span>Final integration</strong><span>Dialogue and linking quests are being completed to connect the mission flow.</span></div>
-                        <div class="status-row"><strong><span class="status-dot wip"></span>Wider game</strong><span>Additional missions and further rooms within the Asgard remain in production beyond the demo scope.</span></div>
+                        <div class="status-row"><strong><span class="status-dot"></span>Public demo</strong><span>Released for Steam Next Fest, October 2026. Iterated through 22 builds (v0.1 to v0.91).</span></div>
+                        <div class="status-row"><strong><span class="status-dot"></span>Localisation</strong><span>English, Japanese, Traditional Chinese and Simplified Chinese.</span></div>
+                        <div class="status-row"><strong><span class="status-dot"></span>Live tuning</strong><span>Onboarding, difficulty tiers (including a Story tier), revives and game-over hints, all tuned from player analytics.</span></div>
+                        <div class="status-row"><strong><span class="status-dot wip"></span>Full game</strong><span>More campaign missions, Asgard rooms and story in production.</span></div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="ir-section" id="development">
-            <div class="page-shell">
-                <div class="section-head">
-                    <div>
-                        <span class="section-index">10 / Development testing</span>
-                        <h2>Built, tested<br><span class="section-kicker">and iterated.</span></h2>
-                    </div>
-                    <p>These short captures show work-in-progress testing environments used to validate player controls, combat interactions and mission systems before they become finished campaign content.</p>
-                </div>
-                <div class="development-grid">
-                    <article class="development-card">
-                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/QjHI7TN7y6U" title="Iron Remnant tutorial and controls testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-                        <div class="development-copy"><h3>Tutorial testing</h3><p>Earlier tutorial and controls testing showing the onboarding flow and interaction foundations.</p></div>
-                    </article>
-                    <article class="development-card">
-                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/rd7FG625t9c" title="Iron Remnant simulation room and slingshot course testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-                        <div class="development-copy"><h3>Simulation room &amp; slingshot course</h3><p>Editor-testing footage of a simulation-room course used to validate movement, interactions and the slingshot sequence.</p></div>
-                    </article>
-                    <article class="development-card">
-                        <div class="video-frame"><iframe src="https://www.youtube.com/embed/5Q_DDNXOc_U" title="Iron Remnant Augusta Port Sicily Campaign testing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-                        <div class="development-copy"><h3>Augusta Port</h3><p>Sicily Campaign testing at Augusta Port, checking the mission space, encounter flow and surrounding systems.</p></div>
-                    </article>
-                </div>
-            </div>
-        </section>
+
         <aside class="mission-notes" aria-label="Earlier mission write-ups">
             <p>Earlier mission write-ups (may be out of date): <a href="Project11.html">Breakout</a> · <a href="iron_remnant_counter_attack_mission.html">Counter Attack</a></p>
         </aside>
@@ -803,15 +824,13 @@
 
     <section class="final-cta" id="demo">
         <div class="final-content">
-            <p class="eyebrow" style="justify-content:center;">The next operation</p>
             <img class="steam-capsule" src="SmallCapsule.png" alt="Iron Remnant Steam capsule artwork" loading="lazy">
-            <h2>Prepare for<br>deployment.</h2>
-            <p>Iron Remnant is being prepared for a Steam Next Fest demo. Wishlist the game now and follow the store page for the public build.</p>
+            <h2>Play the<br>free demo.</h2>
+            <p>Iron Remnant's demo is out now on Steam. Play it, and wishlist the game to follow the full release.</p>
             <div class="final-actions">
-                <a class="button" href="https://store.steampowered.com/app/5180570/Iron_Remnant/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Wishlist on Steam</a>
+                <a class="button" href="https://store.steampowered.com/app/5180570/Iron_Remnant/" target="_blank" rel="noopener"><i class="fa-brands fa-steam"></i> Get the demo on Steam</a>
                 <a class="button secondary" href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i> Contact Nicholas</a>
             </div>
-            <div class="placeholder-note">Steam page live · Next Fest demo in preparation</div>
         </div>
     </section>
 
@@ -827,6 +846,43 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Solid nav once the hero has scrolled away
+            const nav = document.querySelector('.site-nav');
+            const onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // Highlight the nav link for the section in view
+            const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+            const sections = navLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        navLinks.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id); });
+                    });
+                }, { rootMargin: '-40% 0px -55% 0px' });
+                sections.forEach(function (s) { observer.observe(s); });
+            }
+
+            // Gameplay clips only download and play while on screen; reduced-motion users get controls instead
+            const clips = document.querySelectorAll('video.clip');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) {
+                clips.forEach(function (v) { v.controls = true; });
+            } else if ('IntersectionObserver' in window) {
+                const clipObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) entry.target.play().catch(function () {});
+                        else entry.target.pause();
+                    });
+                }, { threshold: 0.25 });
+                clips.forEach(function (v) { clipObserver.observe(v); });
+            } else {
+                clips.forEach(function (v) { v.autoplay = true; v.play().catch(function () {}); });
+            }
+
+            // Image lightbox
             const lightbox = document.querySelector('.lightbox');
             const lightboxImage = lightbox.querySelector('img');
             const closeButton = lightbox.querySelector('button');
@@ -865,4 +921,3 @@
     </script>
 </body>
 </html>
-

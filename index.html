@@ -190,6 +190,7 @@
         .work .card h3 { font-size: clamp(1.9rem, 2.8vw, 2.5rem); }
         .work .card.feature { min-height: 620px; }
         .work .card.row2 { grid-column: span 3; }
+        .work .card.wide { grid-column: span 6; min-height: 420px; }
 
         /* ---------- Archive ---------- */
         .archive { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; }
@@ -242,7 +243,7 @@
             .cap h3 { padding-top: 30px; }
             .archive { grid-template-columns: 1fr; }
             .archive .card { min-height: 440px; }
-            .work .card, .work .card.feature, .work .card.tall, .work .card.row2 { grid-column: span 6; grid-row: auto; }
+            .work .card, .work .card.feature, .work .card.tall, .work .card.row2, .work .card.wide { grid-column: span 6; grid-row: auto; }
             .work .card.feature { min-height: 480px; }
             .work .card.tall p { display: block; }
         }
@@ -392,6 +393,10 @@
                     <a class="card row2 rv" style="--d:.1s" href="Project3.html">
                         <img src="Project3CoverFull.jpg" alt="Lost Kingdoms RPG environment" loading="lazy">
                         <div class="card-copy"><span class="tag">Solo Unity project / Systems-heavy RPG</span><h3>Lost Kingdoms</h3><p>An ambitious RPG prototype connecting kingdom building, procedural expeditions, party progression and long-form combat systems.</p><span class="more">View project <i class="fa-solid fa-arrow-right"></i></span></div>
+                    </a>
+                    <a class="card wide rv" href="Project12.html">
+                        <img src="ColourblindCheckoutStore.webp" alt="Colour-Blind Checkout grocery store entrance" loading="lazy">
+                        <div class="card-copy"><span class="tag">Team university project / QUT Capstone Showcase</span><h3>Colour-Blind Checkout</h3><p>A first-person grocery puzzle where colour can't be trusted. I built the core gameplay: movement and camera, item interaction and inspection, the basket inventory and product data.</p><span class="more">View project <i class="fa-solid fa-arrow-right"></i></span></div>
                     </a>
                 </div>
             </div>

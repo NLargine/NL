@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Colour-Blind Checkout | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url('ColourblindCheckoutStore.webp') no-repeat center center/cover;
+        }
+
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .loop-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            list-style: none;
+            padding-left: 0;
+            margin-top: 25px;
+            counter-reset: step;
+        }
+
+        .loop-steps li {
+            counter-increment: step;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .loop-steps li::before {
+            content: "0" counter(step);
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 800;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Colour-Blind Checkout</h1>
+            <h2>Team-built 3D first-person puzzle game about finding groceries when colour can't be trusted</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <p>Colour-Blind Checkout is a light-hearted 3D first-person exploration and puzzle game set inside a mundane, poorly organised grocery store. The player is handed a shopping list of visually described items, such as "red strawberry yoghurt", and has to find and collect them within a time limit. They quickly discover that in this world, they are colour blind.</p>
+                <p>With colour no longer reliable, players identify products through silhouette, packaging pattern, poorly written labels, lighting, shelf placement and aisle context. At checkout, the collected items are revealed by name and the player receives accuracy-based feedback, finding out whether their reading of the shelves matched the store's.</p>
+                <p>The game was a university team project built for a QAGOMA brief and inspired by Nick Cave's <em>Heard</em> (2012), exploring how colour and perception influence recognition and interpretation. It was invited to and showcased at the <strong>IT &amp; Games Capstone Showcase at QUT</strong>.</p>
+                <div class="project-links">
+                    <a href="https://williamtodd.itch.io/colourblind-checkout" target="_blank" rel="noopener noreferrer" class="project-button">
+                        <i class="fa-brands fa-itch-io"></i> Play on itch.io
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="role" class="scroll-target">
+            <h2>My Role: Core Gameplay Programmer</h2>
+            <div class="content-card">
+                <p>I was the core gameplay programmer on the team, responsible for the systems the player touches every moment of a run, and for the data structures the rest of the game is built on.</p>
+                <ul class="role-list">
+                    <li>Player movement and first-person camera controls</li>
+                    <li>Item interaction system for selecting, taking and returning products</li>
+                    <li>Item inspection view for examining products up close</li>
+                    <li>Basket inventory with drag-to-arrange, drag-out-to-return and gamepad support</li>
+                    <li>Core data structures defining products, categories and shopping list entries</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="loop" class="scroll-target">
+            <h2>Core Loop</h2>
+            <div class="content-card">
+                <p>Because colour can't be relied on, every pick is a small act of close looking: the player compares the cues that remain and commits to a best guess.</p>
+                <ol class="loop-steps">
+                    <li>Read the next item on the grocery list</li>
+                    <li>Search the store, comparing shape, pattern, text, placement and context</li>
+                    <li>Inspect a candidate up close, then take it or return it</li>
+                    <li>Repeat until the list is attempted, then reveal the basket at checkout</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="tech" class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-brands fa-unity"></i><span>Unity</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C#</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cubes"></i><span>Data-Driven Products</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-video"></i><span>First-Person Camera</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-hand-pointer"></i><span>Touch &amp; Mouse Input</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-gamepad"></i><span>Gamepad Support</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="systems" class="scroll-target">
+            <h2>Key Systems</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Player Movement &amp; Camera</h3>
+                        <p>I built the first-person controller and camera that carry the player through the store. Movement and look controls had to feel relaxed and readable for a casual gallery audience, while still letting players line up shelves and products precisely enough to compare them.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="ColourblindCheckoutStore.webp" alt="Colour-Blind Checkout store entrance with movement and look control prompts" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Item Interaction &amp; Inspection</h3>
+                        <p>Clicking a product brings it into an inspection view where the player can examine it up close before committing. Large Return and Take buttons keep the choice clear and touch-friendly, which mattered because the game targets touch-screen play for younger audiences.</p>
+                        <p>Inspection is where the core idea lands: with colour stripped back, the player studies silhouette, surface detail and packaging to decide whether the product matches their list.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="ColourblindCheckoutInspectProduce.webp" alt="Inspecting an apple up close with Return and Take buttons in Colour-Blind Checkout" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Basket Inventory</h3>
+                        <p>I implemented the basket inventory, which shows the player's collected groceries with their category and the current basket load. Items can be dragged to rearrange or dragged outside the grid to return them to the store, and the same actions are mapped to gamepad buttons.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="ColourblindCheckoutInventory.png" alt="Colour-Blind Checkout basket inventory grid showing collected groceries and basket load" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Product Data Structures</h3>
+                        <p>I defined the core structures that describe products: their identity, category and the information the shopping list, inspection view, inventory and checkout reveal all read from. Keeping that in one shared definition gave the rest of the team a consistent base to build store content on.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="ColourblindCheckoutInspectBasket.png" alt="Picking up a shopping basket at the start of a Colour-Blind Checkout run" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="outcome" class="scroll-target">
+            <h2>Outcome</h2>
+            <div class="content-card">
+                <p>Colour-Blind Checkout turns an everyday errand into a playful exploration of perception. By making colour unreliable, it pushes players to notice the shape, pattern, text and context they normally overlook, meeting the brief's goal of showing gallery visitors how subjective colour and perception can be.</p>
+                <ul class="role-list">
+                    <li>Invited to and showcased at the IT &amp; Games Capstone Showcase at QUT</li>
+                    <li>Built the moment-to-moment gameplay systems in a team setting</li>
+                    <li>Designed interaction for touch, mouse and gamepad from the start</li>
+                    <li>Created shared product data that the rest of the team could build content on</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="gallery" class="scroll-target">
+            <h2>Screenshots</h2>
+            <div class="gallery-grid">
+                <img src="ColourblindCheckoutStore.webp" alt="Colour-Blind Checkout store entrance" loading="lazy">
+                <img src="ColourblindCheckoutInspectBasket.png" alt="Inspecting the shopping basket" loading="lazy">
+                <img src="ColourblindCheckoutInspectProduce.webp" alt="Inspecting produce with the shopping list open" loading="lazy">
+                <img src="ColourblindCheckoutInventory.png" alt="Basket inventory screen" loading="lazy">
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Thanks for taking a look at Colour-Blind Checkout. If you'd like to talk about my role on the project or the systems behind it, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nicholas Morris</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-grid img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+
+            galleryImages.forEach(img => img.addEventListener('click', (e) => {
+                lightbox.classList.add('active');
+                lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
+            }));
+
+            lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target !== lightboxImg) {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

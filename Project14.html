@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <title>Three Beacons | Nicholas Morris</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .hero-background {
+            background: url('media/tb/hero.webp') no-repeat center center/cover;
+        }
+
+        .deep-dive:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .jam-note {
+            margin-top: 20px;
+            padding: 14px 16px;
+            border-left: 3px solid var(--rust);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .video-caption {
+            margin: -8px 0 4px;
+            color: var(--muted);
+            font-size: .92rem;
+        }
+
+        .media-stack {
+            display: grid;
+            gap: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Three Beacons</h1>
+            <h2>A third-person sci-fi shooter in Unreal Engine 5.9, made solo in four days for the Epic MegaJam 2026 by directing a crew of AI agents.</h2>
+            <a href="#overview" class="hero-button">View Project</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="overview" class="scroll-target">
+            <h2>Overview</h2>
+            <div class="content-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/9YNH--lwP4E" title="Three Beacons trailer" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <p class="video-caption">Trailer, cut from gameplay recordings of the jam build.</p>
+                <p>Nine years ago the beacons that linked every colony world went dark. The fleet's last mind, the Director, wants to relight them and film it, because that footage will be the first thing the silent worlds see. It prints one agent three times, tells each she has scene one, and leaves one thing out of the briefing.</p>
+                <p>Three Beacons is my solo entry for the Epic MegaJam 2026, on the theme <em>Director's Cut</em>. You fight across four scenes (a rain-soaked megacity, a canyon outpost, a drowned city and the Meridian station), light each world's dead beacon and hold it while it charges, then face the gunship that caused the blackout. It runs 20 to 30 minutes, with a fully voiced Director.</p>
+                <p>The jam was the first built around agentic development, with a preview of UE 5.9 and an MCP that lets AI agents work inside the editor. So I took the theme literally: I was the director. A coordinator agent split the work across parallel Claude Code sessions for levels, guns, effects, sound, cinematics and packaging. I set the vision, playtested every build and decided what made the cut.</p>
+                <p class="jam-note"><strong>4 days · 1 developer · a crew of AI agents.</strong> Four hand-built worlds, three playable takes, a gunship boss, voiced cinematics and a Director who never stops rolling.</p>
+                <div class="contact-links">
+                    <a href="https://nikolargine.itch.io/three-beacons" target="_blank" rel="noopener"><i class="fa-brands fa-itch-io"></i>Play free on itch.io</a>
+                    <a href="https://claude.ai/artifact/4YrPJ7vwV3wddqA6ci2KPP" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i>Read the dev log</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="systems" class="scroll-target">
+            <h2>What's In It</h2>
+            <div class="content-card">
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Three Takes, Four Scenes</h3>
+                        <p>Each scene gives you a different take of the same agent: Polar with twin pistols in the city, Bulwark with a machine gun in the canyon, and Hazard with a sniper and sidearm in the drowned city. Each has her own skills and an orbital strike. On the Meridian all three meet in one frame for the finale.</p>
+                        <p>Every world is its own mood: neon rain, red dust, a city swallowed by the sea, and a station hanging between planets. The levels are built in Blender and Substance 3D Painter and lit with Lumen hardware ray tracing, Nanite and virtual shadow maps.</p>
+                    </div>
+                    <div class="media-content media-stack">
+                        <img src="media/tb/city_hologram.webp" alt="The rain-soaked megacity with a giant pink hologram over a glide pad" loading="lazy">
+                        <img src="media/tb/canyon_mech.webp" alt="Fighting a mech in the canyon outpost" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Shooting and Movement</h3>
+                        <p>Free aim on a shoulder camera, recoil that kicks the arm that fired, spread, reloads, headshots, hit-stop and ragdoll deaths thrown along the killing shot.</p>
+                        <p>Between fights you dodge, blink and hover, fly across rifts between towers, launch off glide pads and grind rails across the flooded bay, so each level plays as a route rather than a single arena.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="media/tb/drowned_rail.webp" alt="Grinding a rail across the flooded bay of the drowned city" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>The Gunship</h3>
+                        <p>The final boss is a multi-phase gunship with armour plates to break, a sweeping laser, missiles and bullet-hell patterns, fought by all three takes on the Meridian with planets hanging in the sky behind it.</p>
+                    </div>
+                    <div class="media-content media-stack">
+                        <img src="media/tb/gunship.webp" alt="The gunship boss hovering over the Meridian arena" loading="lazy">
+                        <img src="media/tb/boss_bullet_hell.webp" alt="Dodging a bullet-hell pattern of pink shots in the boss fight" loading="lazy">
+                    </div>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 50px 0;">
+
+                <div class="deep-dive">
+                    <div class="text-content">
+                        <h3>Through the Director's Lens</h3>
+                        <p>The theme runs through the presentation. The HUD is a viewfinder with REC, timecode, scene and take. A clapperboard slates every fight and grades every mission, and a death is "CUT! Take 2".</p>
+                        <p>The final kill of each fight plays a kill cam that prints a still of your best moment, and the ending collects those stills as "The Director's Cut". Lost takes hidden in each level are the Director's outtakes.</p>
+                    </div>
+                    <div class="media-content">
+                        <img src="media/tb/killcam.webp" alt="A kill cam still printed over the city, labelled Scene 1 Take 1" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="scroll-target">
+            <h2>Directing the Crew</h2>
+            <div class="content-card">
+                <ul class="role-list">
+                    <li>The vision from day one: a shooter with the fidelity Unreal is known for, not a weekend tech demo</li>
+                    <li>A coordinator agent ran parallel Claude Code sessions, one each for levels, guns, effects, sound, cinematics and packaging</li>
+                    <li>Agents worked live inside Unreal through its MCP, and in Blender and Substance Painter through theirs</li>
+                    <li>Every change came back with automated test runs and captured screenshots, so I could judge it at a glance</li>
+                    <li>I playtested every build, and my notes drove each round of fixes</li>
+                    <li>Like any director, I cut what didn't earn its place, including a whole boss and five enemy types</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="gallery" class="scroll-target">
+            <h2>Screenshots</h2>
+            <div class="gallery-grid">
+                <img src="media/tb/pod_launch.webp" alt="A drop pod launching from the destroyer above a pink planet" loading="lazy">
+                <img src="media/tb/polar.webp" alt="Agent Polar in the hangar" loading="lazy">
+                <img src="media/tb/city_lasers.webp" alt="Laser fire across a city rooftop" loading="lazy">
+                <img src="media/tb/beacon_planet.webp" alt="A relit beacon beaming from the planet into orbit" loading="lazy">
+                <img src="media/tb/canyon_enemies.webp" alt="Enemies advancing through the canyon outpost" loading="lazy">
+                <img src="media/tb/drowned_freighter.webp" alt="The drowned city's flooded skyline" loading="lazy">
+                <img src="media/tb/hazard.webp" alt="An agent in the rain of the drowned city" loading="lazy">
+                <img src="media/tb/drowned_fireball.webp" alt="A fireball hitting during the drowned city beacon fight" loading="lazy">
+                <img src="media/tb/three_takes.webp" alt="The three takes together in a cutscene on the Meridian" loading="lazy">
+                <img src="media/tb/meridian_portal.webp" alt="The three takes arriving on the Meridian station" loading="lazy">
+                <img src="media/tb/meridian_beacon.webp" alt="The Meridian beacon lit in gold" loading="lazy">
+                <img src="media/tb/arena_beam.webp" alt="The gunship's laser sweeping the boss arena" loading="lazy">
+                <img src="media/tb/arena_explosions.webp" alt="Explosions in the boss arena" loading="lazy">
+                <img src="media/tb/ending.webp" alt="The three takes under the relit worlds at the end" loading="lazy">
+            </div>
+        </section>
+
+        <section id="tech" class="scroll-target">
+            <h2>Tools &amp; Technologies</h2>
+            <div class="content-card">
+                <div class="tech-grid">
+                    <div class="tech-item"><i class="fa-solid fa-gamepad"></i><span>Unreal Engine 5.9</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-code"></i><span>C++ &amp; GAS</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-sun"></i><span>Lumen, Nanite &amp; VSM</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-robot"></i><span>Claude Code Agents</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-plug"></i><span>Unreal MCP</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-fire"></i><span>Niagara</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-cube"></i><span>Blender &amp; Substance Painter</span></div>
+                    <div class="tech-item"><i class="fa-solid fa-comment-dots"></i><span>Ink Dialogue</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-target">
+            <h2>Get In Touch</h2>
+            <div class="content-card" style="text-align: center;">
+                <p>Three Beacons is free to play on itch.io. If you'd like to talk about how it was made, or about directing agents on a game, feel free to reach out.</p>
+                <div class="contact-links">
+                    <a href="https://nikolargine.itch.io/three-beacons" target="_blank" rel="noopener"><i class="fa-brands fa-itch-io"></i>itch.io</a>
+                    <a href="mailto:nicholas_m0rris@hotmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nicholas Morris</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged screenshot" class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const targets = document.querySelectorAll('.scroll-target');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            targets.forEach(target => observer.observe(target));
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.gallery-grid img, .deep-dive .media-content img');
+            const lightboxClose = document.querySelector('.lightbox-close');
+
+            galleryImages.forEach(img => img.addEventListener('click', (e) => {
+                lightbox.classList.add('active');
+                lightboxImg.src = e.target.src;
+                lightboxImg.alt = e.target.alt;
+            }));
+
+            lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target !== lightboxImg) {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
